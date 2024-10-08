@@ -3,7 +3,7 @@
   width: 100%;
   padding: 10px;
 
-  background-color: #EFEFEF;
+  background-color: var(--gray-bg-color);
   font-size: 12px;
   border-radius:5px;
   border: none;
@@ -11,5 +11,5 @@
 }
 
 .search-input:placeholder {
-  color: #999999;
+  color: var(--dark-gray-color);
 }

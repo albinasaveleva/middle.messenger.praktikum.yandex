@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--light-gray-color);
 }
 
 .chat-feed .top-bar .info {
@@ -38,7 +38,7 @@
 .chat-feed .send-message {
   display: flex;
   width: 100%;
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid var(--light-gray-color);
   padding: 10px 0;
   margin-top: auto;
 }

@@ -15,15 +15,17 @@
   justify-content: center;
 }
 
-.form .title {
+.page-form .title {
+  font-family: Inter;
   font-size: 20px;
+  font-weight: 500;
   line-height: 20px;
   text-align: center;
   margin: 0;
   margin-bottom: 40px;
 }
 
-.form .form-inputs {
+.page-form .form-inputs {
   margin-bottom: 40px;
   width: 100%;
   display: flex;
