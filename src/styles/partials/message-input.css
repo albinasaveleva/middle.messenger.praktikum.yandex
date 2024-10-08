@@ -7,4 +7,15 @@
   height: 32px;
   background-color: var(--gray-bg-color);
   border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 12px;
+  line-height: 12px;
+  text-align: left;
+}
+
+.message-input .input-field::placeholder {
+  color: var(--dark-gray-color);
+  font-size: 12px;
+  line-height: 12px;
+  text-align: left;
 }

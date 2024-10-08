@@ -5,11 +5,14 @@
 
   background-color: var(--gray-bg-color);
   font-size: 12px;
+  line-height: 12px;
   border-radius:5px;
   border: none;
   outline: none;
 }
 
 .search-input:placeholder {
+  font-size: 12px;
+  line-height: 12px;
   color: var(--dark-gray-color);
 }

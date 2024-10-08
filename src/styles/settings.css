@@ -1,11 +1,23 @@
 @font-face {
   font-family: "Inter";
   src:
+    url("../../static/fonts/Inter/Inter_18pt-Regular.woff2") format("woff2"),
+    url("../../static/fonts/Inter/Inter_18pt-Regular.woff") format("woff"),
+    url("../../static/fonts/Inter/Inter_18pt-Regular.otf") format("otf"),
+    url("../../static/fonts/Inter/Inter_18pt-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
     url("../../static/fonts/Inter/Inter_18pt-Medium.woff2") format("woff2"),
     url("../../static/fonts/Inter/Inter_18pt-Medium.woff") format("woff"),
     url("../../static/fonts/Inter/Inter_18pt-Medium.otf") format("otf"),
     url("../../static/fonts/Inter/Inter_18pt-Medium.ttf") format("ttf");
   font-weight: 500;
+  font-optical-sizing: auto;
 }
 
 @font-face {
@@ -16,6 +28,7 @@
     url("../../static/fonts/Inter/Inter_18pt-SemiBold.otf") format("otf"),
     url("../../static/fonts/Inter/Inter_18pt-SemiBold.ttf") format("ttf");
   font-weight: 600;
+  font-optical-sizing: auto;
 }
 
 body {
@@ -60,7 +73,6 @@ button {
 
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-style: normal;
   color: var(--black-color);
   background-color: var(--white-bg-color);
 }

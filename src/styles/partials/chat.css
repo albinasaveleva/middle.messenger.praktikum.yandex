@@ -29,25 +29,31 @@
   justify-content: space-between;
 }
 
-.chat .container .name {
+.chat .name {
   font-size: 13px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: left;
 }
 
-.chat .container .timestamp {
+.chat .timestamp {
   font-size: 9px;
-  color: var(--dark-gray-color);
+  line-height: 13px;
+  text-align: right;
 }
 
-.chat .container .content {
+.chat .content {
   font-size: 12px;
+  line-height: 15px;
+  text-align: left;
   color: var(--dark-gray-color);
-  width: 195px;
+  width: 193px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.chat .container .counter {
+.chat .counter {
   height: 20px;
   width: 20px;
   display: flex;
@@ -56,6 +62,9 @@
 
   background-color: var(--blue-bg-color);
   color: var(--white-color);
+  font-family: Inter;
   font-size: 11px;
+  line-height: 12px;
+  text-align: center;
   border-radius: 50%;
 }

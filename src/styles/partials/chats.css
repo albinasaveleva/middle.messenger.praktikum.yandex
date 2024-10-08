@@ -13,9 +13,11 @@
   padding: 10px 0 14px 0;
 }
 
-.chats .top-bar .profile-link {
+.chats .profile-link {
   color: var(--dark-gray-color);
   font-size: 12px;
+  line-height: 12px;
+  text-align: right;
   width: min-content;
   margin-left: auto;
   padding-right: 12px;
@@ -24,7 +26,7 @@
   position: relative;
 }
 
-.chats .top-bar .profile-link::after {
+.chats .profile-link::after {
   height: 10px;
   width: 6px;
   content: "";
@@ -32,7 +34,7 @@
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  background-image: url(./static/profile-link-icon.svg);
+  background-image: url(../../../static/icons/profile-link-icon.svg);
   background-position: center center;
   background-size: cover;
 }

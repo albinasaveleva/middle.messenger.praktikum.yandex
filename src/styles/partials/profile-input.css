@@ -1,29 +1,26 @@
 .profile-input {
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .profile-input .input-label {
-  font-family: Inter;
   font-size: 13px;
-  font-weight: 500;
   line-height: 13px;
   text-align: left;
   color: var(--black-color);  
 }
 
 .profile-input .input-field {
-  font-family: Inter;
+  height: 32px;
   font-size: 13px;
-  font-weight: 500;
   line-height: 13px;
   text-align: right;
   color: var(--dark-gray-color);  
 }
 
 .profile-input .input-field::placeholder {
-  font-family: Inter;
   font-size: 13px;
-  font-weight: 500;
   line-height: 13px;
   text-align: right;
   color: var(--dark-gray-color);  

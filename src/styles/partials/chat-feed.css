@@ -17,22 +17,45 @@
   align-items: center;
 }
 
-.chat-feed .top-bar .actions {
-  width: 3px;
-  height: 15px;
-  background-image: url(./static/actions-icon.svg);
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.chat-feed .info .avatar {
+.chat-feed .top-bar .avatar {
   width: 34px;
   height: 34px;
   margin-right: 11px;
 }
 
+.chat-feed .top-bar .name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: left;
+}
+
+.chat-feed .top-bar .actions {
+  width: 3px;
+  height: 15px;
+  background-image: url(../../../static/icons/actions-icon.svg);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .chat-feed .messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-feed .message-group {
+
+}
+
+.chat-feed .message {
+  
+}
+
+.chat-feed .timestamp {
+  font-size: 12px;
+  line-height: 12px;
+  text-align: center;
 }
 
 .chat-feed .send-message {
@@ -47,7 +70,7 @@
   height: 32px;
   width: 32px;
 
-  background-image: url(./static/attach-icon.svg);
+  background-image: url(../../../static/icons/attach-icon.svg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
