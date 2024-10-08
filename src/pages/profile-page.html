@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/normalize.css">
+  <link rel="stylesheet" href="../../style.css">
+  <title>Signup</title>
+</head>
+<body>
+  <div id="app">
+    <main class="profile-page">
+      <nav class="navigation">
+        <a href="#"></a>
+      </nav>
+      <div class="profile">
+        {{> avatar }}
+        <span class="name">Иван</span>
+        <div class="info">
+          {{> profile-input label="Почта" name="email" type="email" placeholder="pochta@yandex.ru" }}
+          {{> profile-input label="Логин" name="login" type="text" placeholder="ivanivanov" }}
+          {{> profile-input label="Имя" name="first_name" type="text" placeholder="Иван" }}
+          {{> profile-input label="Фамилия" name="second_name" type="text" placeholder="Иванов" }}
+          {{> profile-input label="Имя в чате" name="display_name" type="text" placeholder="Иван" }}
+          {{> profile-input label="Телефон" name="phone" type="text" placeholder="+7 (909) 967 30 30" }}
+        </div>
+        <div class="buttons">
+          {{> button-link href="#" action="Изменить данные" }}
+          {{> button-link href="#" action="Изменить пароль" }}
+          {{> button-link href="#" action="Выйти" }}
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- <script type="module" src="../../index.js"></script> -->
+</body>
+</html>

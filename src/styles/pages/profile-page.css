@@ -1,0 +1,9 @@
+.profile-page {
+  height: 100%;
+  display: flex;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/normalize.css">
+  <link rel="stylesheet" href="../../style.css">
+  <title>Login</title>
+</head>
+<body>
+  <div id="app">
+    <main class="login-page">
+      {{#> page-form name="login-form" id="login-form" }}
+        <h2 class="title">Вход</h2>
+        <div class="form-inputs">
+          {{> form-input label="Логин" name="login" type="text" placeholder="Логин" }}
+          {{> form-input label="Пароль" name="password" type="password" placeholder="Пароль" }}
+        </div>
+        {{> button-action action="Войти" }}
+        {{> button-link href="#" action="Нет аккаунта?" }}
+      {{/page-form}}
+    </main>
+  </div>
+  <!-- <script type="module" src="../../index.js"></script> -->
+</body>
+</html>
