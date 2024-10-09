@@ -14,7 +14,12 @@
         {{> button-back href="./chat-page" }}
       </div>
       <div class="profile">
-        {{> avatar }}
+        <div class="avatar-wrapper">
+          {{> avatar }}
+          <div class="avatar-hover">
+            <span>Поменять<br/>аватар</span>
+          </div>
+        </div>
         <span class="name">Иван</span>
         <div class="info">
           {{> profile-input label="Почта" name="email" type="email" placeholder="pochta@yandex.ru" }}
@@ -31,8 +36,14 @@
         </div>
       </div>
     </main>
+    {{#> modal }}
+      {{#> page-form name="avatar-form" id="avatar-form" }}
+      <h2 class="title">Загрузите файл</h2>
+      {{> avatar-input }}
+      {{> button-action action="Поменять" }}
+      {{/page-form}}
+    {{/modal}}
   </div>
-  
-  <!-- <script type="module" src="../../index.js"></script> -->
+  <script src="../modules/profile-page.js"></script>  
 </body>
 </html>

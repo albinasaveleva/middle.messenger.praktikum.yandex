@@ -85,14 +85,14 @@ button {
   margin: 100px;
 }
 
-.main-page > nav {
+.main-page > nav > ul {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.main-page > nav a {
+.main-page > nav > ul > li {
   padding: 10px;
 }
 
