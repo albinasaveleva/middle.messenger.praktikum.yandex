@@ -34,7 +34,7 @@
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  background-image: url(../../../static/icons/profile-link-icon.svg);
+  background-image: url(../icons/profile-link-icon.svg);
   background-position: center center;
   background-size: cover;
 }

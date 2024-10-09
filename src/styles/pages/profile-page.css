@@ -40,7 +40,7 @@
   width: 130px;
   height: 130px;
   
-  background-image: url(../../../static/icons/avatar-icon.svg);
+  background-image: url(../icons/avatar-icon.svg);
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
