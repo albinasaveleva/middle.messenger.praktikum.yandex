@@ -76,7 +76,10 @@
 .profile .info {
   width: 100%;
   margin-bottom: 60px;
+}
 
+.profile .info .input-field {
+  cursor: default;
 }
 
 .profile .info > :not(:last-child) {
