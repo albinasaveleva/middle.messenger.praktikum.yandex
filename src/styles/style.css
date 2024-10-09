@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'settings';
 
+@import './partials/avatar-input.css';
 @import './partials/avatar.css';
 @import './partials/button-action.css';
 @import './partials/button-back.css';

@@ -1,6 +1,13 @@
-const avatarWrapper = document.querySelector('.avatar-wrapper');
+const profilePage = document.querySelector('.profile-page');
+
+const inputs = profilePage.querySelectorAll('.profile-input .input-field');
+
+const avatarWrapper = profilePage.querySelector('.avatar-wrapper');
 const [ avatar, avatarHover ] = avatarWrapper.children;
+
 const modal = document.querySelector('.modal');
+
+inputs.forEach(input => input.readOnly = true)
 
 avatarWrapper.addEventListener('mouseover', () => {
   avatarHover.style.display = "flex";
