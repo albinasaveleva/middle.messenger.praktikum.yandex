@@ -9,6 +9,7 @@
   line-height: 13px;
   text-align: left;
   color: var(--black-color);  
+  flex-shrink: 0;
 }
 
 .profile-input .input-field {

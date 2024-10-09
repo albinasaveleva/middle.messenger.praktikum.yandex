@@ -13,16 +13,16 @@
       {{#> page-form name="login-form" id="login-form" }}
         <p class="title">Регистрация</p>
         <div class="form-inputs">
-          {{> form-input label="Почта" name="email" type="email" placeholder="Почта" }}
-          {{> form-input label="Логин" name="login" type="text" placeholder="Логин" }}
-          {{> form-input label="Имя" name="first_name" type="text" placeholder="Имя" }}
-          {{> form-input label="Фамилия" name="second_name" type="text" placeholder="Фамилия" }}
-          {{> form-input label="Телефон" name="phone" type="number" placeholder="Телефон" }}
-          {{> form-input label="Пароль" name="password" type="password" placeholder="Пароль" }}
-          {{> form-input label="Пароль (ещё раз)" name="password" type="password" placeholder="Пароль" }}
+          {{> form-input name="email" type="email" placeholder="Почта" }}
+          {{> form-input name="login" type="text" placeholder="Логин" }}
+          {{> form-input name="first_name" type="text" placeholder="Имя" }}
+          {{> form-input name="second_name" type="text" placeholder="Фамилия" }}
+          {{> form-input name="phone" type="text" placeholder="Телефон" }}
+          {{> form-input name="password" type="password" placeholder="Пароль" }}
+          {{> form-input name="password" type="password" placeholder="Пароль" }}
         </div>
         {{> button-action action="Зарегистрироваться" }}
-        {{> button-link href="#" action="Войти" }}
+        {{> button-link href="./login-page" action="Войти" }}
       {{/page-form}}
     </main>
   </div>

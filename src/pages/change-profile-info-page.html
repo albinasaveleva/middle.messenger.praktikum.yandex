@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/normalize.css">
   <link rel="stylesheet" href="../../style.css">
-  <title>Profile</title>
+  <title>Change profile</title>
 </head>
 <body>
   <div id="app">
     <main class="profile-page">
       <div class="navigation">
-        {{> button-back href="./chat-page" }}
+        {{> button-back href="./profile-page" }}
       </div>
       <div class="profile">
         {{> avatar }}
@@ -24,11 +24,7 @@
           {{> profile-input label="Имя в чате" name="display_name" type="text" placeholder="Иван" }}
           {{> profile-input label="Телефон" name="phone" type="text" placeholder="+7(909)9673030" }}
         </div>
-        <div class="buttons">
-          {{> button-link href="./change-profile-info-page.html" action="Изменить данные" }}
-          {{> button-link href="./change-profile-password-page.html" action="Изменить пароль" }}
-          {{> button-link href="#" action="Выйти" }}
-        </div>
+        {{> button-action action="Сохранить" }}
       </div>
     </main>
   </div>
