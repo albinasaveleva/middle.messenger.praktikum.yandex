@@ -1,5 +1,9 @@
 # Веб-приложение «Чат»
 
+## Demo
+
+https://dazzling-unicorn-13d70a.netlify.app/
+
 ## Страницы приложения
 
  * Авторизация /src/pages/login-page
