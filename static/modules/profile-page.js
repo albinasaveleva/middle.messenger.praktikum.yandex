@@ -1,4 +1,4 @@
-const profilePage = document.querySelector('.profile-page');
+const profilePage = document.querySelector('#profile-page');
 
 const inputs = profilePage.querySelectorAll('.profile-input .input-field');
 
