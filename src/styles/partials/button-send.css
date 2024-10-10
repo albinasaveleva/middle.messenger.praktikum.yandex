@@ -3,7 +3,7 @@
   width: 28px;
   border-radius: 50%;
   background-color: var(--blue-bg-color);
-  background-image: url(../../../static/icons/button-send-icon.svg);
+  background-image: url(../icons/button-send-icon.svg);
   background-position: center center;
   background-size: auto;
   background-repeat: no-repeat;
