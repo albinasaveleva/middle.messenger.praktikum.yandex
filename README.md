@@ -1,5 +1,15 @@
 # Веб-приложение «Чат»
 
+## Страницы приложения
+
+ * Авторизация /src/pages/login-page
+ * Регистрация /src/pages/signup-page
+ * Список чатов и лента переписки /src/pages/chat-page
+ * Профиль пользователя /src/pages/profile-page
+ * Страница 404 /src/pages/non-found-page
+ * Страница 5** /src/pages/error-page
+
+
 ## Технологии
 
  * JavaScript
