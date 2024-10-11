@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "Inter";
+  src:
+    url("../fonts/Inter/Inter_18pt-Regular.woff2") format("woff2"),
+    url("../fonts/Inter/Inter_18pt-Regular.woff") format("woff"),
+    url("../fonts/Inter/Inter_18pt-Regular.otf") format("otf"),
+    url("../fonts/Inter/Inter_18pt-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
+    url("../fonts/Inter/Inter_18pt-Medium.woff2") format("woff2"),
+    url("../fonts/Inter/Inter_18pt-Medium.woff") format("woff"),
+    url("../fonts/Inter/Inter_18pt-Medium.otf") format("otf"),
+    url("../fonts/Inter/Inter_18pt-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-optical-sizing: auto;
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
+    url("../fonts/Inter/Inter_18pt-SemiBold.woff2") format("woff2"),
+    url("../fonts/Inter/Inter_18pt-SemiBold.woff") format("woff"),
+    url("../fonts/Inter/Inter_18pt-SemiBold.otf") format("otf"),
+    url("../fonts/Inter/Inter_18pt-SemiBold.ttf") format("ttf");
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ol, ul, li { 
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit;
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+#app {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  color: var(--black-color);
+  background-color: var(--white-bg-color);
+}
+
+.main-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 100px;
+}
+
+.main-page > nav > ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-page > nav > ul > li {
+  padding: 10px;
+}
+
+.input-field {
+  border: none;
+  padding: 0;
+  width: 100%;
+  outline: none;
+}
+
+.input-field:focus {
+  border: none;
+  outline: none;
+}

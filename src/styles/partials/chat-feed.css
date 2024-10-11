@@ -1,0 +1,77 @@
+.chat-feed {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.chat-feed .top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--light-gray-color);
+}
+
+.chat-feed .top-bar .info {
+  display: flex;
+  align-items: center;
+}
+
+.chat-feed .top-bar .avatar {
+  width: 34px;
+  height: 34px;
+  margin-right: 11px;
+}
+
+.chat-feed .top-bar .name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: left;
+}
+
+.chat-feed .top-bar .actions {
+  width: 3px;
+  height: 15px;
+  background-image: url(../icons/actions-icon.svg);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.chat-feed .messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-feed .message-group {
+
+}
+
+.chat-feed .message {
+  
+}
+
+.chat-feed .timestamp {
+  font-size: 12px;
+  line-height: 12px;
+  text-align: center;
+}
+
+.chat-feed .send-message {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid var(--light-gray-color);
+  padding: 10px 0;
+  margin-top: auto;
+}
+
+.chat-feed .send-message .attach {
+  height: 32px;
+  width: 32px;
+
+  background-image: url(../icons/attach-icon.svg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

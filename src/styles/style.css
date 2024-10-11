@@ -1,0 +1,30 @@
+@import 'variables';
+@import 'settings';
+
+@import './partials/avatar-input.css';
+@import './partials/avatar.css';
+@import './partials/button-action.css';
+@import './partials/button-back.css';
+@import './partials/button-link.css';
+@import './partials//button-send.css';
+@import './partials/chat-feed.css';
+@import './partials/chat.css';
+@import './partials/chats.css';
+@import './partials/empty-chat-feed.css';
+@import './partials/error.css';
+@import './partials/form-input.css';
+@import './partials/incoming-message.css';
+@import './partials/message-input.css';
+@import './partials/modal.css';
+@import './partials/outcoming-message.css';
+@import './partials/page-form.css';
+@import './partials/profile-input.css';
+@import './partials/search-input.css';
+@import './partials/timestamp.css';
+
+@import './pages/chat-page.css';
+@import './pages/error-page.css';
+@import './pages/login-page.css';
+@import './pages/non-found-page.css';
+@import './pages/profile-page.css';
+@import './pages/signup-page.css';
