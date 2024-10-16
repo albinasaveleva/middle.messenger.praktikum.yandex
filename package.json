@@ -9,10 +9,14 @@
     "start": "vite build && vite preview"
   },
   "devDependencies": {
-    "vite": "^5.4.1"
-  },
-  "dependencies": {
+    "@eslint/js": "^9.12.0",
+    "@typescript-eslint/eslint-plugin": "^8.9.0",
+    "@typescript-eslint/parser": "^8.9.0",
     "@vituum/vite-plugin-postcss": "^1.1.0",
+    "eslint": "^9.12.0",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.1",
+    "vite": "^5.4.1",
     "vite-plugin-handlebars": "^2.0.0"
   },
   "engines": {
