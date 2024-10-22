@@ -1,0 +1,9 @@
+export { ChangeProfileInfoPage } from './change-profile-info-page/index';
+export { ChangeProfilePasswordPage } from './change-profile-password-page/index';
+export { ChatPage } from './chat-page/index';
+export { ErrorPage } from './error-page/index';
+export { LoginPage } from './login-page/index';
+export { MainPage } from './main-page/index';
+export { NonFoundPage } from './non-found-page/index';
+export { ProfilePage } from './profile-page/index';
+export { SignupPage } from './signup-page/index';

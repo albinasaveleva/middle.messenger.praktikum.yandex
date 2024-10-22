@@ -1,3 +1,4 @@
+@import 'normalize';
 @import 'variables';
 @import 'settings';
 
@@ -13,10 +14,8 @@
 @import './partials/empty-chat-feed.css';
 @import './partials/error.css';
 @import './partials/form-input.css';
-@import './partials/incoming-message.css';
 @import './partials/message-input.css';
 @import './partials/modal.css';
-@import './partials/outcoming-message.css';
 @import './partials/page-form.css';
 @import './partials/profile-input.css';
 @import './partials/search-input.css';

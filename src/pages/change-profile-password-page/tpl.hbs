@@ -1,0 +1,17 @@
+<main class="profile-page">
+      <div class="navigation">
+        {{> ButtonBack href="./profile-page" }}
+      </div>
+      <div class="profile">
+        <div class="avatar-wrapper">
+          {{> Avatar }}
+        </div>
+        <span class="name">Иван</span>
+        <div class="info">
+          {{> ProfileInput label="Старый пароль" name="oldPassword" type="password" placeholder="Старый пароль" value="password" }}
+          {{> ProfileInput label="Новый пароль" name="newPassword" type="password" placeholder="Новый пароль" value="password" }}
+          {{> ProfileInput label="Повторите новый пароль" name="newPassword" type="password" placeholder="Повторите новый пароль" value="password" }}
+        </div>
+        {{> ButtonAction action="Сохранить" }}
+      </div>
+</main>
