@@ -1,9 +1,10 @@
-import { EventBus } from "./event-bus";
+import EventBus from "./event-bus";
 
 export default class Block {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
+    FLOW_CDU: "flow:component-did-update",
     FLOW_RENDER: "flow:render"
   };
 
@@ -29,6 +30,7 @@ export default class Block {
   _registerEvents(eventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
@@ -53,7 +55,11 @@ export default class Block {
   }
 
   _componentDidUpdate(oldProps, newProps) {
-    
+    const response = this.componentDidUpdate(oldProps, newProps);
+    if (!response) {
+      return;
+    }
+    this._render();
   }
 
   componentDidUpdate(oldProps, newProps) {
@@ -88,11 +94,27 @@ export default class Block {
   }
 
   _makePropsProxy(props) {
-    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
+    // Можно и так передать this
+    // Такой способ больше не применяется с приходом ES6+
     const self = this;
-
-        // Здесь вам предстоит реализовать метод
-    return props;
+  
+    return new Proxy(props, {
+      get(target, prop) {
+        const value = target[prop];
+        return typeof value === "function" ? value.bind(target) : value;
+      },
+      set(target, prop, value) {
+        target[prop] = value;
+  
+        // Запускаем обновление компоненты
+        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
+        return true;
+      },
+      deleteProperty() {
+        throw new Error("Нет доступа");
+      }
+    });
   }
 
   _createDocumentElement(tagName) {

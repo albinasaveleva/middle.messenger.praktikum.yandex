@@ -30,4 +30,13 @@ export default class EventBus {
       listener(...args);
     })
   }
+
+  // once(event: string, callback: any): void {
+  //   const wrapper = (...args: any[]): void => {
+  //       callback(...args);
+  //       this.off(event, wrapper); 
+  //   };
+    
+  //   this.on(event, wrapper);
+  // }
 } 

@@ -1,1 +1,14 @@
-export { default as ErrorPage } from './tpl.hbs?raw';
+import tpl from './tpl.hbs?raw';
+import Block from '../../utils/Block';
+import Handlebars from 'handlebars';
+
+export default class ErrorPage extends Block {
+  constructor(props) {
+    super('div', props);
+  }
+
+  render() {
+    const template = Handlebars.compile(tpl);
+    return template();
+  }
+}
