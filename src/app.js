@@ -8,7 +8,12 @@ import {
   SignupPage
 } from './pages/index';
 
-// import Avatar from './components/avatar/index';
+import nonFoundPageProps from './pages/non-found-page/componentProps'
+
+import Avatar from './components/avatar/index';
+import Link from './components/link';
+import errorPageProps from './pages/error-page/componentProps';
+import signupPageProps from './pages/signup-page/componentProps';
 // import AvatarInput from './components/avatar-input/index';
 // import ButtonAction from './components/button-action/index';
 // import ButtonBack from './components/button-back/index';
@@ -29,26 +34,7 @@ import {
 // import SearchInput from './components/search-input';
 // import Timestamp from './components/timestamp/index';
 
-// Handlebars.registerPartial('Avatar', Avatar);
-// Handlebars.registerPartial('AvatarInput', AvatarInput);
-// Handlebars.registerPartial('ButtonAction', ButtonAction);
-// Handlebars.registerPartial('ButtonBack', ButtonBack);
-// Handlebars.registerPartial('ButtonLink', ButtonLink);
-// Handlebars.registerPartial('ButtonSend', ButtonSend);
-// Handlebars.registerPartial('Chat', Chat);
-// Handlebars.registerPartial('ChatFeed', ChatFeed);
-// Handlebars.registerPartial('Chats', Chats);
-// Handlebars.registerPartial('EmptyChatFeed', EmptyChatFeed);
-// Handlebars.registerPartial('Error', Error);
-// Handlebars.registerPartial('FormInput', FormInput);
-// Handlebars.registerPartial('IncomingMessage', IncomingMessage);
-// Handlebars.registerPartial('MessageInput', MessageInput);
-// Handlebars.registerPartial('Modal', Modal);
-// Handlebars.registerPartial('OutcomingMessage', OutcomingMessage);
-// Handlebars.registerPartial('PageForm', PageForm);
-// Handlebars.registerPartial('ProfileInput', ProfileInput);
-// Handlebars.registerPartial('SearchInput', SearchInput);
-// Handlebars.registerPartial('Timestamp', Timestamp);
+
 
 export default class App {
   constructor() {
@@ -82,15 +68,7 @@ export default class App {
         );
         break;
       case '/signup':
-        template = new SignupPage(
-          'main',
-          {
-            attr: {
-              class: 'signup-page',
-              id: 'signup-page'
-            }
-          }
-        );
+        template = new SignupPage(...signupPageProps);
         break;
       case '/chats':
         template = new ChatPage(
@@ -115,26 +93,10 @@ export default class App {
         );
         break;
       case '/error':
-        template = new ErrorPage(
-          'main',
-          {
-            attr: {
-              class: 'error-page',
-              id: 'error-page'
-            }
-          }
-        );
+        template = new ErrorPage(...errorPageProps);
         break;
       default:
-        template = new NonFoundPage(
-          'main',
-          {
-            attr: {
-              class: 'non-found-page',
-              id: 'non-found-page'
-            }
-          }
-        );
+        template = new NonFoundPage(...nonFoundPageProps);
         break;
     }
     

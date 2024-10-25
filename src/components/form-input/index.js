@@ -1,2 +1,9 @@
-import FormInput from './tpl.hbs?raw';
-export default FormInput;
+import tpl from './tpl.hbs?raw';
+import Component from '../../utils/component';
+
+export default class FormInput extends Component {
+  render() {
+    return this.compile(tpl);
+  }
+}
+

@@ -12,17 +12,19 @@ export default class Component {
 
   _props = null;
   _children = null;
+  _lists = null;
   _id = null;
   _element = null;
   _meta = null;
   _eventBus = null;
   _setUpdate = false;
 
-  constructor(tag = "div", propsAndChildren = {}) {
-    const { children, props } = this.getChildren(propsAndChildren);
+  constructor(tag = "div", componentProps = {}) {
+    const { props, children, lists } = this.getProps(componentProps);
     
     this._props = this.makePropsProxy({ ...props, _id: this._id })
     this._children = children;
+    this._lists = lists;
     this._id = makeUUID();
     this._meta = { tag, props };
     this._eventBus = new EventBus();
@@ -87,23 +89,22 @@ export default class Component {
     })
   }
 
-
-
-  getChildren(propsAndChildren) {
-    const children = {};
+  getProps(componentProps) {
     const props = {};
+    const children = {};
+    const lists = {};
 
-    Object.keys(propsAndChildren).forEach((key) => {
-      if (propsAndChildren[key] instanceof Component) {
-        children[key] = propsAndChildren[key];
-      } 
-      // else if () {} массивы 
-      else {
-        props[key] = propsAndChildren[key];
+    Object.entries(componentProps).forEach(([key, value]) => {
+      if (value instanceof Component) {
+        children[key] = value;
+      } else if (Array.isArray(value)) {
+        lists[key] = value;
+      } else {
+        props[key] = value;
       }
     })
 
-    return { children, props };
+    return { props, children, lists };
   }
 
   compile(template, props) {
@@ -162,7 +163,7 @@ export default class Component {
       return;
     }
 
-    const { children, props } = this.getChildren(newProps);
+    const { children, props } = this.getProps(newProps);
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);
@@ -171,6 +172,10 @@ export default class Component {
       Object.assign(this._props, props);
     }
   };
+
+  setLists() {
+    
+  }
 
   makePropsProxy(props) {
     return new Proxy(props, {

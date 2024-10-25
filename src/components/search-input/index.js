@@ -1,2 +1,9 @@
-import SearchInput from './tpl.hbs?raw';
-export default SearchInput;
+import tpl from './tpl.hbs?raw';
+import Component from '../../utils/component';
+
+export default class SearchInput extends Component {
+  render() {
+    return this.compile(tpl);
+  }
+}
+

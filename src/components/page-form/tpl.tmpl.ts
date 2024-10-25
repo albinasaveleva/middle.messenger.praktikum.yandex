@@ -1,5 +1,5 @@
-<div class="page-form">
+export default `
   <form class="form" name={{name}} id={{id}}>
-    {{> @partial-block}}
+    {{content}}
   </form>
-</div>
+`;

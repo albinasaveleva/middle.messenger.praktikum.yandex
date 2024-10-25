@@ -1,2 +1,9 @@
-import Modal from './tpl.hbs?raw';
-export default Modal;
+import tpl from './tpl.hbs?raw';
+import Component from '../../utils/component';
+
+export default class Modal extends Component {
+  render() {
+    return this.compile(tpl);
+  }
+}
+

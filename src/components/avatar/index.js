@@ -1,2 +1,9 @@
-import Avatar from './tpl.hbs?raw';
-export default Avatar;
+import tpl from './tpl.tmpl';
+import Component from '../../utils/component';
+
+export default class Avatar extends Component {
+  render() {
+    return this.compile(tpl);
+  }
+}
+

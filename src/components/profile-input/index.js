@@ -1,2 +1,9 @@
-import ProfileInput from './tpl.hbs?raw';
-export default ProfileInput;
+import tpl from './tpl.hbs?raw';
+import Component from '../../utils/component';
+
+export default class ProfileInput extends Component {
+  render() {
+    return this.compile(tpl);
+  }
+}
+

@@ -1,2 +1,9 @@
-import Timestamp from './tpl.hbs?raw';
-export default Timestamp;
+import tpl from './tpl.hbs?raw';
+import Component from '../../utils/component';
+
+export default class Timestamp extends Component {
+  render() {
+    return this.compile(tpl);
+  }
+}
+

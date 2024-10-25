@@ -1,2 +1,9 @@
-import ChatFeed from './tpl.hbs?raw';
-export default ChatFeed;
+import tpl from './tpl.hbs?raw';
+import Component from '../../utils/component';
+
+export default class ChatFeed extends Component {
+  render() {
+    return this.compile(tpl);
+  }
+}
+
