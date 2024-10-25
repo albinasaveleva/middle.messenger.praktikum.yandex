@@ -1,15 +1,9 @@
 import tpl from './tpl.hbs?raw';
-import Block from '../../utils/Block';
-import Handlebars from 'handlebars';
+import Component from '../../utils/component';
 
-export default class ChatPage extends Block {
-  constructor(props) {
-    super('div', props);
-  }
-
+export default class ChatPage extends Component {
   render() {
-    const template = Handlebars.compile(tpl);
-    return template();
+    return this.compile(tpl);
   }
 }
 

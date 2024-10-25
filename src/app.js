@@ -52,7 +52,7 @@ import {
 
 export default class App {
   constructor() {
-    this.currentPage = 'MainPage';
+    // this.currentPage = 'MainPage';
     this.appElement = document.getElementById('app');
   }
   render() {
@@ -60,30 +60,86 @@ export default class App {
 
     switch (location.pathname) {
       case '/':
-        template = new MainPage();
+        template = new MainPage(
+          'main',
+          {
+            attr: {
+              class: 'main-page',
+              id: 'main-page'
+            }
+          }
+        );
         break;
       case '/login':
-        template = new LoginPage();
+        template = new LoginPage(
+          'main',
+          {
+            attr: {
+              class: 'login-page',
+              id: 'login-page'
+            }
+          }
+        );
         break;
       case '/signup':
-        template = new SignupPage();
+        template = new SignupPage(
+          'main',
+          {
+            attr: {
+              class: 'signup-page',
+              id: 'signup-page'
+            }
+          }
+        );
         break;
       case '/chats':
-        template = new ChatPage();
+        template = new ChatPage(
+          'main',
+          {
+            attr: {
+              class: 'chat-page',
+              id: 'chat-page'
+            }
+          }
+        );
         break;
       case '/profile':
-        template = new ProfilePage();
+        template = new ProfilePage(
+          'main',
+          {
+            attr: {
+              class: 'profile-page',
+              id: 'profile-page'
+            }
+          }
+        );
         break;
       case '/error':
-        template = new ErrorPage();
+        template = new ErrorPage(
+          'main',
+          {
+            attr: {
+              class: 'error-page',
+              id: 'error-page'
+            }
+          }
+        );
         break;
       default:
-        template = new NonFoundPage();
+        template = new NonFoundPage(
+          'main',
+          {
+            attr: {
+              class: 'non-found-page',
+              id: 'non-found-page'
+            }
+          }
+        );
         break;
     }
     
-    // this.appElement.appendChild(page.getContent());
-    this.appElement.appendChild(template.getContent());
+    this.appElement.innerHTML = '';
+    this.appElement.appendChild(template.getContent())
 
     this.attachEventListeners();
   }

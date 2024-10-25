@@ -1,8 +1,8 @@
 import tpl from './tpl.hbs?raw';
-import Block from '../../utils/Block';
+import Component from '../../utils/component';
 import Handlebars from 'handlebars';
 
-export default class Error extends Block {
+export default class Error extends Component {
   constructor(props) {
     super('div', props);
   }
