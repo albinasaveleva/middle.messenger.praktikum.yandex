@@ -6,6 +6,6 @@ export default `
     <p class="error-subtitle">
       {{subtitle}}
     </p>
-    {{{link}}}
+    {{{buttonLink}}}
   </div>
 `;

@@ -1,4 +1,4 @@
-import tpl from './tpl.hbs?raw';
+import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
 export default class ButtonAction extends Component {
@@ -6,4 +6,3 @@ export default class ButtonAction extends Component {
     return this.compile(tpl);
   }
 }
-

@@ -1,5 +1,6 @@
-import PageForm from "../../components/page-form";
-import Title from "../../components/title";
+import ButtonAction from "../../components/button-action";
+import ButtonLink from "../../components/button-link";
+import Input from "../../components/input";
 
 const signupPageProps = [
   'main',
@@ -8,15 +9,76 @@ const signupPageProps = [
       class: 'signup-page',
       id: 'signup-page'
     },
-    pageForm: new PageForm('div', {
+    emailInput: new Input('input', {
       attr: {
-        class: 'page-form',
-      },
-      name: 'signup-form',
-      id: 'signup-form',
-      content: 'Регистрация'
+        class: "input-field", 
+        name: "email",
+        type: "email",
+        placeholder: "Почта"
+      }
     }),
-    
+    loginInput: new Input('input', {
+      attr: {
+        class: "input-field", 
+        name: "login",
+        type: "text",
+        placeholder: "Логин"
+      }
+    }),
+    firstNameInput: new Input('input', {
+      attr: {
+        class: "input-field", 
+        name: "first_name",
+        type: "text",
+        placeholder: "Имя"
+      }
+    }),
+    secondNameInput: new Input('input', {
+      attr: {
+        class: "input-field", 
+        name: "second_name",
+        type: "text",
+        placeholder: "Фамилия"
+      }
+    }),
+    phoneInput: new Input('input', {
+      attr: {
+        class: "input-field", 
+        name: "phone",
+        type: "text",
+        placeholder: "Телефон"
+      }
+    }),
+    passwordInput: new Input('input', {
+      attr: {
+        class: "input-field", 
+        name: "password",
+        type: "password",
+        placeholder: "Пароль"
+      }
+    }),
+    doublePasswordInput: new Input('input', {
+      attr: {
+        class: "input-field", 
+        name: "password",
+        type: "password",
+        placeholder: "Пароль"
+      }
+    }),
+    buttonAction: new ButtonAction('button', {
+      attr: {
+        class: "button-action",
+        type: "submit"
+      },
+      action: "Зарегистрироваться"
+    }),
+    buttonLink: new ButtonLink('a', {
+      attr: {
+        class: "button-link", 
+        href: "/login"
+      },
+      action: 'Войти'
+    })
   }
 ];
 

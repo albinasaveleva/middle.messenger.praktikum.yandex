@@ -1,18 +1,50 @@
-// {{#> PageForm name="login-form" id="login-form" }}
-//   <p class="title">Регистрация</p>
-//   <div class="form-inputs">
-//     {{> FormInput name="email" type="email" placeholder="Почта" }}
-//     {{> FormInput name="login" type="text" placeholder="Логин" }}
-//     {{> FormInput name="first_name" type="text" placeholder="Имя" }}
-//     {{> FormInput name="second_name" type="text" placeholder="Фамилия" }}
-//     {{> FormInput name="phone" type="text" placeholder="Телефон" }}
-//     {{> FormInput name="password" type="password" placeholder="Пароль" }}
-//     {{> FormInput name="password" type="password" placeholder="Пароль" }}
-//   </div>
-//   {{> ButtonAction action="Зарегистрироваться" }}
-//   {{> ButtonLink href="./login-page" action="Войти" }}
-// {{/PageForm}}
-
 export default `
-  {{{pageForm}}}
+  <div class="page-form">
+    <form class="form" name="signup-form" id="signup-form">
+      <p class="title">Регистрация</p>
+      <div class="inputs">
+        <div class="form-input">
+          <span class="input-label">Почта</span>
+          {{{emailInput}}}
+          <span class="input-error">Ошибка</span>
+        </div>
+        <div class="form-input">
+          <span class="input-label">Логин</span>
+          {{{loginInput}}}
+          <span class="input-error">Ошибка</span>
+        </div>
+        <div class="form-input">
+          <span class="input-label">Имя</span>
+          {{{firstNameInput}}}
+          <span class="input-error">Ошибка</span>
+        </div>
+        <div class="form-input">
+          <span class="input-label">Фамилия</span>
+          {{{secondNameInput}}}
+          <span class="input-error">Ошибка</span>
+        </div>
+        <div class="form-input">
+          <span class="input-label">Телефон</span>
+          {{{phoneInput}}}
+          <span class="input-error">Ошибка</span>
+        </div>
+        <div class="form-input">
+          <span class="input-label">Пароль</span>
+          {{{passwordInput}}}
+          <span class="input-error">Ошибка</span>
+        </div>
+        <div class="form-input">
+          <span class="input-label">Пароль (ещё раз)</span>
+          {{{doublePasswordInput}}}
+          <span class="input-error">Ошибка</span>
+        </div>
+      </div>
+      <div class="buttons">
+        {{{buttonAction}}}
+        {{{buttonLink}}}
+      </div>
+    </form>
+  </div>
 `;
+      //   {{> ButtonAction action="Зарегистрироваться" }}
+      //   {{> ButtonLink href="./login-page" action="Войти" }}

@@ -1,5 +1,5 @@
 import Error from "../../components/error";
-import Link from "../../components/link";
+import ButtonLink from "../../components/button-link";
 
 const nonFoundPageProps = [
   'main', 
@@ -14,7 +14,7 @@ const nonFoundPageProps = [
       },
       title: '404',
       subtitle: 'Не туда попали',
-      link: new Link('a', {
+      buttonLink: new ButtonLink('a', {
         attr: {
           href: '/chats',
           class: 'button-link'

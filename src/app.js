@@ -9,32 +9,11 @@ import {
 } from './pages/index';
 
 import nonFoundPageProps from './pages/non-found-page/componentProps'
-
-import Avatar from './components/avatar/index';
-import Link from './components/link';
 import errorPageProps from './pages/error-page/componentProps';
 import signupPageProps from './pages/signup-page/componentProps';
-// import AvatarInput from './components/avatar-input/index';
-// import ButtonAction from './components/button-action/index';
-// import ButtonBack from './components/button-back/index';
-// import ButtonLink from './components/button-link/index';
-// import ButtonSend from './components/button-send';
-// import Chat from './components/chat/index';
-// import ChatFeed from './components/chat-feed/index';
-// import Chats from './components/chats';
-// import EmptyChatFeed from './components/empty-chat-feed/index';
-// import Error from './components/error/index';
-// import FormInput from './components/form-input/index';
-// import IncomingMessage from './components/incoming-message';
-// import MessageInput from './components/message-input/index';
-// import Modal from './components/modal/index';
-// import OutcomingMessage from './components/outcoming-message/index';
-// import PageForm from './components/page-form/index';
-// import ProfileInput from './components/profile-input/index';
-// import SearchInput from './components/search-input';
-// import Timestamp from './components/timestamp/index';
-
-
+import loginPageProps from './pages/login-page/componentProps';
+import profilePageProps from './pages/profile-page/componentProps';
+import chatPageProps from './pages/chat-page/componentProps';
 
 export default class App {
   constructor() {
@@ -57,40 +36,16 @@ export default class App {
         );
         break;
       case '/login':
-        template = new LoginPage(
-          'main',
-          {
-            attr: {
-              class: 'login-page',
-              id: 'login-page'
-            }
-          }
-        );
+        template = new LoginPage(...loginPageProps);
         break;
       case '/signup':
         template = new SignupPage(...signupPageProps);
         break;
       case '/chats':
-        template = new ChatPage(
-          'main',
-          {
-            attr: {
-              class: 'chat-page',
-              id: 'chat-page'
-            }
-          }
-        );
+        template = new ChatPage(...chatPageProps);
         break;
       case '/profile':
-        template = new ProfilePage(
-          'main',
-          {
-            attr: {
-              class: 'profile-page',
-              id: 'profile-page'
-            }
-          }
-        );
+        template = new ProfilePage(...profilePageProps);
         break;
       case '/error':
         template = new ErrorPage(...errorPageProps);

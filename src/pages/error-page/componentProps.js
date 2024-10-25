@@ -1,5 +1,5 @@
 import Error from "../../components/error";
-import Link from "../../components/link";
+import ButtonLink from "../../components/button-link";
 
 const errorPageProps = [
   'main',
@@ -14,7 +14,7 @@ const errorPageProps = [
       },
       title: '500',
       subtitle: 'Мы уже фиксим',
-      link: new Link('a', {
+      buttonLink: new ButtonLink('a', {
         attr: {
           href: '/chats',
           class: 'button-link'
