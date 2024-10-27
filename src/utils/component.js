@@ -174,7 +174,7 @@ export default class Component {
   };
 
   setLists() {
-    
+
   }
 
   makePropsProxy(props) {
@@ -186,7 +186,7 @@ export default class Component {
       set(target, prop, value) {
         const oldValue = { ...target };
         target[prop] = value;
-        this._eventBus().emit(Component.EVENTS.FLOW_CDU, oldValue, target);
+        this._eventBus.emit(Component.EVENTS.FLOW_CDU, oldValue, target);
         return true;
       },
     });
