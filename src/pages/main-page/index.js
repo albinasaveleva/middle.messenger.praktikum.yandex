@@ -1,6 +1,7 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 import ButtonLink from '../../components/button-link';
+import LoginPage from '../login-page';
 
 export default class MainPage extends Component {
   constructor() {
@@ -20,6 +21,12 @@ export default class MainPage extends Component {
             event.preventDefault();
             const href = event.target.attributes.href.value;
             history.pushState(null, null, href);
+            this.setProps({
+              attr: {
+              class: 'login-page',
+              id: 'login-page'
+            }
+            })
           }
         }
       }),

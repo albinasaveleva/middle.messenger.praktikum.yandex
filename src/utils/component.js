@@ -22,10 +22,10 @@ export default class Component {
   constructor(tag = "div", componentProps = {}) {
     const { props, children, lists } = this.getProps(componentProps);
     
-    this._props = this.makePropsProxy({ ...props, _id: this._id })
-    this._children = children;
-    this._lists = lists;
+    this._children = this.makePropsProxy(children);
+    this._lists = this.makePropsProxy({...lists});
     this._id = makeUUID();
+    this._props = this.makePropsProxy({ ...props, _id: this._id })
     this._meta = { tag, props };
     this._eventBus = new EventBus();
 
@@ -48,9 +48,7 @@ export default class Component {
   createElement(tag) {
     const element = document.createElement(tag);
 
-    if (this._props.settings?.withInternalID) {
-      element.setAttribute('data-id', this._id);
-    }
+    element.setAttribute('data-id', `${this._id}`);
     return element;
   }
 
@@ -178,6 +176,8 @@ export default class Component {
   }
 
   makePropsProxy(props) {
+    const self = this;
+
     return new Proxy(props, {
       get(target, prop) {
         const value = target[prop];
@@ -186,7 +186,7 @@ export default class Component {
       set(target, prop, value) {
         const oldValue = { ...target };
         target[prop] = value;
-        this._eventBus.emit(Component.EVENTS.FLOW_CDU, oldValue, target);
+        self._eventBus.emit(Component.EVENTS.FLOW_CDU, oldValue, target)
         return true;
       },
     });
