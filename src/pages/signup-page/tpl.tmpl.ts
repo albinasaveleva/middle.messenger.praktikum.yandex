@@ -46,5 +46,3 @@ export default `
     </form>
   </div>
 `;
-      //   {{> ButtonAction action="Зарегистрироваться" }}
-      //   {{> ButtonLink href="./login-page" action="Войти" }}
