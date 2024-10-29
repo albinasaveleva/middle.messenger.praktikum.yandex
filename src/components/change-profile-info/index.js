@@ -23,6 +23,8 @@ export default class ChangeProfileInfo extends Component {
           type: "email",
           placeholder: "Почта",
           value: "pochta@yandex.ru",
+        },
+        events: {
         }
       }),
       loginInput: new Input('input', {
@@ -32,6 +34,8 @@ export default class ChangeProfileInfo extends Component {
           type: "text",
           placeholder: "Логин",
           value: "ivanivanov",
+        },
+        events: {
         }
       }),
       firstNameInput: new Input('input', {
@@ -41,6 +45,8 @@ export default class ChangeProfileInfo extends Component {
           type: "text",
           placeholder: "Имя",
           value: "Иван",
+        },
+        events: {
         }
       }),
       secondNameInput: new Input('input', {
@@ -50,6 +56,8 @@ export default class ChangeProfileInfo extends Component {
           type: "text",
           placeholder: "Фамилия",
           value: "Иванов",
+        },
+        events: {
         }
       }),
       displayNameInput: new Input('input', {
@@ -59,6 +67,8 @@ export default class ChangeProfileInfo extends Component {
           type: "text",
           placeholder: "Пароль",
           value: "Иван",
+        },
+        events: {
         }
       }),
       phoneInput: new Input('input', {
@@ -68,14 +78,27 @@ export default class ChangeProfileInfo extends Component {
           type: "text",
           placeholder: "Телефон",
           value: '+7 (999) 999 99 99',
+        },
+        events: {
         }
       }),
       saveButton: new ButtonAction('button', {
         attr: {
           class: 'button-action',
-          type: 'button'
+          type: 'submit',
+          form: 'profile-form'
         },
-        action: 'Сохранить'
+        action: 'Сохранить',
+        events: {
+          click: (event) => {
+            event.preventDefault();
+            const formData = new FormData(document.forms['profile-form']);
+
+            for (let pair of formData.entries()) {
+              console.log(`${pair[0]}: ${pair[1]}`);
+            }
+          }
+        }
       })
     })
   }

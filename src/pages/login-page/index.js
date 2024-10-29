@@ -20,6 +20,8 @@ export default class LoginPage extends Component {
           name: "login",
           type: "text",
           placeholder: "Логин"
+        },
+        events: {
         }
       }),
       passwordInput: new Input('input', {
@@ -28,14 +30,29 @@ export default class LoginPage extends Component {
           name: "password",
           type: "password",
           placeholder: "Пароль"
+        },
+        events: {
         }
       }),
       buttonAction: new ButtonAction('button', {
         attr: {
           class: "button-action",
-          type: "submit"
+          type: "submit",
+          form: 'login-form'
         },
-        action: "Войти"
+        action: "Войти",
+        events: {
+          click: (event) => {
+            event.preventDefault();
+            const formData = new FormData(document.forms['login-form']);
+
+            for (let pair of formData.entries()) {
+              console.log(`${pair[0]}: ${pair[1]}`);
+            }
+
+            document.querySelector('#login-form').reset();
+          }
+        }
       }),
       buttonLink: new ButtonLink('a', {
         attr: {

@@ -1,6 +1,6 @@
 export default `
   <div class="page-form">
-    <form class="form" name="login-form" id="login-form">
+    <form class="form" name="login-form" id="login-form" onsubmit="return false;">
       <p class="title">Вход</p>
       <div class="inputs">
         <div class="form-input">

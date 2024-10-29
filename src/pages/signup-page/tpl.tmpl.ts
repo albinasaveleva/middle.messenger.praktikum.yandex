@@ -1,6 +1,6 @@
 export default `
   <div class="page-form">
-    <form class="form" name="signup-form" id="signup-form">
+    <form class="form" name="signup-form" id="signup-form" onsubmit="return false;">
       <p class="title">Регистрация</p>
       <div class="inputs">
         <div class="form-input">

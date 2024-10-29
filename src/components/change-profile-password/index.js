@@ -46,9 +46,20 @@ export default class ChangeProfilePassword extends Component {
       saveButton: new ButtonAction('button', {
         attr: {
           class: 'button-action',
-          type: 'button'
+          type: 'button',
+          name: 'profile-form'
         },
-        action: 'Сохранить'
+        action: 'Сохранить',
+        events: {
+          click: (event) => {
+            event.preventDefault();
+            const formData = new FormData(document.forms['profile-form']);
+
+            for (let pair of formData.entries()) {
+              console.log(`${pair[0]}: ${pair[1]}`);
+            }
+          }
+        }
       })
     })
   }

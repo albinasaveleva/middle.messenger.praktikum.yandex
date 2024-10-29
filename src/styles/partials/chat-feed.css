@@ -42,6 +42,7 @@
 .chat-feed .messages {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .chat-feed .message-group {
@@ -49,7 +50,6 @@
 }
 
 .chat-feed .message {
-  
 }
 
 .chat-feed .timestamp {
@@ -58,7 +58,7 @@
   text-align: center;
 }
 
-.chat-feed .send-message {
+.chat-feed .send-message form {
   display: flex;
   width: 100%;
   border-top: 1px solid var(--light-gray-color);

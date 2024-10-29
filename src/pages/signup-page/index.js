@@ -18,6 +18,8 @@ export default class SignupPage extends Component {
           name: "email",
           type: "email",
           placeholder: "Почта"
+        },
+        events: {
         }
       }),
       loginInput: new Input('input', {
@@ -26,6 +28,8 @@ export default class SignupPage extends Component {
           name: "login",
           type: "text",
           placeholder: "Логин"
+        },
+        events: {
         }
       }),
       firstNameInput: new Input('input', {
@@ -34,6 +38,8 @@ export default class SignupPage extends Component {
           name: "first_name",
           type: "text",
           placeholder: "Имя"
+        },
+        events: {
         }
       }),
       secondNameInput: new Input('input', {
@@ -42,6 +48,8 @@ export default class SignupPage extends Component {
           name: "second_name",
           type: "text",
           placeholder: "Фамилия"
+        },
+        events: {
         }
       }),
       phoneInput: new Input('input', {
@@ -50,6 +58,8 @@ export default class SignupPage extends Component {
           name: "phone",
           type: "text",
           placeholder: "Телефон"
+        },
+        events: {
         }
       }),
       passwordInput: new Input('input', {
@@ -58,6 +68,8 @@ export default class SignupPage extends Component {
           name: "password",
           type: "password",
           placeholder: "Пароль"
+        },
+        events: {
         }
       }),
       doublePasswordInput: new Input('input', {
@@ -66,14 +78,27 @@ export default class SignupPage extends Component {
           name: "password",
           type: "password",
           placeholder: "Пароль"
-        }
+        },
       }),
       buttonAction: new ButtonAction('button', {
         attr: {
           class: "button-action",
-          type: "submit"
+          type: "submit",
+          form: 'signup-form'
         },
-        action: "Зарегистрироваться"
+        action: "Зарегистрироваться",
+        events: {
+          click: (event) => {
+            event.preventDefault();
+            const formData = new FormData(document.forms['signup-form']);
+
+            for (let pair of formData.entries()) {
+              console.log(`${pair[0]}: ${pair[1]}`);
+            }
+
+            document.querySelector('#signup-form').reset();
+          }
+        }
       }),
       buttonLink: new ButtonLink('a', {
         attr: {

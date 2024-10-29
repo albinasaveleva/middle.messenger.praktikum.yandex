@@ -72,12 +72,27 @@ export default class ChatPage extends Component {
                       type: "text",
                       name: "message",
                       placeholder: "Сообщение"
+                    },
+                    events: {
                     }
                   }),
                   buttonSend: new ButtonAction('button', {
                     attr: {
                       class: 'button-send',
-                      type: 'button'
+                      type: 'submit',
+                      form: 'message-form'
+                    },
+                    events: {
+                      click: (event) => {
+                        event.preventDefault();
+                        const formData = new FormData(document.forms['message-form']);
+
+                        for (let pair of formData.entries()) {
+                          console.log(`${pair[0]}: ${pair[1]}`);
+                        }
+
+                        document.querySelector('#message-form').reset();
+                      }
                     }
                   })
                 })

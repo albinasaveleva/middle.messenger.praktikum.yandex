@@ -6,7 +6,7 @@ export default `
     </div>
   </div>
   <span class="name">Иван</span>
-  <form class="form" name="profile-form" id="profile-form">
+  <form class="form" name="profile-form" id="profile-form" onsubmit="return false;">
     <div class="inputs">
       <div class="profile-input">
         <span class="input-label">Почта</span>
