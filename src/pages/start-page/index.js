@@ -96,7 +96,7 @@ export default class StartPage extends Component {
             const href = event.target.attributes.href.value;
             history.pushState(null, null, href);
             changePageContent({
-              content: new ErrorPage()
+              content: new NonFoundPage()
             });
           }
         }
@@ -113,7 +113,7 @@ export default class StartPage extends Component {
             const href = event.target.attributes.href.value;
             history.pushState(null, null, href);
             changePageContent({
-              content: new NonFoundPage()
+              content: new ErrorPage()
             });
           }
         }
