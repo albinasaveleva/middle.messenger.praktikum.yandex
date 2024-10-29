@@ -9,12 +9,12 @@ export default class NonFoundPage extends Component {
   constructor(changePageContent) {
     super('div', {
       attr: {
-        title: '404',
-        subtitle: 'Не туда попали',
+        class: 'non-found-page',
+        id: 'non-found-page'
       },
       error: new Error('div', {
         attr: {
-          class: ''
+          class: 'error-wrapper'
         },
         title: '404',
         subtitle: 'Не туда попали',

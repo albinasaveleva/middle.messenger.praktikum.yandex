@@ -195,12 +195,4 @@ export default class Component {
   getContent() {
     return this._element;
   }
-
-  // show() {
-  //   this.getContent().style.display = "block";
-  // }
-
-  // hide() {
-  //   this.getContent().style.display = "none";
-  // }
 }

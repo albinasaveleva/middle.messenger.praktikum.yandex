@@ -3,4 +3,5 @@ export default `
     {{{buttonLink}}}
   </div>
   {{{content}}}
+  {{{modal}}}
 `;

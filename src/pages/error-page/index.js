@@ -9,12 +9,12 @@ export default class ErrorPage extends Component {
   constructor(changePageContent) {
     super('div', {
       attr: {
-        title: '404',
-        subtitle: 'Не туда попали',
+        class: 'error-page',
+        id: 'error-page'
       },
       error: new Error('div', {
         attr: {
-          class: ''
+          class: 'error-wrapper'
         },
         title: '500',
         subtitle: 'Мы уже фиксим',

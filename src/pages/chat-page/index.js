@@ -9,6 +9,7 @@ import Input from '../../components/input';
 import EmptyChatFeed from '../../components/empty-chat-feed';
 import ProfilePage from '../profile-page';
 import ChatFeed from '../../components/chat-feed';
+import ButtonAction from '../../components/button-action';
 
 export default class ChatPage extends Component {
   constructor(changePageContent) {
@@ -61,7 +62,25 @@ export default class ChatPage extends Component {
               // const href = event.target.attributes.href.value;
               // history.pushState(null, null, href);
               this.setProps({
-                chatFeed: new ChatFeed()
+                chatFeed: new ChatFeed('div', {
+                  attr: {
+                    class: 'chat-feed'
+                  },
+                  messageInput: new Input('input', {
+                    attr: {
+                      class: "input-field",
+                      type: "text",
+                      name: "message",
+                      placeholder: "Сообщение"
+                    }
+                  }),
+                  buttonSend: new ButtonAction('button', {
+                    attr: {
+                      class: 'button-send',
+                      type: 'button'
+                    }
+                  })
+                })
               })
             }
           }
@@ -69,7 +88,7 @@ export default class ChatPage extends Component {
       }),
       chatFeed: new EmptyChatFeed('div', {
         attr: {
-          class: 'empty-chat-feed'
+          class: 'chat-feed'
         }
       })
     })
