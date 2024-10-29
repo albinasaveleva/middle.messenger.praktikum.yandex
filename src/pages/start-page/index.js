@@ -25,10 +25,10 @@ export default class StartPage extends Component {
         events: {
           click: (event) => {
             event.preventDefault();
-            const href = event.target.attributes.href.value;
-            history.pushState(null, null, href);
+            // const href = event.target.attributes.href.value;
+            // history.pushState(null, null, href);
             changePageContent({
-              content: new LoginPage()
+              content: new LoginPage(changePageContent)
             });
           }
         }
@@ -42,10 +42,10 @@ export default class StartPage extends Component {
         events: {
           click: (event) => {
             event.preventDefault();
-            const href = event.target.attributes.href.value;
-            history.pushState(null, null, href);
+            // const href = event.target.attributes.href.value;
+            // history.pushState(null, null, href);
             changePageContent({
-              content: new SignupPage()
+              content: new SignupPage(changePageContent)
             });
           }
         }
@@ -59,10 +59,10 @@ export default class StartPage extends Component {
         events: {
           click: (event) => {
             event.preventDefault();
-            const href = event.target.attributes.href.value;
-            history.pushState(null, null, href);
+            // const href = event.target.attributes.href.value;
+            // history.pushState(null, null, href);
             changePageContent({
-              content: new ChatPage()
+              content: new ChatPage(changePageContent)
             });
           }
         }
@@ -76,10 +76,10 @@ export default class StartPage extends Component {
         events: {
           click: (event) => {
             event.preventDefault();
-            const href = event.target.attributes.href.value;
-            history.pushState(null, null, href);
+            // const href = event.target.attributes.href.value;
+            // history.pushState(null, null, href);
             changePageContent({
-              content: new ProfilePage()
+              content: new ProfilePage(changePageContent)
             });
           }
         }
@@ -93,10 +93,10 @@ export default class StartPage extends Component {
         events: {
           click: (event) => {
             event.preventDefault();
-            const href = event.target.attributes.href.value;
-            history.pushState(null, null, href);
+            // const href = event.target.attributes.href.value;
+            // history.pushState(null, null, href);
             changePageContent({
-              content: new NonFoundPage()
+              content: new NonFoundPage(changePageContent)
             });
           }
         }
@@ -110,10 +110,10 @@ export default class StartPage extends Component {
         events: {
           click: (event) => {
             event.preventDefault();
-            const href = event.target.attributes.href.value;
-            history.pushState(null, null, href);
+            // const href = event.target.attributes.href.value;
+            // history.pushState(null, null, href);
             changePageContent({
-              content: new ErrorPage()
+              content: new ErrorPage(changePageContent)
             });
           }
         }

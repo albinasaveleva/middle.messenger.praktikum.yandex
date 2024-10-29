@@ -3,9 +3,10 @@ import Component from '../../utils/component';
 import Input from '../../components/input';
 import ButtonAction from '../../components/button-action';
 import ButtonLink from '../../components/button-link';
+import LoginPage from '../login-page';
 
 export default class SignupPage extends Component {
-  constructor() {
+  constructor(changePageContent) {
     super('div', {
       attr: {
         class: 'signup-page',
@@ -79,7 +80,17 @@ export default class SignupPage extends Component {
           class: "button-link", 
           href: "/login"
         },
-        action: 'Войти'
+        action: 'Войти',
+        events: {
+          click: (event) => {
+            event.preventDefault();
+            // const href = event.target.attributes.href.value;
+            // history.pushState(null, null, href);
+            changePageContent({
+              content: new LoginPage(changePageContent)
+            });
+          }
+        }
       })
     })
   }

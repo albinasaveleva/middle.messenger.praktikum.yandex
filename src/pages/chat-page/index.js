@@ -7,9 +7,11 @@ import Chats from '../../components/chats';
 import ButtonLink from '../../components/button-link';
 import Input from '../../components/input';
 import EmptyChatFeed from '../../components/empty-chat-feed';
+import ProfilePage from '../profile-page';
+import ChatFeed from '../../components/chat-feed';
 
 export default class ChatPage extends Component {
-  constructor() {
+  constructor(changePageContent) {
     super('div', {
       attr: {
       class: 'chat-page',
@@ -24,7 +26,17 @@ export default class ChatPage extends Component {
             class: 'profile-link',
             href: '/profile'
           },
-          action: 'Профиль'
+          action: 'Профиль',
+          events: {
+            click: (event) => {
+              event.preventDefault();
+              // const href = event.target.attributes.href.value;
+              // history.pushState(null, null, href);
+              changePageContent({
+                content: new ProfilePage(changePageContent)
+              });
+            }
+          }
         }),
         searchInput: new Input('input', {
           attr: {
@@ -42,7 +54,17 @@ export default class ChatPage extends Component {
             attr: {
               class: 'avatar'
             }
-          })
+          }),
+          events: {
+            click: (event) => {
+              event.preventDefault();
+              // const href = event.target.attributes.href.value;
+              // history.pushState(null, null, href);
+              this.setProps({
+                chatFeed: new ChatFeed()
+              })
+            }
+          }
         })
       }),
       chatFeed: new EmptyChatFeed('div', {
