@@ -5,6 +5,7 @@ import ButtonAction from '../../components/button-action';
 import ButtonLink from '../../components/button-link';
 import Input from '../../components/input';
 import SignupPage from '../signup-page';
+import { inputValidation } from '../../utils/formValidation';
 
 export default class LoginPage extends Component {
   constructor(changePageContent) {
@@ -22,6 +23,9 @@ export default class LoginPage extends Component {
           placeholder: "Логин"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       passwordInput: new Input('input', {
@@ -32,6 +36,9 @@ export default class LoginPage extends Component {
           placeholder: "Пароль"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       buttonAction: new ButtonAction('button', {
@@ -70,7 +77,11 @@ export default class LoginPage extends Component {
             });
           }
         }
-      })
+      }),
+      onSubmit: (event) => {
+        event.preventDefault();
+        console.log(event);
+      }
     });
   }
   render() {

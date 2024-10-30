@@ -4,6 +4,7 @@ import Input from '../../components/input';
 import ButtonAction from '../../components/button-action';
 import ButtonLink from '../../components/button-link';
 import LoginPage from '../login-page';
+import { inputValidation } from '../../utils/formValidation';
 
 export default class SignupPage extends Component {
   constructor(changePageContent) {
@@ -20,6 +21,9 @@ export default class SignupPage extends Component {
           placeholder: "Почта"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       loginInput: new Input('input', {
@@ -30,6 +34,9 @@ export default class SignupPage extends Component {
           placeholder: "Логин"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       firstNameInput: new Input('input', {
@@ -40,6 +47,9 @@ export default class SignupPage extends Component {
           placeholder: "Имя"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       secondNameInput: new Input('input', {
@@ -50,6 +60,9 @@ export default class SignupPage extends Component {
           placeholder: "Фамилия"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       phoneInput: new Input('input', {
@@ -60,6 +73,9 @@ export default class SignupPage extends Component {
           placeholder: "Телефон"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       passwordInput: new Input('input', {
@@ -70,6 +86,9 @@ export default class SignupPage extends Component {
           placeholder: "Пароль"
         },
         events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
         }
       }),
       doublePasswordInput: new Input('input', {
@@ -79,6 +98,11 @@ export default class SignupPage extends Component {
           type: "password",
           placeholder: "Пароль"
         },
+        events: {
+          blur: (event) => {
+            inputValidation(event.target)
+          }
+        }
       }),
       buttonAction: new ButtonAction('button', {
         attr: {
