@@ -10,6 +10,9 @@ import EmptyChatFeed from '../../components/empty-chat-feed';
 import ProfilePage from '../profile-page';
 import ChatFeed from '../../components/chat-feed';
 import ButtonAction from '../../components/button-action';
+import Form from '../../components/form';
+import MessageForm from '../../forms/message-form';
+import { inputValidation } from '../../utils/formValidation';
 
 export default class ChatPage extends Component {
   constructor(changePageContent) {
@@ -66,35 +69,59 @@ export default class ChatPage extends Component {
                   attr: {
                     class: 'chat-feed'
                   },
-                  messageInput: new Input('input', {
+                  form: new Form('form', {
                     attr: {
-                      class: "input-field",
-                      type: "text",
-                      name: "message",
-                      placeholder: "Сообщение"
+                      class: 'form',
+                      name: "message-form",
+                      id: "message-form"
                     },
+                    content: new MessageForm('div', {
+                      attr: {
+                        class: 'form-wrapper'
+                      },
+                      messageInput: new Input('input', {
+                        attr: {
+                          class: "input-field",
+                          type: "text",
+                          name: "message",
+                          placeholder: "Сообщение"
+                        },
+                      }),
+                      buttonSend: new ButtonAction('button', {
+                        attr: {
+                          class: 'button-send',
+                          type: 'submit',
+                          form: 'message-form'
+                        },
+                      })
+                    }),
                     events: {
-                    }
-                  }),
-                  buttonSend: new ButtonAction('button', {
-                    attr: {
-                      class: 'button-send',
-                      type: 'submit',
-                      form: 'message-form'
-                    },
-                    events: {
-                      click: (event) => {
+                      submit: (event) => {
                         event.preventDefault();
-                        const formData = new FormData(document.forms['message-form']);
+            
+                        let error = false;
+                        const inputs = event.target.querySelectorAll('input');
+                        inputs.forEach(input => {
+                          if (inputValidation(input)) {
+                            error = false;
+                          } else {
+                            error = true;
+                          }
+                        })
 
-                        for (let pair of formData.entries()) {
-                          console.log(`${pair[0]}: ${pair[1]}`);
-                        }
-
-                        document.querySelector('#message-form').reset();
+                        if (!error) {
+                          const formData = new FormData(event.target);
+            
+                          for (let pair of formData.entries()) {
+                            console.log(`${pair[0]}: ${pair[1]}`);
+                          }
+            
+                          event.target.reset();
+                        } 
                       }
                     }
                   })
+                  
                 })
               })
             }
@@ -112,4 +139,3 @@ export default class ChatPage extends Component {
     return this.compile(tpl);
   }
 }
-

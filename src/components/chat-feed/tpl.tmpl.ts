@@ -8,10 +8,6 @@ export default `
   <div class="messages">
   </div>
   <div class="send-message">
-    <form name="message-form" id="message-form" onsubmit="return false;">
-      <div class="attach"></div>
-      {{{messageInput}}}
-      {{{buttonSend}}}
-    </form>
+    {{{form}}}
   </div>
 `;
