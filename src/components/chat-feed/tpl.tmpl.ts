@@ -6,6 +6,7 @@ export default `
     <div class="actions"></div>
   </div>
   <div class="messages">
+    {{{messages}}}
   </div>
   <div class="send-message">
     {{{form}}}

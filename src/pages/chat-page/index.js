@@ -13,6 +13,7 @@ import ButtonAction from '../../components/button-action';
 import Form from '../../components/form';
 import MessageForm from '../../forms/message-form';
 import { inputValidation } from '../../utils/formValidation';
+import Message from '../../components/message';
 
 export default class ChatPage extends Component {
   constructor(changePageContent) {
@@ -69,6 +70,12 @@ export default class ChatPage extends Component {
                   attr: {
                     class: 'chat-feed'
                   },
+                  messages: new Message('div', {
+                    attr: {
+                      class: 'outcoming-message'
+                    },
+                    message: 'Test'
+                  }),
                   form: new Form('form', {
                     attr: {
                       class: 'form',
