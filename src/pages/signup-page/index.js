@@ -31,7 +31,7 @@ export default class SignupPage extends Component {
             attr: {
               class: "input-field", 
               name: "email",
-              type: "email",
+              type: "text",
               placeholder: "Почта"
             },
             events: {

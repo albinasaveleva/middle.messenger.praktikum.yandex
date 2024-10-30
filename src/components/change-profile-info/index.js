@@ -7,6 +7,7 @@ import ButtonAction from "../../components/button-action";
 import Form from '../form';
 import ChangeProfileInfoForm from '../../forms/change-profile-info-form';
 import { inputValidation } from '../../utils/formValidation';
+import ProfileInfo from '../profile-info';
 
 export default class ChangeProfileInfo extends Component {
   constructor(changePageContent, changeProfileContent) {
@@ -33,7 +34,7 @@ export default class ChangeProfileInfo extends Component {
             attr: {
               class: "input-field", 
               name: "email",
-              type: "email",
+              type: "text",
               placeholder: "Почта",
               value: "pochta@yandex.ru",
             },
@@ -170,6 +171,10 @@ export default class ChangeProfileInfo extends Component {
               for (let pair of formData.entries()) {
                 console.log(`${pair[0]}: ${pair[1]}`);
               }
+
+              changeProfileContent({
+                content: new ProfileInfo(changePageContent, changeProfileContent)
+              })
             }
           }
         }

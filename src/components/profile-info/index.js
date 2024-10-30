@@ -10,6 +10,7 @@ import ChangeProfileInfo from '../change-profile-info';
 import ChangeProfilePassword from '../change-profile-password';
 import Form from '../form';
 import ProfileInfoForm from '../../forms/profile-info-form';
+import AvatarHover from '../avatar-hover';
 
 export default class ProfileInfo extends Component {
   constructor(changePageContent, changeProfileContent) {
@@ -33,7 +34,19 @@ export default class ProfileInfo extends Component {
             avatarHover.style.display = "none";
           },
           click: (event) => {
-            console.log(event.target)
+            const avatarModal = document.querySelector('#avatar-modal');
+            avatarModal.style.display = 'flex';
+          }
+        }
+      }),
+      avatarHover: new AvatarHover('div', {
+        attr: {
+          class: 'avatar-hover'
+        },
+        events: {
+          click: (event) => {
+            const avatarModal = document.querySelector('#avatar-modal');
+            avatarModal.style.display = 'flex';
           }
         }
       }),
@@ -92,7 +105,7 @@ export default class ProfileInfo extends Component {
               class: "input-field", 
               name: "display_name",
               type: "text",
-              placeholder: "Пароль",
+              placeholder: "Имя в чате",
               value: "Иван",
               readonly: true
             }
@@ -119,7 +132,7 @@ export default class ProfileInfo extends Component {
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
                 changeProfileContent({
-                  content: new ChangeProfileInfo()
+                  content: new ChangeProfileInfo(changePageContent, changeProfileContent)
                 })
               }
             }
@@ -136,7 +149,7 @@ export default class ProfileInfo extends Component {
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
                 changeProfileContent({
-                  content: new ChangeProfilePassword()
+                  content: new ChangeProfilePassword(changePageContent, changeProfileContent)
                 })
               }
             }

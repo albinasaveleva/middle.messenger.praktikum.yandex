@@ -5,7 +5,7 @@ import ProfileInfo from '../../components/profile-info';
 import ButtonLink from '../../components/button-link';
 import ChatPage from '../chat-page';
 import Modal from '../../components/modal';
-import AvatarModal from '../../components/avatar-modal';
+import AvatarModal from '../../modals/avatar-modal';
 
 export default class ProfilePage extends Component {
   constructor(changePageContent) {
@@ -36,7 +36,14 @@ export default class ProfilePage extends Component {
           class: 'modal',
           id: 'avatar-modal'
         },
-        content: new AvatarModal()
+        content: new AvatarModal(),
+        events: {
+          click: (event) => {
+            if (event.target.classList.contains("modal")) {
+              event.target.style.display = 'none';
+            }
+          }
+        }
       })
     })
   }

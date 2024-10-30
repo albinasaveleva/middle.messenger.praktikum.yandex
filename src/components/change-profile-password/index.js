@@ -7,6 +7,7 @@ import ButtonAction from "../../components/button-action";
 import Form from '../form';
 import ChangeProfilePasswordForm from '../../forms/change-profile-password-form';
 import { inputValidation } from '../../utils/formValidation';
+import ProfileInfo from '../profile-info';
 
 export default class ChangeProfilePassword extends Component {
   constructor(changePageContent, changeProfileContent) {
@@ -32,10 +33,10 @@ export default class ChangeProfilePassword extends Component {
           oldPasswordInput: new Input('input', {
             attr: {
               class: "input-field", 
-              name: "oldPassword",
+              name: "password",
               type: "password",
               placeholder: "Старый пароль",
-              value: "password",
+              value: "Password1",
             },
             events: {
               blur: (event) => {
@@ -50,10 +51,10 @@ export default class ChangeProfilePassword extends Component {
           newPasswordInput: new Input('input', {
             attr: {
               class: "input-field", 
-              name: "newPassword",
+              name: "password",
               type: "password",
               placeholder: "Новый пароль",
-              value: "password",
+              value: "Password1",
             },
             events: {
               blur: (event) => {
@@ -68,10 +69,10 @@ export default class ChangeProfilePassword extends Component {
           doubleNewPasswordInput: new Input('input', {
             attr: {
               class: "input-field", 
-              name: "newPassword",
+              name: "password",
               type: "password",
               placeholder: "Повторите новый пароль",
-              value: "password",
+              value: "Password1",
             },
             events: {
               blur: (event) => {
@@ -86,7 +87,7 @@ export default class ChangeProfilePassword extends Component {
           saveButton: new ButtonAction('button', {
             attr: {
               class: 'button-action',
-              type: 'button',
+              type: 'submit',
               name: 'profile-form'
             },
             action: 'Сохранить',
@@ -115,6 +116,10 @@ export default class ChangeProfilePassword extends Component {
               for (let pair of formData.entries()) {
                 console.log(`${pair[0]}: ${pair[1]}`);
               }
+
+              changeProfileContent({
+                content: new ProfileInfo(changePageContent, changeProfileContent)
+              })
             }
           }
         }
