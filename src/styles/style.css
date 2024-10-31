@@ -2,21 +2,21 @@
 @import 'variables';
 @import 'settings';
 
-@import './partials/avatar-input.css';
-@import './partials/avatar.css';
-@import './partials//button.css';
-@import './partials/chat-feed.css';
-@import './partials/chat.css';
-@import './partials/chats.css';
-@import './partials/empty-chat-feed.css';
-@import './partials/error.css';
-@import './partials/form-input.css';
-@import './partials/message-input.css';
-@import './partials/modal.css';
-@import './partials/page-form.css';
-@import './partials/profile-input.css';
-@import './partials/search-input.css';
-@import './partials/timestamp.css';
+@import './components/avatar.css';
+@import './components//button.css';
+@import './components/chat-feed.css';
+@import './components/chat.css';
+@import './components/chats.css';
+@import './components/empty-chat-feed.css';
+@import './components/error.css';
+@import './components/form-input.css';
+@import './components/frame.css';
+@import './components/message-input.css';
+@import './components/modal.css';
+@import './components/page-form.css';
+@import './components/profile-input.css';
+@import './components/search-input.css';
+@import './components/timestamp.css';
 
 @import './pages/chat-page.css';
 @import './pages/error-page.css';

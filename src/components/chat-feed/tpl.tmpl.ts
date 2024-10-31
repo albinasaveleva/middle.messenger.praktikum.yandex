@@ -3,7 +3,7 @@ export default `
     <div class="info">
       <span class="name">Андрей</span>
     </div>
-    <div class="actions"></div>
+    {{{actions}}}
   </div>
   <div class="messages">
     {{{messages}}}

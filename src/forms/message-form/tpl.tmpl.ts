@@ -1,5 +1,5 @@
 export default `
-  <div class="attach"></div>
+  {{{attach}}}
   {{{messageInput}}}
   {{{buttonSend}}}
 `;

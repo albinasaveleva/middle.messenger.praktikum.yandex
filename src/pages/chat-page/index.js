@@ -14,6 +14,9 @@ import Form from '../../components/form';
 import MessageForm from '../../forms/message-form';
 import { inputValidation } from '../../utils/formValidation';
 import Message from '../../components/message';
+import Frame from '../../components/frame';
+import Attach from '../../components/attach';
+import Actions from '../../components/actions';
 
 export default class ChatPage extends Component {
   constructor(changePageContent) {
@@ -70,11 +73,27 @@ export default class ChatPage extends Component {
                   attr: {
                     class: 'chat-feed'
                   },
+                  actions: new Actions('div', {
+                    attr: {
+                      class: 'actions'
+                    },
+                    frame: new Frame('div', {
+                      attr: {
+                        class: 'frame'
+                      }
+                    }),
+                    events: {
+                      click: (event) => {
+                        const [frame] = event.target.children;
+                        frame.classList.toggle('visible')
+                      }
+                    }
+                  }),
                   messages: new Message('div', {
                     attr: {
                       class: 'outcoming-message'
                     },
-                    message: 'Test'
+                    message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
                   }),
                   form: new Form('form', {
                     attr: {
@@ -86,6 +105,22 @@ export default class ChatPage extends Component {
                       attr: {
                         class: 'form-wrapper'
                       },
+                      attach: new Attach('div', {
+                        attr: {
+                          class: 'attach'
+                        },
+                        frame: new Frame('div', {
+                          attr: {
+                            class: 'frame'
+                          }
+                        }),
+                        events: {
+                          click: (event) => {
+                            const [frame] = event.target.children;
+                            frame.classList.toggle('visible')
+                          }
+                        }
+                      }),
                       messageInput: new Input('input', {
                         attr: {
                           class: "input-field",
