@@ -2,6 +2,7 @@
 @import 'variables';
 @import 'settings';
 
+@import './components/avatar-input.css';
 @import './components/avatar.css';
 @import './components//button.css';
 @import './components/chat-feed.css';
