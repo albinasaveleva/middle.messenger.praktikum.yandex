@@ -51,4 +51,3 @@ export default class AvatarModal extends Component {
     return this.compile(tpl);
   }
 }
-

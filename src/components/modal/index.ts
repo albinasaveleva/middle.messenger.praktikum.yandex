@@ -6,4 +6,3 @@ export default class Modal extends Component {
     return this.compile(tpl);
   }
 }
-

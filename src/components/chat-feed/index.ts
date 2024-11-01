@@ -6,4 +6,3 @@ export default class ChatFeed extends Component {
     return this.compile(tpl);
   }
 }
-

@@ -6,4 +6,3 @@ export default class EmptyChatFeed extends Component {
     return this.compile(tpl);
   }
 }
-

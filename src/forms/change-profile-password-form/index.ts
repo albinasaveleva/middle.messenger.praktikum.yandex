@@ -6,4 +6,3 @@ export default class ChangeProfilePasswordForm extends Component {
     return this.compile(tpl);
   }
 }
-

@@ -6,4 +6,3 @@ export default class Message extends Component {
     return this.compile(tpl);
   }
 }
-

@@ -12,4 +12,3 @@ export default class MainPage extends Component {
     return this.compile(tpl);
   }
 }
-

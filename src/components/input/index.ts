@@ -6,4 +6,3 @@ export default class Input extends Component {
     return this.compile(tpl);
   }
 }
-
