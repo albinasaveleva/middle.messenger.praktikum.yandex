@@ -26,7 +26,7 @@ https://dazzling-unicorn-13d70a.netlify.app/
 
 ## Разработка
 
-### Сборка и запуск проекта 
+### Сборка и запуск проекта
 Выполните команду:
 
 `npm run start`
@@ -40,3 +40,8 @@ https://dazzling-unicorn-13d70a.netlify.app/
 Выполните команду:
 
 `npm run build`
+
+### Создание билда
+Запуск eslint:
+
+`npm run prebuild`
