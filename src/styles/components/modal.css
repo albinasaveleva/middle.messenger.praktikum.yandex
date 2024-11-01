@@ -7,7 +7,6 @@
   display: none;
   align-items: center;
   justify-content: center;
-
   background: rgba(0, 0, 0, 0.4);
 }
 
@@ -15,7 +14,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   max-width: 340px;
   width: 100%;
   padding: 50px 30px 30px;

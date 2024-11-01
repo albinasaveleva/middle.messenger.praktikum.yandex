@@ -8,7 +8,7 @@
   font-size: 13px;
   line-height: 13px;
   text-align: left;
-  color: var(--black-color);  
+  color: var(--black-color);
   flex-shrink: 0;
 }
 
@@ -17,12 +17,12 @@
   font-size: 13px;
   line-height: 13px;
   text-align: right;
-  color: var(--dark-gray-color);  
+  color: var(--dark-gray-color);
 }
 
 .profile-input .input-field::placeholder {
   font-size: 13px;
   line-height: 13px;
   text-align: right;
-  color: var(--dark-gray-color);  
+  color: var(--dark-gray-color);
 }

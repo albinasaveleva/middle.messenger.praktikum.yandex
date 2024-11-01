@@ -9,7 +9,6 @@
 .chats .top-bar {
   display: flex;
   flex-direction: column;
-
   padding: 10px 0 14px 0;
 }
 
@@ -22,7 +21,6 @@
   margin-left: auto;
   padding-right: 12px;
   margin-bottom: 23px;
-
   position: relative;
 }
 
@@ -44,17 +42,16 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
   overflow-y: auto;
   border-top: 1px solid var(--light-gray-color);
 }
 
 .chats-box::-webkit-scrollbar {
-  width: 4px;               
+  width: 4px;
 }
 
 .chats-box::-webkit-scrollbar-track {
-  background: var(--light-gray-bg-color);        
+  background: var(--light-gray-bg-color);
 }
 
 .chats-box::-webkit-scrollbar-thumb {

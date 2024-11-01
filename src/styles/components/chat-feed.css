@@ -98,10 +98,8 @@
 
 .chat-feed .send-message .attach {
   position: relative;
-
   height: 32px;
   width: 32px;
-
   background-image: url(../icons/attach-icon.svg);
   background-position: center center;
   background-size: cover;
