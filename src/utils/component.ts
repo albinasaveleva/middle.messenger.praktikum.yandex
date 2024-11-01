@@ -15,7 +15,7 @@ export default class Component {
   _children: { [key: string]: any };
   _lists: { [key: string]: any };
   _id: string;
-  _element: HTMLElement;
+  _element: HTMLElement | null = null;
   _meta: { [key: string]: any };
   _eventBus: EventBus;
   _setUpdate: boolean = false;
@@ -46,7 +46,7 @@ export default class Component {
     this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
   }
 
-  createElement(tag): HTMLElement {
+  createElement(tag: string): HTMLElement {
     const element: HTMLElement = document.createElement(tag);
 
     element.setAttribute('data-id', `${this._id}`);
@@ -56,8 +56,8 @@ export default class Component {
   _render(): void {
     const block = this.render();
     this.removeEvents();
-    this._element.innerHTML = '';
-    this._element.appendChild(block);
+    (this._element as HTMLElement).innerHTML = '';
+    (this._element as HTMLElement).appendChild(block);
     this.addAttributes();
     this.addEvents();
   }
@@ -70,7 +70,7 @@ export default class Component {
     const { attr = {} } = this._props;
 
     Object.entries(attr).forEach(([key,  value]) => {
-      this._element.setAttribute(key, value);
+        (this._element as HTMLElement).setAttribute(key, value);
     })
   }
 
@@ -78,7 +78,7 @@ export default class Component {
     const { events = {} } = this._props;
 
     Object.keys(events).forEach((event) => {
-      this._element.addEventListener(event, events[event]);
+        (this._element as HTMLElement).addEventListener(event, events[event]);
     })
   }
 
@@ -86,14 +86,14 @@ export default class Component {
     const { events = {} } = this._props;
 
     Object.keys(events).forEach((event) => {
-      this._element.removeEventListener(event, events[event]);
+        (this._element as HTMLElement).removeEventListener(event, events[event]);
     })
   }
 
   getProps(componentProps) {
-    const props = {};
-    const children = {};
-    const lists = {};
+    const props: { [key: string]: any } = {};
+    const children: { [key: string]: any } = {};
+    const lists: { [key: string]: any } = {};
 
     Object.entries(componentProps).forEach(([key, value]) => {
       if (value instanceof Component) {
@@ -119,7 +119,7 @@ export default class Component {
       propsAndStuds[key] = `<div data-id="${child._id}"></div>`;
     })
 
-    Object.entries(this._lists).forEach(([key, child]) => {
+    Object.entries(this._lists).forEach(([key, ]) => {
       propsAndStuds[key] = `<div data-id="__l_${key}"></div>`;
     })
 
@@ -171,18 +171,18 @@ export default class Component {
     }
   }
 
-  _componentDidUpdate(oldProps, newProps) {
+  _componentDidUpdate(oldProps: { [key: string]: any }, newProps: { [key: string]: any }) {
     const isRerender = this.componentDidUpdate(oldProps, newProps);
     if (isRerender) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER)
     }
   }
 
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(oldProps: { [key: string]: any }, newProps: { [key: string]: any }) {
     return true;
   }
 
-  setProps = (newProps) => {
+  setProps = (newProps: { [key: string]: any }) => {
     if (!newProps) {
       return;
     }
@@ -197,7 +197,7 @@ export default class Component {
     }
   };
 
-  makePropsProxy(props) {
+  makePropsProxy(props: { [key: string]: any }) {
     const self = this;
 
     return new Proxy(props, {

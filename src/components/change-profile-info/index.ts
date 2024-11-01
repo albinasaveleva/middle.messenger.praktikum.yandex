@@ -8,9 +8,10 @@ import Form from '../form';
 import ChangeProfileInfoForm from '../../forms/change-profile-info-form';
 import { inputValidation } from '../../utils/formValidation';
 import ProfileInfo from '../profile-info';
+import { blur } from '../../pages/profile-page';
 
 export default class ChangeProfileInfo extends Component {
-  constructor(changePageContent, changeProfileContent) {
+  constructor(changePageContent: ({}) => {}, changeProfileContent: ({}) => {}) {
     super('div', {
       attr: {
         class: 'profile'
@@ -39,13 +40,7 @@ export default class ChangeProfileInfo extends Component {
               value: "pochta@yandex.ru",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: blur
             }
           }),
           loginInput: new Input('input', {
@@ -57,13 +52,7 @@ export default class ChangeProfileInfo extends Component {
               value: "ivanivanov",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: blur
             }
           }),
           firstNameInput: new Input('input', {
@@ -75,13 +64,7 @@ export default class ChangeProfileInfo extends Component {
               value: "Иван",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: blur
             }
           }),
           secondNameInput: new Input('input', {
@@ -93,13 +76,7 @@ export default class ChangeProfileInfo extends Component {
               value: "Иванов",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: blur
             }
           }),
           displayNameInput: new Input('input', {
@@ -111,13 +88,7 @@ export default class ChangeProfileInfo extends Component {
               value: "Иван",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: blur
             }
           }),
           phoneInput: new Input('input', {
@@ -129,13 +100,7 @@ export default class ChangeProfileInfo extends Component {
               value: '+79999999999',
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: blur
             }
           }),
           saveButton: new ButtonAction('button', {
@@ -148,20 +113,20 @@ export default class ChangeProfileInfo extends Component {
           })
         }),
         events: {
-          submit: (event) => {
+          submit: (event: Event) => {
             event.preventDefault();
 
-            const inputs = event.target.querySelectorAll('input');
-            inputs.forEach(input => {
+            const inputs = (event.target as HTMLElement).querySelectorAll('input');
+            inputs.forEach((input: HTMLInputElement) => {
               if (inputValidation(input)) {
-                input.previousElementSibling.style.color = "inherit";
+                (input.previousElementSibling as HTMLElement).style.color = "inherit";
               } else {
-                input.previousElementSibling.style.color = "red";
+                (input.previousElementSibling as HTMLElement).style.color = "red";
               }
             })
 
-            if ([...inputs].every(inputValidation)) {
-              const formData = new FormData(event.target);
+            if (Array.from(inputs).every(inputValidation)) {
+              const formData = new FormData(event.target as HTMLFormElement);
 
               for (let pair of formData.entries()) {
                 console.log(`${pair[0]}: ${pair[1]}`);

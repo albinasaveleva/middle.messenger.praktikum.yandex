@@ -9,8 +9,19 @@ import { inputValidation } from '../../utils/formValidation';
 import Form from '../../components/form';
 import LoginForm from '../../forms/login-form';
 
+const blur = (target: HTMLInputElement) => {
+    const formInput = target.closest('.form-input');
+    const inputError = formInput?.querySelector('.input-error');
+
+    if (inputValidation(target)) {
+      (inputError as HTMLElement).style.opacity = "0";
+    } else {
+      (inputError as HTMLElement).style.opacity = "1";
+    }
+}
+
 export default class LoginPage extends Component {
-  constructor(changePageContent) {
+  constructor(changePageContent: ({}) => {}) {
     super('div',
     {
       attr: {
@@ -35,13 +46,7 @@ export default class LoginPage extends Component {
               placeholder: "Логин"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: () => blur(event?.target as HTMLInputElement)
             }
           }),
           passwordInput: new Input('input', {
@@ -52,13 +57,7 @@ export default class LoginPage extends Component {
               placeholder: "Пароль"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: () => blur(event?.target as HTMLInputElement)
             }
           }),
           buttonAction: new ButtonAction('button', {
@@ -76,7 +75,7 @@ export default class LoginPage extends Component {
             },
             action: 'Нет аккаунта?',
             events: {
-              click: (event) => {
+              click: (event: Event) => {
                 event.preventDefault();
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
@@ -88,28 +87,22 @@ export default class LoginPage extends Component {
           }),
         }),
         events: {
-          submit: (event) => {
-            event.preventDefault();
+            submit: (event: Event) => {
+                event.preventDefault();
 
-            const inputs = event.target.querySelectorAll('input');
-            inputs.forEach(input => {
-              if (inputValidation(input)) {
-                input.nextElementSibling.style.opacity = 0;
-              } else {
-                input.nextElementSibling.style.opacity = 1;
+                const inputs = (event.target as HTMLElement).querySelectorAll('input');
+                inputs.forEach(blur)
+
+                if ((Array.from(inputs).every(inputValidation))) {
+                  const formData = new FormData(event.target as HTMLFormElement);
+
+                  for (let pair of formData.entries()) {
+                    console.log(`${pair[0]}: ${pair[1]}`);
+                  }
+
+                  (event.target as HTMLFormElement).reset();
+                }
               }
-            })
-
-            if (([...inputs].every(inputValidation))) {
-              const formData = new FormData(event.target);
-
-              for (let pair of formData.entries()) {
-                console.log(`${pair[0]}: ${pair[1]}`);
-              }
-
-              event.target.reset();
-            }
-          }
         }
       }),
     });

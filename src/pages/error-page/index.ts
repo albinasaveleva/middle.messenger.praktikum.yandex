@@ -6,7 +6,7 @@ import ButtonLink from "../../components/button-link";
 import ChatPage from '../chat-page';
 
 export default class ErrorPage extends Component {
-  constructor(changePageContent) {
+  constructor(changePageContent: ({}) => {}) {
     super('div', {
       attr: {
         class: 'error-page',
@@ -25,7 +25,7 @@ export default class ErrorPage extends Component {
           },
           action: 'Назад к чатам',
           events: {
-            click: (event) => {
+            click: (event: Event) => {
               event.preventDefault();
               // const href = event.target.attributes.href.value;
               // history.pushState(null, null, href);

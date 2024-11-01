@@ -14,12 +14,11 @@ import Form from '../../components/form';
 import MessageForm from '../../forms/message-form';
 import { inputValidation } from '../../utils/formValidation';
 import Message from '../../components/message';
-import Frame from '../../components/frame';
 import Attach from '../../components/attach';
 import Actions from '../../components/actions';
 
 export default class ChatPage extends Component {
-  constructor(changePageContent) {
+  constructor(changePageContent: ({}) => {}) {
     super('div', {
       attr: {
       class: 'chat-page',
@@ -36,7 +35,7 @@ export default class ChatPage extends Component {
           },
           action: 'Профиль',
           events: {
-            click: (event) => {
+            click: (event: Event) => {
               event.preventDefault();
               // const href = event.target.attributes.href.value;
               // history.pushState(null, null, href);
@@ -64,7 +63,7 @@ export default class ChatPage extends Component {
             }
           }),
           events: {
-            click: (event) => {
+            click: (event: Event) => {
               event.preventDefault();
               // const href = event.target.attributes.href.value;
               // history.pushState(null, null, href);
@@ -116,19 +115,19 @@ export default class ChatPage extends Component {
                       })
                     }),
                     events: {
-                      submit: (event) => {
+                      submit: (event: Event) => {
                         event.preventDefault();
 
-                        const inputs = event.target.querySelectorAll('input');
+                        const inputs = (event.target as HTMLElement).querySelectorAll('input');
 
-                        if ([...inputs].every(inputValidation)) {
-                          const formData = new FormData(event.target);
+                        if (Array.from(inputs).every(inputValidation)) {
+                          const formData = new FormData(event.target as HTMLFormElement);
 
                           for (let pair of formData.entries()) {
                             console.log(`${pair[0]}: ${pair[1]}`);
                           }
 
-                          event.target.reset();
+                          (event.target as HTMLFormElement).reset();
                         }
                       }
                     }

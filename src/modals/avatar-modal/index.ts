@@ -32,10 +32,10 @@ export default class AvatarModal extends Component {
           action: 'Поменять'
         }),
         events: {
-          submit: (event) => {
+          submit: (event: Event) => {
             event.preventDefault();
-            
-            const formData = new FormData(event.target);
+
+            const formData = new FormData(event.target as HTMLFormElement);
 
             for (let pair of formData.entries()) {
               console.log(`${pair[0]}: ${pair[1]}`);
