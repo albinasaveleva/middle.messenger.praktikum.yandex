@@ -23,7 +23,7 @@ export default class Component {
     const { props, children, lists } = this.getProps(componentProps);
     
     this._children = this.makePropsProxy(children);
-    this._lists = this.makePropsProxy({...lists});
+    this._lists = this.makePropsProxy(lists);
     this._id = makeUUID();
     this._props = this.makePropsProxy({ ...props, _id: this._id })
     this._meta = { tag, props };
@@ -116,6 +116,10 @@ export default class Component {
       propsAndStuds[key] = `<div data-id="${child._id}"></div>`;
     })
 
+    Object.entries(this._lists).forEach(([key, child]) => {
+      propsAndStuds[key] = `<div data-id="__l_${key}"></div>`;
+    })
+
     const fragment = this.createElement('template');
     fragment.innerHTML = Handlebars.compile(template)(propsAndStuds);
 
@@ -124,6 +128,25 @@ export default class Component {
       if (stud) {
         stud.replaceWith(child.getContent());
       }
+    })
+
+    Object.entries(this._lists).forEach(([key, child]) => {
+      const stud = fragment.content.querySelector(`[data-id="__l_${key}"]`);
+
+      if (!stud) {
+        return;
+      }
+
+      const listContent = this.createElement('template');
+      child.forEach(item => {
+        if (item instanceof Component) {
+          listContent.content.append(item.getContent())
+        } else {
+          listContent.content.append(`${item}`)
+        }
+      })
+      
+      stud.replaceWith(listContent.content);
     })
 
     return fragment.content;
@@ -170,10 +193,6 @@ export default class Component {
       Object.assign(this._props, props);
     }
   };
-
-  setLists() {
-
-  }
 
   makePropsProxy(props) {
     const self = this;
