@@ -1,0 +1,14 @@
+.frame {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 6px #00000024;
+  background-color: var(--white-bg-color);
+}
+
+.frame.visible {
+  display: flex;
+}

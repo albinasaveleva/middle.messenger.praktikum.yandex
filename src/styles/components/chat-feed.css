@@ -1,0 +1,117 @@
+.chat-feed {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.chat-feed .top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--light-gray-color);
+}
+
+.chat-feed .top-bar .info {
+  display: flex;
+  align-items: center;
+}
+
+.chat-feed .top-bar .avatar {
+  width: 34px;
+  height: 34px;
+  margin-right: 11px;
+}
+
+.chat-feed .top-bar .name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: left;
+}
+
+.chat-feed .top-bar .actions {
+  position: relative;
+  width: 3px;
+  height: 15px;
+  background-image: url(../icons/actions-icon.svg);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.chat-feed .top-bar .actions .frame {
+  position: absolute;
+  right: -10px;
+  top: 40px;
+  width: 200px;
+  height: 100px;
+}
+
+.chat-feed .messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 30px 0;
+}
+
+.chat-feed .outcoming-message {
+  background-color: var(--light-blue-color);
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  max-width: 402px;
+  padding: 10px;
+  margin-left: auto;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: left;
+}
+
+.chat-feed .incoming-message {
+  background-color: var(--light-gray-bg-color);
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  max-width: 402px;
+  padding: 10px;
+  margin-right: auto;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: left;
+}
+
+.chat-feed .timestamp {
+  font-size: 12px;
+  line-height: 12px;
+  text-align: center;
+}
+
+.chat-feed .send-message .form-wrapper {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid var(--light-gray-color);
+  padding: 10px 0;
+  margin-top: auto;
+}
+
+.chat-feed .send-message .attach {
+  position: relative;
+
+  height: 32px;
+  width: 32px;
+
+  background-image: url(../icons/attach-icon.svg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.chat-feed .send-message .attach .frame {
+  position: absolute;
+  left: -10px;
+  width: 200px;
+  height: 100px;
+  bottom: 55px;
+}

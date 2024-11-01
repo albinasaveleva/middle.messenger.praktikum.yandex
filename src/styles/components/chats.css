@@ -1,0 +1,63 @@
+.chats {
+  height: 100%;
+  padding: 10px;
+  padding-bottom: 0;
+  background-color: var(--light-gray-bg-color);
+  border-right: 1px solid var(--light-gray-color);
+}
+
+.chats .top-bar {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 0 14px 0;
+}
+
+.chats .profile-link {
+  color: var(--dark-gray-color);
+  font-size: 12px;
+  line-height: 12px;
+  text-align: right;
+  width: min-content;
+  margin-left: auto;
+  padding-right: 12px;
+  margin-bottom: 23px;
+
+  position: relative;
+}
+
+.chats .profile-link::after {
+  height: 10px;
+  width: 6px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-image: url(../icons/profile-link-icon.svg);
+  background-position: center center;
+  background-size: cover;
+}
+
+.chats-box {
+  height: calc(100% - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  overflow-y: auto;
+  border-top: 1px solid var(--light-gray-color);
+}
+
+.chats-box::-webkit-scrollbar {
+  width: 4px;               
+}
+
+.chats-box::-webkit-scrollbar-track {
+  background: var(--light-gray-bg-color);        
+}
+
+.chats-box::-webkit-scrollbar-thumb {
+  background-color: var(--gray-bg-color);
+  border-radius: 0;
+}
