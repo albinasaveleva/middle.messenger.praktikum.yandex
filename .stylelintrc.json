@@ -2,7 +2,7 @@
   "extends": "stylelint-config-standard",
   "ignoreFiles": [
     "dist/*",
-    "node_modules/*", 
+    "node_modules/*",
     "github/*"
   ]
 }
