@@ -21,7 +21,7 @@ const blur = (target: HTMLInputElement) => {
 }
 
 export default class LoginPage extends Component {
-  constructor(changePageContent: ({}) => {}) {
+  constructor(changePageContent: any) {
     super('div',
     {
       attr: {
@@ -46,7 +46,7 @@ export default class LoginPage extends Component {
               placeholder: "Логин"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           passwordInput: new Input('input', {
@@ -57,7 +57,7 @@ export default class LoginPage extends Component {
               placeholder: "Пароль"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           buttonAction: new ButtonAction('button', {

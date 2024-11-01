@@ -11,7 +11,7 @@ import ProfileInfo from '../profile-info';
 import { blur } from '../../pages/profile-page';
 
 export default class ChangeProfileInfo extends Component {
-  constructor(changePageContent: ({}) => {}, changeProfileContent: ({}) => {}) {
+  constructor(changePageContent: any, changeProfileContent: any) {
     super('div', {
       attr: {
         class: 'profile'
@@ -40,7 +40,7 @@ export default class ChangeProfileInfo extends Component {
               value: "pochta@yandex.ru",
             },
             events: {
-              blur: blur
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           loginInput: new Input('input', {
@@ -52,7 +52,7 @@ export default class ChangeProfileInfo extends Component {
               value: "ivanivanov",
             },
             events: {
-              blur: blur
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           firstNameInput: new Input('input', {
@@ -64,7 +64,7 @@ export default class ChangeProfileInfo extends Component {
               value: "Иван",
             },
             events: {
-              blur: blur
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           secondNameInput: new Input('input', {
@@ -76,7 +76,7 @@ export default class ChangeProfileInfo extends Component {
               value: "Иванов",
             },
             events: {
-              blur: blur
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           displayNameInput: new Input('input', {
@@ -88,7 +88,7 @@ export default class ChangeProfileInfo extends Component {
               value: "Иван",
             },
             events: {
-              blur: blur
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           phoneInput: new Input('input', {
@@ -100,7 +100,7 @@ export default class ChangeProfileInfo extends Component {
               value: '+79999999999',
             },
             events: {
-              blur: blur
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           saveButton: new ButtonAction('button', {
@@ -113,30 +113,24 @@ export default class ChangeProfileInfo extends Component {
           })
         }),
         events: {
-          submit: (event: Event) => {
-            event.preventDefault();
+            submit: (event: Event) => {
+                event.preventDefault();
 
-            const inputs = (event.target as HTMLElement).querySelectorAll('input');
-            inputs.forEach((input: HTMLInputElement) => {
-              if (inputValidation(input)) {
-                (input.previousElementSibling as HTMLElement).style.color = "inherit";
-              } else {
-                (input.previousElementSibling as HTMLElement).style.color = "red";
+                const inputs = (event.target as HTMLElement).querySelectorAll('input');
+                inputs.forEach(blur)
+
+                if (Array.from(inputs).every(inputValidation)) {
+                  const formData = new FormData(event.target as HTMLFormElement);
+
+                  for (let pair of formData.entries()) {
+                    console.log(`${pair[0]}: ${pair[1]}`);
+                  }
+
+                  changeProfileContent({
+                    content: new ProfileInfo(changePageContent, changeProfileContent)
+                  })
+                }
               }
-            })
-
-            if (Array.from(inputs).every(inputValidation)) {
-              const formData = new FormData(event.target as HTMLFormElement);
-
-              for (let pair of formData.entries()) {
-                console.log(`${pair[0]}: ${pair[1]}`);
-              }
-
-              changeProfileContent({
-                content: new ProfileInfo(changePageContent, changeProfileContent)
-              })
-            }
-          }
         }
       }),
 

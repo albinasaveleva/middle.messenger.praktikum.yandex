@@ -8,9 +8,10 @@ import Form from '../form';
 import ChangeProfilePasswordForm from '../../forms/change-profile-password-form';
 import { inputValidation } from '../../utils/formValidation';
 import ProfileInfo from '../profile-info';
+import { blur } from '../../pages/profile-page';
 
 export default class ChangeProfilePassword extends Component {
-  constructor(changePageContent, changeProfileContent) {
+  constructor(changePageContent: any, changeProfileContent: any) {
     super('div', {
       attr: {
         class: 'profile',
@@ -39,13 +40,7 @@ export default class ChangeProfilePassword extends Component {
               value: "Password1",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           newPasswordInput: new Input('input', {
@@ -57,13 +52,7 @@ export default class ChangeProfilePassword extends Component {
               value: "Password1",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           doubleNewPasswordInput: new Input('input', {
@@ -75,13 +64,7 @@ export default class ChangeProfilePassword extends Component {
               value: "Password1",
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.previousElementSibling.style.color = "inherit";
-                } else {
-                  event.target.previousElementSibling.style.color = "red";
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           saveButton: new ButtonAction('button', {
@@ -94,30 +77,24 @@ export default class ChangeProfilePassword extends Component {
           })
         }),
         events: {
-          submit: (event) => {
-            event.preventDefault();
+            submit: (event: Event) => {
+                event.preventDefault();
 
-            const inputs = event.target.querySelectorAll('input');
-            inputs.forEach(input => {
-              if (inputValidation(input)) {
-                input.previousElementSibling.style.color = "inherit";
-              } else {
-                input.previousElementSibling.style.color = "red";
-              }
-            })
+                const inputs = (event.target as HTMLElement).querySelectorAll('input');
+                inputs.forEach(blur)
 
-            if ([...inputs].every(inputValidation)) {
-                const formData = new FormData(event.target);
+                if (Array.from(inputs).every(inputValidation)) {
+                  const formData = new FormData(event.target as HTMLFormElement);
 
-                for (let pair of formData.entries()) {
-                  console.log(`${pair[0]}: ${pair[1]}`);
+                  for (let pair of formData.entries()) {
+                    console.log(`${pair[0]}: ${pair[1]}`);
+                  }
+
+                  changeProfileContent({
+                    content: new ProfileInfo(changePageContent, changeProfileContent)
+                  })
                 }
-
-                changeProfileContent({
-                  content: new ProfileInfo(changePageContent, changeProfileContent)
-                })
               }
-          }
         }
       }),
     })

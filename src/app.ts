@@ -1,4 +1,4 @@
-import { 
+import {
   MainPage,
 } from './pages/index';
 
@@ -9,9 +9,8 @@ export default class App {
     this.appElement = document.getElementById('app') as HTMLElement;
   }
   render() {
-    let template = new MainPage();    
+    let template = new MainPage();
     this.appElement.innerHTML = '';
-    this.appElement.appendChild(template.getContent())
+    this.appElement.appendChild(template.getContent() as Node)
   }
 };
- 

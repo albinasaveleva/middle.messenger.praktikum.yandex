@@ -18,7 +18,7 @@ import Attach from '../../components/attach';
 import Actions from '../../components/actions';
 
 export default class ChatPage extends Component {
-  constructor(changePageContent: ({}) => {}) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
       class: 'chat-page',

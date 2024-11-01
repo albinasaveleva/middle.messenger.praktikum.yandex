@@ -6,7 +6,7 @@ import ButtonLink from "../../components/button-link";
 import ChatPage from '../chat-page';
 
 export default class ErrorPage extends Component {
-  constructor(changePageContent: ({}) => {}) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'error-page',

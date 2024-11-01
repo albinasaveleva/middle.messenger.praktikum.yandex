@@ -6,7 +6,7 @@ import ButtonLink from "../../components/button-link";
 import ChatPage from '../chat-page';
 
 export default class NonFoundPage extends Component {
-  constructor(changePageContent: ({}) => {}) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'non-found-page',

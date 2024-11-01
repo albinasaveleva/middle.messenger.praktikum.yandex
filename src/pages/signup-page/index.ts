@@ -22,7 +22,7 @@ const blur = (target: HTMLInputElement) => {
 export default class SignupPage extends Component {
   disabledSubmit = true;
 
-  constructor(changePageContent: ({}) => {}) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'signup-page',
@@ -46,7 +46,7 @@ export default class SignupPage extends Component {
               placeholder: "Почта"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           loginInput: new Input('input', {
@@ -57,7 +57,7 @@ export default class SignupPage extends Component {
               placeholder: "Логин"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           firstNameInput: new Input('input', {
@@ -68,7 +68,7 @@ export default class SignupPage extends Component {
               placeholder: "Имя"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           secondNameInput: new Input('input', {
@@ -79,7 +79,7 @@ export default class SignupPage extends Component {
               placeholder: "Фамилия"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           phoneInput: new Input('input', {
@@ -90,7 +90,7 @@ export default class SignupPage extends Component {
               placeholder: "Телефон"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           passwordInput: new Input('input', {
@@ -101,7 +101,7 @@ export default class SignupPage extends Component {
               placeholder: "Пароль"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           doublePasswordInput: new Input('input', {
@@ -112,7 +112,7 @@ export default class SignupPage extends Component {
               placeholder: "Пароль"
             },
             events: {
-              blur: () => blur(event?.target as HTMLInputElement)
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           buttonAction: new ButtonAction('button', {

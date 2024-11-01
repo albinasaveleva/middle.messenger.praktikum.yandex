@@ -10,7 +10,7 @@ import SignupPage from '../signup-page';
 import ProfilePage from '../profile-page';
 
 export default class StartPage extends Component {
-  constructor(changePageContent: ({}) => {}) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'start-page',

@@ -90,7 +90,7 @@ export default class Component {
     })
   }
 
-  getProps(componentProps) {
+  getProps(componentProps: {[key: string]: any}) {
     const props: { [key: string]: any } = {};
     const children: { [key: string]: any } = {};
     const lists: { [key: string]: any } = {};
@@ -108,7 +108,8 @@ export default class Component {
     return { props, children, lists };
   }
 
-  compile(template, props?) {
+  compile(template: string, props?: { [key: string]: any }) {
+    console.log(typeof template)
     if (typeof(props) == 'undefined') {
       props = this._props;
     }
@@ -141,9 +142,9 @@ export default class Component {
       }
 
       const listContent = this.createElement('template') as HTMLTemplateElement;
-      child.forEach(item => {
+      child.forEach((item: any) => {
         if (item instanceof Component) {
-          listContent.content.append(item.getContent())
+          listContent.content.append(item.getContent() as Node)
         } else {
           listContent.content.append(`${item}`)
         }
@@ -171,14 +172,14 @@ export default class Component {
     }
   }
 
-  _componentDidUpdate(oldProps: { [key: string]: any }, newProps: { [key: string]: any }) {
-    const isRerender = this.componentDidUpdate(oldProps, newProps);
+  _componentDidUpdate() {
+    const isRerender = this.componentDidUpdate();
     if (isRerender) {
       this._eventBus.emit(Component.EVENTS.FLOW_RENDER)
     }
   }
 
-  componentDidUpdate(oldProps: { [key: string]: any }, newProps: { [key: string]: any }) {
+  componentDidUpdate() {
     return true;
   }
 
@@ -202,12 +203,12 @@ export default class Component {
 
     return new Proxy(props, {
       get(target, prop) {
-        const value = target[prop];
+        const value = target[prop as string];
         return typeof value === "function" ? value.bind(target) : value;
       },
       set(target, prop, value) {
         const oldValue = { ...target };
-        target[prop] = value;
+        target[prop as string] = value;
         self._eventBus.emit(Component.EVENTS.FLOW_CDU, oldValue, target)
         return true;
       },

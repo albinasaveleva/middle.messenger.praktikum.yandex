@@ -8,11 +8,11 @@ import Modal from '../../components/modal';
 import AvatarModal from '../../modals/avatar-modal';
 import { inputValidation } from '../../utils/formValidation';
 
-export const blur = (event: Event) => {
-    const profileInput = (event.target as HTMLElement).closest('.profile-input');
+export const blur = (target: HTMLInputElement) => {
+    const profileInput = target.closest('.profile-input');
     const inputLabel = profileInput?.querySelector('.input-label');
 
-    if (inputValidation(event.target as HTMLInputElement)) {
+    if (inputValidation(target)) {
       (inputLabel as HTMLElement).style.color = "inherit";
     } else {
       (inputLabel as HTMLElement).style.color = "red";
@@ -20,7 +20,7 @@ export const blur = (event: Event) => {
 }
 
 export default class ProfilePage extends Component {
-  constructor(changePageContent: ({}) => {}) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'profile-page',
@@ -42,7 +42,7 @@ export default class ProfilePage extends Component {
           }
         }
       }),
-      content: new ProfileInfo(changePageContent, (content: {[key: string]: any})=>{this.setProps(content)}),
+      content: new ProfileInfo(changePageContent, (content: {[key: string]: any})=>this.setProps(content)),
       modal: new Modal('div', {
         attr: {
           class: 'modal',

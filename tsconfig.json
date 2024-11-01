@@ -3,7 +3,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "dom.iterable"],
     "moduleResolution": "Node",
     "strict": true,
     "resolveJsonModule": true,
@@ -16,9 +16,4 @@
     "skipLibCheck": true
   },
   "include": ["src"],
-  "lib": [
-    "es2019",
-    "dom",
-    "dom.iterable"
-  ],
 }

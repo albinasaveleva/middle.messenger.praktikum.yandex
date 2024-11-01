@@ -41,7 +41,7 @@ export default class AvatarModal extends Component {
               console.log(`${pair[0]}: ${pair[1]}`);
             }
 
-            event.target.closest('#avatar-modal').style.display = 'none';
+            (document.querySelector('#avatar-modal') as HTMLElement).style.display = 'none';
           }
         }
       }),

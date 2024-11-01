@@ -5,7 +5,7 @@ import StartPage from '../start-page';
 export default class MainPage extends Component {
   constructor() {
     super('main', {
-      content: new StartPage((content: {[key: string]: any}): void =>{this.setProps(content)})
+      content: new StartPage((content: {[key: string]: any}) =>this.setProps(content))
     })
   }
   render() {
