@@ -77,17 +77,6 @@ export default class ChatPage extends Component {
                     attr: {
                       class: 'actions'
                     },
-                    frame: new Frame('div', {
-                      attr: {
-                        class: 'frame'
-                      }
-                    }),
-                    events: {
-                      click: (event) => {
-                        const [frame] = event.target.children;
-                        frame.classList.toggle('visible')
-                      }
-                    }
                   }),
                   messages: new Message('div', {
                     attr: {
@@ -109,17 +98,6 @@ export default class ChatPage extends Component {
                         attr: {
                           class: 'attach'
                         },
-                        frame: new Frame('div', {
-                          attr: {
-                            class: 'frame'
-                          }
-                        }),
-                        events: {
-                          click: (event) => {
-                            const [frame] = event.target.children;
-                            frame.classList.toggle('visible')
-                          }
-                        }
                       }),
                       messageInput: new Input('input', {
                         attr: {
