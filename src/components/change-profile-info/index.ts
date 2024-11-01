@@ -32,7 +32,7 @@ export default class ChangeProfileInfo extends Component {
           },
           emailInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "email",
               type: "text",
               placeholder: "Почта",
@@ -50,7 +50,7 @@ export default class ChangeProfileInfo extends Component {
           }),
           loginInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "login",
               type: "text",
               placeholder: "Логин",
@@ -58,7 +58,6 @@ export default class ChangeProfileInfo extends Component {
             },
             events: {
               blur: (event) => {
-                console.log(inputValidation(event.target))
                 if (inputValidation(event.target)) {
                   event.target.previousElementSibling.style.color = "inherit";
                 } else {
@@ -69,7 +68,7 @@ export default class ChangeProfileInfo extends Component {
           }),
           firstNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "first_name",
               type: "text",
               placeholder: "Имя",
@@ -87,7 +86,7 @@ export default class ChangeProfileInfo extends Component {
           }),
           secondNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "second_name",
               type: "text",
               placeholder: "Фамилия",
@@ -105,10 +104,10 @@ export default class ChangeProfileInfo extends Component {
           }),
           displayNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "display_name",
               type: "text",
-              placeholder: "Пароль",
+              placeholder: "Имя в чате",
               value: "Иван",
             },
             events: {
@@ -123,7 +122,7 @@ export default class ChangeProfileInfo extends Component {
           }),
           phoneInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "phone",
               type: "text",
               placeholder: "Телефон",
@@ -152,20 +151,16 @@ export default class ChangeProfileInfo extends Component {
           submit: (event) => {
             event.preventDefault();
 
-            let error = false;
-
             const inputs = event.target.querySelectorAll('input');
             inputs.forEach(input => {
               if (inputValidation(input)) {
                 input.previousElementSibling.style.color = "inherit";
-                error = false;
               } else {
                 input.previousElementSibling.style.color = "red";
-                error = true
               }
             })
 
-            if (!error) {
+            if ([...inputs].every(inputValidation)) {
               const formData = new FormData(event.target);
 
               for (let pair of formData.entries()) {

@@ -29,7 +29,7 @@ export default class LoginPage extends Component {
           },
           loginInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "login",
               type: "text",
               placeholder: "Логин"
@@ -46,7 +46,7 @@ export default class LoginPage extends Component {
           }),
           passwordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Пароль"
@@ -71,7 +71,7 @@ export default class LoginPage extends Component {
           }),
           buttonLink: new ButtonLink('a', {
             attr: {
-              class: "button-link", 
+              class: "button-link",
               href: "/signup"
             },
             action: 'Нет аккаунта?',
@@ -91,20 +91,16 @@ export default class LoginPage extends Component {
           submit: (event) => {
             event.preventDefault();
 
-            let error = false;
-
             const inputs = event.target.querySelectorAll('input');
             inputs.forEach(input => {
               if (inputValidation(input)) {
                 input.nextElementSibling.style.opacity = 0;
-                error = false;
               } else {
                 input.nextElementSibling.style.opacity = 1;
-                error = true
               }
             })
 
-            if (!error) {
+            if (([...inputs].every(inputValidation))) {
               const formData = new FormData(event.target);
 
               for (let pair of formData.entries()) {
@@ -112,7 +108,7 @@ export default class LoginPage extends Component {
               }
 
               event.target.reset();
-            }            
+            }
           }
         }
       }),

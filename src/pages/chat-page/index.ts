@@ -48,7 +48,7 @@ export default class ChatPage extends Component {
         }),
         searchInput: new Input('input', {
           attr: {
-            class: "search-input", 
+            class: "search-input",
             name: "search",
             type: "text",
             placeholder: "Поиск"
@@ -118,30 +118,22 @@ export default class ChatPage extends Component {
                     events: {
                       submit: (event) => {
                         event.preventDefault();
-            
-                        let error = false;
-                        const inputs = event.target.querySelectorAll('input');
-                        inputs.forEach(input => {
-                          if (inputValidation(input)) {
-                            error = false;
-                          } else {
-                            error = true;
-                          }
-                        })
 
-                        if (!error) {
+                        const inputs = event.target.querySelectorAll('input');
+
+                        if ([...inputs].every(inputValidation)) {
                           const formData = new FormData(event.target);
-            
+
                           for (let pair of formData.entries()) {
                             console.log(`${pair[0]}: ${pair[1]}`);
                           }
-            
+
                           event.target.reset();
-                        } 
+                        }
                       }
                     }
                   })
-                  
+
                 })
               })
             }

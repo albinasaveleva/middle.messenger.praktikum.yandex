@@ -1,9 +1,9 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Avatar from "../../components/avatar";
-import Input from "../../components/input";
-import ButtonAction from "../../components/button-action";
+import Avatar from "../avatar";
+import Input from "../input";
+import ButtonAction from "../button-action";
 import Form from '../form';
 import ChangeProfilePasswordForm from '../../forms/change-profile-password-form';
 import { inputValidation } from '../../utils/formValidation';
@@ -32,7 +32,7 @@ export default class ChangeProfilePassword extends Component {
           },
           oldPasswordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Старый пароль",
@@ -50,7 +50,7 @@ export default class ChangeProfilePassword extends Component {
           }),
           newPasswordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Новый пароль",
@@ -68,7 +68,7 @@ export default class ChangeProfilePassword extends Component {
           }),
           doubleNewPasswordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Повторите новый пароль",
@@ -97,30 +97,26 @@ export default class ChangeProfilePassword extends Component {
           submit: (event) => {
             event.preventDefault();
 
-            let error = false;
-
             const inputs = event.target.querySelectorAll('input');
             inputs.forEach(input => {
               if (inputValidation(input)) {
                 input.previousElementSibling.style.color = "inherit";
-                error = false;
               } else {
                 input.previousElementSibling.style.color = "red";
-                error = true
               }
             })
 
-            if (!error) {
-              const formData = new FormData(event.target);
+            if ([...inputs].every(inputValidation)) {
+                const formData = new FormData(event.target);
 
-              for (let pair of formData.entries()) {
-                console.log(`${pair[0]}: ${pair[1]}`);
+                for (let pair of formData.entries()) {
+                  console.log(`${pair[0]}: ${pair[1]}`);
+                }
+
+                changeProfileContent({
+                  content: new ProfileInfo(changePageContent, changeProfileContent)
+                })
               }
-
-              changeProfileContent({
-                content: new ProfileInfo(changePageContent, changeProfileContent)
-              })
-            }
           }
         }
       }),

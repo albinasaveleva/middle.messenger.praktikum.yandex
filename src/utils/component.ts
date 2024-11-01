@@ -3,8 +3,6 @@ import Handlebars from "handlebars";
 import { v4 as makeUUID } from "uuid";
 import { TProps } from "../types/data";
 
-
-
 export default class Component {
   static EVENTS = {
     INIT: "init",
@@ -24,7 +22,7 @@ export default class Component {
 
   constructor(tag: string = "div", componentProps: { [key: string]: any } = {}) {
     const { props, children, lists } = this.getProps(componentProps);
-    
+
     this._children = this.makePropsProxy(children);
     this._lists = this.makePropsProxy(lists);
     this._id = makeUUID();
@@ -150,7 +148,7 @@ export default class Component {
           listContent.content.append(`${item}`)
         }
       })
-      
+
       stud.replaceWith(listContent.content);
     })
 

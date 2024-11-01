@@ -29,7 +29,7 @@ export default class SignupPage extends Component {
           },
           emailInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "email",
               type: "text",
               placeholder: "Почта"
@@ -46,7 +46,7 @@ export default class SignupPage extends Component {
           }),
           loginInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "login",
               type: "text",
               placeholder: "Логин"
@@ -63,7 +63,7 @@ export default class SignupPage extends Component {
           }),
           firstNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "first_name",
               type: "text",
               placeholder: "Имя"
@@ -80,7 +80,7 @@ export default class SignupPage extends Component {
           }),
           secondNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "second_name",
               type: "text",
               placeholder: "Фамилия"
@@ -97,7 +97,7 @@ export default class SignupPage extends Component {
           }),
           phoneInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "phone",
               type: "text",
               placeholder: "Телефон"
@@ -114,7 +114,7 @@ export default class SignupPage extends Component {
           }),
           passwordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Пароль"
@@ -131,7 +131,7 @@ export default class SignupPage extends Component {
           }),
           doublePasswordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Пароль"
@@ -156,7 +156,7 @@ export default class SignupPage extends Component {
           }),
           buttonLink: new ButtonLink('a', {
             attr: {
-              class: "button-link", 
+              class: "button-link",
               href: "/login"
             },
             action: 'Войти',
@@ -176,20 +176,16 @@ export default class SignupPage extends Component {
           submit: (event) => {
             event.preventDefault();
 
-            let error = false;
-
             const inputs = event.target.querySelectorAll('input');
             inputs.forEach(input => {
               if (inputValidation(input)) {
                 input.nextElementSibling.style.opacity = 0;
-                error = false;
               } else {
                 input.nextElementSibling.style.opacity = 1;
-                error = true
               }
             })
 
-            if (!error) {
+            if (([...inputs].every(inputValidation))) {
               const formData = new FormData(event.target);
 
               for (let pair of formData.entries()) {
@@ -197,7 +193,7 @@ export default class SignupPage extends Component {
               }
 
               event.target.reset();
-            }            
+            }
           }
         }
       }),

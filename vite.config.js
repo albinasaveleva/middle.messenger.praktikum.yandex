@@ -1,6 +1,4 @@
 import { defineConfig } from 'vite';
-// import handlebars from './vite-plugin-handlebars-precompile';
-import handlebars from 'vite-plugin-handlebars';
 import postcss from '@vituum/vite-plugin-postcss';
 
 
@@ -16,7 +14,6 @@ export default defineConfig({
   },
   publicDir: "static",
   plugins: [
-    handlebars(),
     postcss({
       file: {
       dirname: './src/styles',
