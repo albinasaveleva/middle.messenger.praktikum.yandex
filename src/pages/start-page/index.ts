@@ -10,7 +10,7 @@ import SignupPage from '../signup-page';
 import ProfilePage from '../profile-page';
 
 export default class StartPage extends Component {
-  constructor(changePageContent) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'start-page',
@@ -23,7 +23,7 @@ export default class StartPage extends Component {
         },
         action: 'Авторизация',
         events: {
-          click: (event) => {
+          click: (event: Event) => {
             event.preventDefault();
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
@@ -40,7 +40,7 @@ export default class StartPage extends Component {
         },
         action: 'Регистрация',
         events: {
-          click: (event) => {
+          click: (event: Event) => {
             event.preventDefault();
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
@@ -57,7 +57,7 @@ export default class StartPage extends Component {
         },
         action: 'Список чатов и лента переписки',
         events: {
-          click: (event) => {
+          click: (event: Event) => {
             event.preventDefault();
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
@@ -74,7 +74,7 @@ export default class StartPage extends Component {
         },
         action: 'Профиль пользователя',
         events: {
-          click: (event) => {
+          click: (event: Event) => {
             event.preventDefault();
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
@@ -91,7 +91,7 @@ export default class StartPage extends Component {
         },
         action: 'Страница 404',
         events: {
-          click: (event) => {
+          click: (event: Event) => {
             event.preventDefault();
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
@@ -108,7 +108,7 @@ export default class StartPage extends Component {
         },
         action: 'Страница 5**',
         events: {
-          click: (event) => {
+          click: (event: Event) => {
             event.preventDefault();
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);

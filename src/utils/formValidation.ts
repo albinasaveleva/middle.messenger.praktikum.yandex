@@ -1,4 +1,4 @@
-export const inputValidation = (input) => {
+export const inputValidation = (input: HTMLInputElement): boolean => {
   switch (input.name) {
     case 'login':
       return /(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}/.test(input.value);
@@ -17,6 +17,6 @@ export const inputValidation = (input) => {
     case 'message':
       return /.{1,}/.test(input.value.trim());
     default:
-      break;
+      return false;
   }
 }

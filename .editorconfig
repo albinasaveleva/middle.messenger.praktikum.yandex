@@ -1,20 +1,18 @@
-# # EditorConfig is awesome: https://editorconfig.org
+# EditorConfig is awesome: https://editorconfig.org
 
-# # top-most EditorConfig file
-# root = true
+# top-most EditorConfig file
+root = true
 
-# # Unix-style newlines with a newline ending every file
-# [*]
-# end_of_line = lf
-# insert_final_newline = true
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
-# indent_size = 4
-# indent_style = space
+indent_style = space
+indent_size = 4
 
-# [*.json]
-# indent_size = 2 
-
-# # JavaScript and TypeScript files should end with a semicolon
-# [*.{js,ts}]
-# charset = utf-8
-# trim_trailing_whitespace = true
+[*.json]
+indent_style = space
+indent_size = 2 

@@ -1,10 +1,9 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Avatar from "../../components/avatar";
-import ButtonLink from "../../components/button-link";
-import Input from "../../components/input";
-import ButtonAction from "../../components/button-action";
+import Avatar from "../avatar";
+import ButtonLink from "../button-link";
+import Input from "../input";
 import LoginPage from '../../pages/login-page/index';
 import ChangeProfileInfo from '../change-profile-info';
 import ChangeProfilePassword from '../change-profile-password';
@@ -13,7 +12,7 @@ import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 
 export default class ProfileInfo extends Component {
-  constructor(changePageContent, changeProfileContent) {
+  constructor(changePageContent: any, changeProfileContent: any) {
     super('div', {
       attr: {
         class: 'profile'
@@ -23,18 +22,18 @@ export default class ProfileInfo extends Component {
           class: 'avatar'
         },
         events: {
-          mouseover: (event) => {
-            const avatarWrapper = event.target.parentElement;
-            const avatarHover = avatarWrapper.querySelector('.avatar-hover');
-            avatarHover.style.display = "flex";
+          mouseover: (event: Event) => {
+            const avatarWrapper = (event.target as HTMLElement).closest('.avatar-wrapper');
+            const avatarHover = (avatarWrapper as HTMLElement).querySelector('.avatar-hover');
+            (avatarHover as HTMLElement).style.display = "flex";
           },
-          mouseout: (event) => {
-            const avatarWrapper = event.target.parentElement;
-            const avatarHover = avatarWrapper.querySelector('.avatar-hover');
-            avatarHover.style.display = "none";
+          mouseout: (event: Event) => {
+            const avatarWrapper = (event.target as HTMLElement).closest('.avatar-wrapper');
+            const avatarHover = (avatarWrapper as HTMLElement).querySelector('.avatar-hover');
+            (avatarHover as HTMLElement).style.display = "none";
           },
-          click: (event) => {
-            const avatarModal = document.querySelector('#avatar-modal');
+          click: () => {
+            const avatarModal = document.querySelector('#avatar-modal') as HTMLElement;
             avatarModal.style.display = 'flex';
           }
         }
@@ -44,8 +43,8 @@ export default class ProfileInfo extends Component {
           class: 'avatar-hover'
         },
         events: {
-          click: (event) => {
-            const avatarModal = document.querySelector('#avatar-modal');
+          click: () => {
+            const avatarModal = document.querySelector('#avatar-modal') as HTMLElement;
             avatarModal.style.display = 'flex';
           }
         }
@@ -62,7 +61,7 @@ export default class ProfileInfo extends Component {
           },
           emailInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "email",
               type: "email",
               placeholder: "Почта",
@@ -72,7 +71,7 @@ export default class ProfileInfo extends Component {
           }),
           loginInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "login",
               type: "text",
               placeholder: "Логин",
@@ -82,7 +81,7 @@ export default class ProfileInfo extends Component {
           }),
           firstNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "first_name",
               type: "text",
               placeholder: "Имя",
@@ -92,7 +91,7 @@ export default class ProfileInfo extends Component {
           }),
           secondNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "second_name",
               type: "text",
               placeholder: "Фамилия",
@@ -102,7 +101,7 @@ export default class ProfileInfo extends Component {
           }),
           displayNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "display_name",
               type: "text",
               placeholder: "Имя в чате",
@@ -112,7 +111,7 @@ export default class ProfileInfo extends Component {
           }),
           phoneInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "phone",
               type: "text",
               placeholder: "Телефон",
@@ -122,12 +121,12 @@ export default class ProfileInfo extends Component {
           }),
           changeInfoButton: new ButtonLink('a', {
             attr: {
-              class: "button-link", 
+              class: "button-link",
               href: "/profile/changeInfo"
             },
             action: 'Изменить данные',
             events: {
-              click: (event) => {
+              click: (event: Event) => {
                 event.preventDefault();
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
@@ -139,12 +138,12 @@ export default class ProfileInfo extends Component {
           }),
           changePasswordButton: new ButtonLink('a', {
             attr: {
-              class: "button-link", 
+              class: "button-link",
               href: "/profile/changePassword"
             },
             action: 'Изменить пароль',
             events: {
-              click: (event) => {
+              click: (event: Event) => {
                 event.preventDefault();
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
@@ -156,12 +155,12 @@ export default class ProfileInfo extends Component {
           }),
           logoutButton: new ButtonLink('a', {
             attr: {
-              class: "button-link", 
+              class: "button-link",
               href: "/login"
             },
             action: 'Выйти',
             events: {
-              click: (event) => {
+              click: (event: Event) => {
                 event.preventDefault();
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);

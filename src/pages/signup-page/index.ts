@@ -8,10 +8,21 @@ import { inputValidation } from '../../utils/formValidation';
 import Form from '../../components/form';
 import SignupForm from '../../forms/signup-form';
 
+const blur = (target: HTMLInputElement) => {
+    const formInput = target.closest('.form-input');
+    const inputError = formInput?.querySelector('.input-error');
+
+    if (inputValidation(target)) {
+      (inputError as HTMLElement).style.opacity = "0";
+    } else {
+      (inputError as HTMLElement).style.opacity = "1";
+    }
+}
+
 export default class SignupPage extends Component {
   disabledSubmit = true;
 
-  constructor(changePageContent) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'signup-page',
@@ -29,121 +40,79 @@ export default class SignupPage extends Component {
           },
           emailInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "email",
               type: "text",
               placeholder: "Почта"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           loginInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "login",
               type: "text",
               placeholder: "Логин"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           firstNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "first_name",
               type: "text",
               placeholder: "Имя"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           secondNameInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "second_name",
               type: "text",
               placeholder: "Фамилия"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           phoneInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "phone",
               type: "text",
               placeholder: "Телефон"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           passwordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Пароль"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           doublePasswordInput: new Input('input', {
             attr: {
-              class: "input-field", 
+              class: "input-field",
               name: "password",
               type: "password",
               placeholder: "Пароль"
             },
             events: {
-              blur: (event) => {
-                if (inputValidation(event.target)) {
-                  event.target.nextElementSibling.style.opacity = 0;
-                } else {
-                  event.target.nextElementSibling.style.opacity = 1;
-                }
-              }
+              blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
           }),
           buttonAction: new ButtonAction('button', {
@@ -156,12 +125,12 @@ export default class SignupPage extends Component {
           }),
           buttonLink: new ButtonLink('a', {
             attr: {
-              class: "button-link", 
+              class: "button-link",
               href: "/login"
             },
             action: 'Войти',
             events: {
-              click: (event) => {
+              click: (event: Event) => {
                 event.preventDefault();
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
@@ -173,31 +142,21 @@ export default class SignupPage extends Component {
           })
         }),
         events: {
-          submit: (event) => {
+          submit: (event: Event) => {
             event.preventDefault();
 
-            let error = false;
+            const inputs = (event.target as HTMLElement).querySelectorAll('input');
+            inputs.forEach(blur)
 
-            const inputs = event.target.querySelectorAll('input');
-            inputs.forEach(input => {
-              if (inputValidation(input)) {
-                input.nextElementSibling.style.opacity = 0;
-                error = false;
-              } else {
-                input.nextElementSibling.style.opacity = 1;
-                error = true
-              }
-            })
-
-            if (!error) {
-              const formData = new FormData(event.target);
+            if ((Array.from(inputs).every(inputValidation))) {
+              const formData = new FormData(event.target as HTMLFormElement);
 
               for (let pair of formData.entries()) {
                 console.log(`${pair[0]}: ${pair[1]}`);
               }
 
-              event.target.reset();
-            }            
+              (event.target as HTMLFormElement).reset();
+            }
           }
         }
       }),

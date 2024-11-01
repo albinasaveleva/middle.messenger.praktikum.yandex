@@ -6,9 +6,21 @@ import ButtonLink from '../../components/button-link';
 import ChatPage from '../chat-page';
 import Modal from '../../components/modal';
 import AvatarModal from '../../modals/avatar-modal';
+import { inputValidation } from '../../utils/formValidation';
+
+export const blur = (target: HTMLInputElement) => {
+    const profileInput = target.closest('.profile-input');
+    const inputLabel = profileInput?.querySelector('.input-label');
+
+    if (inputValidation(target)) {
+      (inputLabel as HTMLElement).style.color = "inherit";
+    } else {
+      (inputLabel as HTMLElement).style.color = "red";
+    }
+}
 
 export default class ProfilePage extends Component {
-  constructor(changePageContent) {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
         class: 'profile-page',
@@ -20,7 +32,7 @@ export default class ProfilePage extends Component {
           href: '/chats'
         },
         events: {
-          click: (event) => {
+          click: (event: Event) => {
             event.preventDefault();
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
@@ -30,7 +42,7 @@ export default class ProfilePage extends Component {
           }
         }
       }),
-      content: new ProfileInfo(changePageContent, (content)=>{this.setProps(content)}),
+      content: new ProfileInfo(changePageContent, (content: {[key: string]: any})=>this.setProps(content)),
       modal: new Modal('div', {
         attr: {
           class: 'modal',
@@ -38,9 +50,9 @@ export default class ProfilePage extends Component {
         },
         content: new AvatarModal(),
         events: {
-          click: (event) => {
-            if (event.target.classList.contains("modal")) {
-              event.target.style.display = 'none';
+          click: (event: Event) => {
+            if ((event.target as HTMLElement).classList.contains("modal")) {
+              (event.target as HTMLElement).style.display = 'none';
             }
           }
         }

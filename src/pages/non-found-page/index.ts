@@ -5,19 +5,19 @@ import Error from "../../components/error";
 import ButtonLink from "../../components/button-link";
 import ChatPage from '../chat-page';
 
-export default class ErrorPage extends Component {
-  constructor(changePageContent) {
+export default class NonFoundPage extends Component {
+  constructor(changePageContent: any) {
     super('div', {
       attr: {
-        class: 'error-page',
-        id: 'error-page'
+        class: 'non-found-page',
+        id: 'non-found-page'
       },
       error: new Error('div', {
         attr: {
           class: 'error-wrapper'
         },
-        title: '500',
-        subtitle: 'Мы уже фиксим',
+        title: '404',
+        subtitle: 'Не туда попали',
         buttonLink: new ButtonLink('a', {
           attr: {
             href: '/chats',
@@ -25,7 +25,7 @@ export default class ErrorPage extends Component {
           },
           action: 'Назад к чатам',
           events: {
-            click: (event) => {
+            click: (event: Event) => {
               event.preventDefault();
               // const href = event.target.attributes.href.value;
               // history.pushState(null, null, href);
@@ -39,6 +39,7 @@ export default class ErrorPage extends Component {
     })
   }
   render() {
-    return this.compile(tpl);
+    return this.compile(tpl)
   }
 }
+
