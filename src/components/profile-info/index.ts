@@ -1,10 +1,10 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Avatar from "../../components/avatar";
-import ButtonLink from "../../components/button-link";
-import Input from "../../components/input";
-import ButtonAction from "../../components/button-action";
+import Avatar from "../avatar";
+import ButtonLink from "../button-link";
+import Input from "../input";
+import ButtonAction from "../button-action";
 import LoginPage from '../../pages/login-page/index';
 import ChangeProfileInfo from '../change-profile-info';
 import ChangeProfilePassword from '../change-profile-password';
@@ -24,17 +24,17 @@ export default class ProfileInfo extends Component {
         },
         events: {
           mouseover: (event) => {
-            const avatarWrapper = event.target.parentElement;
-            const avatarHover = avatarWrapper.querySelector('.avatar-hover');
+            const avatarWrapper = event.target.parentElement as HTMLElement;
+            const avatarHover = avatarWrapper.querySelector('.avatar-hover') as HTMLElement;
             avatarHover.style.display = "flex";
           },
           mouseout: (event) => {
-            const avatarWrapper = event.target.parentElement;
-            const avatarHover = avatarWrapper.querySelector('.avatar-hover');
+            const avatarWrapper = event.target.parentElement as HTMLElement;
+            const avatarHover = avatarWrapper.querySelector('.avatar-hover') as HTMLElement;
             avatarHover.style.display = "none";
           },
           click: (event) => {
-            const avatarModal = document.querySelector('#avatar-modal');
+            const avatarModal = document.querySelector('#avatar-modal') as HTMLElement;
             avatarModal.style.display = 'flex';
           }
         }
@@ -45,7 +45,7 @@ export default class ProfileInfo extends Component {
         },
         events: {
           click: (event) => {
-            const avatarModal = document.querySelector('#avatar-modal');
+            const avatarModal = document.querySelector('#avatar-modal') as HTMLElement;
             avatarModal.style.display = 'flex';
           }
         }
