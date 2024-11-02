@@ -1,7 +1,7 @@
-/* @import 'normalize'; */
+/* stylelint-disable */
+@import 'normalize';
 @import 'variables';
 @import 'settings';
-
 @import './components/avatar-input.css';
 @import './components/avatar.css';
 @import './components//button.css';
@@ -18,10 +18,10 @@
 @import './components/profile-input.css';
 @import './components/search-input.css';
 @import './components/timestamp.css';
-
 @import './pages/chat-page.css';
 @import './pages/error-page.css';
 @import './pages/login-page.css';
 @import './pages/non-found-page.css';
 @import './pages/profile-page.css';
 @import './pages/signup-page.css';
+/* stylelint-enable */
