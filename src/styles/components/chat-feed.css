@@ -34,7 +34,7 @@
   position: relative;
   width: 3px;
   height: 15px;
-  background-image: url(../icons/actions-icon.svg);
+  background-image: url("../icons/actions-icon.svg");
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -98,11 +98,9 @@
 
 .chat-feed .send-message .attach {
   position: relative;
-
   height: 32px;
   width: 32px;
-
-  background-image: url(../icons/attach-icon.svg);
+  background-image: url("../icons/attach-icon.svg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

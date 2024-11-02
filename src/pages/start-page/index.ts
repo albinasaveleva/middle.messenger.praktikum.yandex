@@ -124,4 +124,3 @@ export default class StartPage extends Component {
     return this.compile(tpl);
   }
 }
-

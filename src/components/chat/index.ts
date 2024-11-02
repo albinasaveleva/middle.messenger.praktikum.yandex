@@ -6,4 +6,3 @@ export default class Chat extends Component {
     return this.compile(tpl);
   }
 }
-

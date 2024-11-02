@@ -109,7 +109,6 @@ export default class Component {
   }
 
   compile(template: string, props?: { [key: string]: any }) {
-    console.log(typeof template)
     if (typeof(props) == 'undefined') {
       props = this._props;
     }

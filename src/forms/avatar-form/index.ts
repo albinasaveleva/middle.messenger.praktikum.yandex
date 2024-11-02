@@ -6,4 +6,3 @@ export default class AvatarForm extends Component {
     return this.compile(tpl);
   }
 }
-

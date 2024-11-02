@@ -1,8 +1,11 @@
 {
   "extends": "stylelint-config-standard",
   "ignoreFiles": [
-    "dist/*",
-    "node_modules/*", 
-    "github/*"
-  ]
+    "dist/**/*.css",
+    "src/styles/normalize.css",
+    "style.css"
+  ],
+  "rules": {
+    "declaration-block-no-redundant-longhand-properties": null
+  }
 }

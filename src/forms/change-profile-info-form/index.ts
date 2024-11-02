@@ -6,4 +6,3 @@ export default class ChangeProfileInfoForm extends Component {
     return this.compile(tpl);
   }
 }
-

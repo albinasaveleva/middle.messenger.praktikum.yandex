@@ -6,4 +6,3 @@ export default class SignupForm extends Component {
     return this.compile(tpl);
   }
 }
-

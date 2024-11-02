@@ -27,7 +27,7 @@ export class HTTPTransport {
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     const {data} = options;
     const newUrl = data ? `${url}?${queryStringify(data)}` : url;
-    
+
     return this.request(newUrl, {...options, method: METHOD.GET});
   };
 
@@ -45,31 +45,30 @@ export class HTTPTransport {
 
   request(url: string, options: Options = { method: METHOD.GET }): Promise<XMLHttpRequest> {
     const {method, data, headers = {}} = options;
-  
+
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
-      
+
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key]);
       });
-    
+
       xhr.onload = function() {
         resolve(xhr);
       };
-    
+
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
-      
+
       if (method === METHOD.GET || !data) {
         xhr.send();
       } else {
         xhr.send(JSON.stringify(data));
       }
     })
-    
-    
+
+
   }
 }
-

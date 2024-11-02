@@ -42,4 +42,3 @@ export default class NonFoundPage extends Component {
     return this.compile(tpl)
   }
 }
-

@@ -6,4 +6,3 @@ export default class MessageForm extends Component {
     return this.compile(tpl);
   }
 }
-

@@ -6,4 +6,3 @@ export default class LoginForm extends Component {
     return this.compile(tpl);
   }
 }
-

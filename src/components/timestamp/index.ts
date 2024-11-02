@@ -6,4 +6,3 @@ export default class Timestamp extends Component {
     return this.compile(tpl);
   }
 }
-
