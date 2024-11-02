@@ -2,7 +2,8 @@
   "extends": "stylelint-config-standard",
   "ignoreFiles": [
     "dist/**/*.css",
-    "src/styles/normalize.css"
+    "src/styles/normalize.css",
+    "style.css"
   ],
   "rules": {
     "declaration-block-no-redundant-longhand-properties": null
