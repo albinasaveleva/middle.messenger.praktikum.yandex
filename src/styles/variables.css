@@ -1,15 +1,14 @@
 :root {
-  --white-bg-color: #FFFFFF;
+  --white-bg-color: #FFF;
   --gray-bg-color: #EFEFEF;
   --light-gray-bg-color: #FBFBFB;
   --blue-bg-color: #3369F3;
   --light-blue-color: #E4EDFD;
-
   --black-color: #1E1E1E;
-  --dark-gray-color: #999999;
+  --dark-gray-color: #999;
   --gray-color: #EFEFEF;
   --light-gray-color: #EAEAEA;
   --blue-color: #3369F3;
   --red-color: #FF2F2F;
-  --white-color: #FFFFFF;
+  --white-color: #FFF;
 }
