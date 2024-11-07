@@ -7,7 +7,6 @@ import Chats from '../../components/chats';
 import ButtonLink from '../../components/button-link';
 import Input from '../../components/input';
 import EmptyChatFeed from '../../components/empty-chat-feed';
-import ProfilePage from '../profile-page';
 import ChatFeed from '../../components/chat-feed';
 import ButtonAction from '../../components/button-action';
 import Form from '../../components/form';
@@ -16,6 +15,9 @@ import { inputValidation } from '../../utils/formValidation';
 import Message from '../../components/message';
 import Attach from '../../components/attach';
 import Actions from '../../components/actions';
+import Router from '../../utils/router';
+
+const router = new Router("#app");
 
 export default class ChatPage extends Component {
   constructor() {
@@ -31,15 +33,12 @@ export default class ChatPage extends Component {
         buttonLink: new ButtonLink('a', {
           attr: {
             class: 'profile-link',
-            href: '/profile'
           },
           action: 'Профиль',
           events: {
             click: (event: Event) => {
               event.preventDefault();
-              const href = event.target;
-              console.log(href)
-              // history.pushState(null, null, href);
+              router.go('/settings');
             }
           }
         }),
@@ -63,8 +62,6 @@ export default class ChatPage extends Component {
           events: {
             click: (event: Event) => {
               event.preventDefault();
-              // const href = event.target.attributes.href.value;
-              // history.pushState(null, null, href);
               this.setProps({
                 chatFeed: new ChatFeed('div', {
                   attr: {

@@ -3,10 +3,12 @@ import Component from '../../utils/component';
 import Input from '../../components/input';
 import ButtonAction from '../../components/button-action';
 import ButtonLink from '../../components/button-link';
-import LoginPage from '../login-page';
 import { inputValidation } from '../../utils/formValidation';
 import Form from '../../components/form';
 import SignupForm from '../../forms/signup-form';
+import Router from '../../utils/router';
+
+const router = new Router("#app");
 
 const blur = (target: HTMLInputElement) => {
     const formInput = target.closest('.form-input');
@@ -126,15 +128,12 @@ export default class SignupPage extends Component {
           buttonLink: new ButtonLink('a', {
             attr: {
               class: "button-link",
-              href: "/login"
             },
             action: 'Войти',
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                const href = event.target;
-                console.log(href)
-                // history.pushState(null, null, href);
+                router.go('/sign-up');
               }
             }
           })

@@ -4,11 +4,12 @@ function isEqual(lhs, rhs) {
     return lhs === rhs;
   }
 
-  function render(query, block) {
+function render(query, block) {
     const root = document.querySelector(query);
-    root.textContent = block.getContent();
+    root.innerHTML = '';
+    root.appendChild(block.getContent())
     return root;
-  }
+}
 
 //   const route = new Route('/buttons', Button, {
 //     rootQuery: '.app',
@@ -17,28 +18,28 @@ function isEqual(lhs, rhs) {
 //   route.render();
 
 export default class Route {
-  constructor(pathname, view, props) {
-    this._pathname = pathname;
+  constructor(path, view, props) {
+    this._pathname = path;
     this._blockClass = view;
     this._block = null;
     this._props = props;
   }
 
-  navigate(pathname) {
-    if (this.match(pathname)) {
-      this._pathname = pathname;
+  navigate(path) {
+    if (this.match(path)) {
+      this._pathname = path;
       this.render();
     }
   }
 
   leave() {
-    if (this._block) {
-      this._block.hide();
-    }
+    // if (this._block) {
+    //   this._block.hide();
+    // }
   }
 
-  match(pathname) {
-    return isEqual(pathname, this._pathname);
+  match(path) {
+    return isEqual(path, this._pathname);
   }
 
   render() {
@@ -48,6 +49,6 @@ export default class Route {
       return;
     }
 
-    this._block.show();
+    // this._block.show();
   }
 }

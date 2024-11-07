@@ -3,10 +3,12 @@ import Component from '../../utils/component';
 
 import ProfileInfo from '../../components/profile-info';
 import ButtonLink from '../../components/button-link';
-import ChatPage from '../chat-page';
 import Modal from '../../components/modal';
 import AvatarModal from '../../modals/avatar-modal';
 import { inputValidation } from '../../utils/formValidation';
+import Router from '../../utils/router';
+
+const router = new Router("#app");
 
 export const blur = (target: HTMLInputElement) => {
     const profileInput = target.closest('.profile-input');
@@ -29,14 +31,11 @@ export default class ProfilePage extends Component {
       buttonLink: new ButtonLink('a', {
         attr: {
           class: 'button-back',
-          href: '/chats'
         },
         events: {
           click: (event: Event) => {
             event.preventDefault();
-            const href = event.target;
-            console.log(href)
-            // history.pushState(null, null, href);
+            router.go('/messenger');
           }
         }
       }),

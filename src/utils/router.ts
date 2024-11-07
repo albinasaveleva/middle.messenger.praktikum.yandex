@@ -23,9 +23,7 @@ class Router {
 
     use(path: string, block: Block) {
         const route = new Route(path, block, {rootQuery: this._rootQuery});
-
         this.routes.push(route);
-
         return this;
     }
 
@@ -40,8 +38,10 @@ class Router {
     }      // запустить роутер
 
     go(path: string) {
-        this.history.pushState({}, "", pathname);
-        this._onRoute(pathname);
+        console.log(path)
+
+        this.history.pushState({}, "", path);
+        this._onRoute(path);
     }
 
     back() {
@@ -52,8 +52,8 @@ class Router {
         window.history.forward();
     }    // переход вперёд по истории браузера
 
-    _onRoute(pathname) {
-        const route = this.getRoute(pathname);
+    _onRoute(path) {
+        const route = this.getRoute(path);
         if (!route) {
           return;
         }
@@ -62,11 +62,11 @@ class Router {
           this._currentRoute.leave();
         }
 
-        route.render(route, pathname);
+        route.render(route, path);
     }
 
-    getRoute(pathname) {
-        return this.routes.find(route => route.match(pathname));
+    getRoute(path) {
+        return this.routes.find(route => route.match(path));
     }
 }
 
