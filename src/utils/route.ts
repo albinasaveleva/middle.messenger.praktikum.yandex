@@ -1,22 +1,11 @@
-// import isEqual from './isEqual';
+import { isEqual } from "./utils";
 
-function isEqual(lhs, rhs) {
-    return lhs === rhs;
-  }
-
-function render(query, block) {
-    console.log(query, block)
+const render = (query, block) => {
     const root = document.querySelector(query);
     root.innerHTML = '';
     root.appendChild(block.getContent())
     return root;
 }
-
-//   const route = new Route('/buttons', Button, {
-//     rootQuery: '.app',
-//   });
-
-//   route.render();
 
 export default class Route {
     _pathname;
@@ -41,9 +30,6 @@ export default class Route {
 
   leave() {
     console.log('leave')
-    // if (this._block) {
-    //   this._block.hide();
-    // }
   }
 
   match(path) {

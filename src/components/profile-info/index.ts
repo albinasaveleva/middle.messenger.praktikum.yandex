@@ -4,7 +4,6 @@ import Component from '../../utils/component';
 import Avatar from "../avatar";
 import ButtonLink from "../button-link";
 import Input from "../input";
-import LoginPage from '../../pages/login-page/index';
 import ChangeProfileInfo from '../change-profile-info';
 import ChangeProfilePassword from '../change-profile-password';
 import Form from '../form';
@@ -13,7 +12,6 @@ import AvatarHover from '../avatar-hover';
 import Router from '../../utils/router';
 
 const router = new Router("#app");
-
 
 export default class ProfileInfo extends Component {
   constructor(changeProfileContent: any) {
@@ -132,8 +130,6 @@ export default class ProfileInfo extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                // const href = event.target.attributes.href.value;
-                // history.pushState(null, null, href);
                 changeProfileContent({
                   content: new ChangeProfileInfo(changeProfileContent)
                 })
@@ -149,8 +145,6 @@ export default class ProfileInfo extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                // const href = event.target.attributes.href.value;
-                // history.pushState(null, null, href);
                 changeProfileContent({
                   content: new ChangeProfilePassword(changeProfileContent)
                 })

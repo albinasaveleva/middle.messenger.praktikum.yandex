@@ -1,4 +1,4 @@
-import queryString from "./queryString";
+import { queryString } from "./utils";
 
 enum METHOD {
   GET = 'GET',
@@ -60,7 +60,6 @@ export class HTTPTransport {
         xhr.send(JSON.stringify(data));
       }
     })
-
-
   }
 }
+//new HTTPTransport().get('https://chats');

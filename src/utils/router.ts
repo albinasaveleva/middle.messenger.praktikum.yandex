@@ -31,8 +31,8 @@ class Router {
     start() {
         console.log('start')
         // Реагируем на изменения в адресной строке и вызываем перерисовку
-        window.onpopstate = event => {
-        this._onRoute(event.currentTarget.location.pathname);
+        window.onpopstate = (event) => {
+            this._onRoute(event.currentTarget.location.pathname);
         };
 
         this._onRoute(window.location.pathname);
@@ -41,8 +41,6 @@ class Router {
 
     go(path: string) {
         console.log('go')
-        console.log(path)
-
         this.history.pushState({}, "", path);
         this._onRoute(path);
     }
@@ -53,19 +51,21 @@ class Router {
 
     }       // переход назад по истории браузера
     forward() {
-        console.Console.log('forward')
+        console.log('forward')
         window.history.forward();
     }    // переход вперёд по истории браузера
 
     _onRoute(path) {
         console.log('_onRoute')
         const route = this.getRoute(path);
+        console.log(route)
         if (!route) {
-          return;
+            console.log('!route')
+            return;
         }
 
         if (this._currentRoute) {
-          this._currentRoute.leave();
+            this._currentRoute.leave();
         }
 
         route.render(route, path);

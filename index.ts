@@ -1,4 +1,4 @@
-import { ChatPage, LoginPage, ProfilePage, SignupPage } from './src/pages/index';
+import { ChatPage, LoginPage, NonFoundPage, ProfilePage, SignupPage } from './src/pages/index';
 import Router from './src/utils/router';
 
 const router = new Router("#app");
