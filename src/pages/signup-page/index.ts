@@ -133,7 +133,7 @@ export default class SignupPage extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                router.go('/sign-up');
+                router.go('/');
               }
             }
           })

@@ -78,7 +78,7 @@ export default class LoginPage extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                router.go('/');
+                router.go('/sign-up');
               }
             }
           }),

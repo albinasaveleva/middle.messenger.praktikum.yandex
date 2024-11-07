@@ -10,6 +10,10 @@ import ChangeProfilePassword from '../change-profile-password';
 import Form from '../form';
 import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
+import Router from '../../utils/router';
+
+const router = new Router("#app");
+
 
 export default class ProfileInfo extends Component {
   constructor(changeProfileContent: any) {
@@ -156,15 +160,12 @@ export default class ProfileInfo extends Component {
           logoutButton: new ButtonLink('a', {
             attr: {
               class: "button-link",
-              href: "/login"
             },
             action: 'Выйти',
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                const href = event.target;
-                console.log(href)
-                // history.pushState(null, null, href);
+                router.go('/');
               }
             }
           })
