@@ -1,6 +1,7 @@
-import {
-  MainPage,
-} from './pages/index';
+import { MainPage } from './pages/index';
+import Router from './utils/router';
+
+
 
 export default class App {
   appElement: HTMLElement;

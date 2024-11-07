@@ -12,7 +12,7 @@ import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 
 export default class ProfileInfo extends Component {
-  constructor(changePageContent: any, changeProfileContent: any) {
+  constructor(changeProfileContent: any) {
     super('div', {
       attr: {
         class: 'profile'
@@ -131,7 +131,7 @@ export default class ProfileInfo extends Component {
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
                 changeProfileContent({
-                  content: new ChangeProfileInfo(changePageContent, changeProfileContent)
+                  content: new ChangeProfileInfo(changeProfileContent)
                 })
               }
             }
@@ -148,7 +148,7 @@ export default class ProfileInfo extends Component {
                 // const href = event.target.attributes.href.value;
                 // history.pushState(null, null, href);
                 changeProfileContent({
-                  content: new ChangeProfilePassword(changePageContent, changeProfileContent)
+                  content: new ChangeProfilePassword(changeProfileContent)
                 })
               }
             }
@@ -162,11 +162,9 @@ export default class ProfileInfo extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                // const href = event.target.attributes.href.value;
+                const href = event.target;
+                console.log(href)
                 // history.pushState(null, null, href);
-                changePageContent({
-                  content: new LoginPage(changePageContent)
-                });
               }
             }
           })

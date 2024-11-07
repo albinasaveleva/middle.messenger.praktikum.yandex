@@ -1,3 +1,5 @@
+import queryString from "./queryString";
+
 enum METHOD {
   GET = 'GET',
   POST =  'POST',
@@ -13,20 +15,10 @@ type Options = {
 
 type OptionsWithoutMethod = Omit<Options, 'method'>;
 
-function queryStringify(data: Record<string, any>): string {
-  if (typeof data !== "object" || data === null) {
-    return '';
-  }
-
-  return Object.keys(data)
-    .map(key => `${key}=${data[key].toString()}`)
-    .join('&')
-}
-
 export class HTTPTransport {
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     const {data} = options;
-    const newUrl = data ? `${url}?${queryStringify(data)}` : url;
+    const newUrl = data ? `${url}?${queryString(data)}` : url;
 
     return this.request(newUrl, {...options, method: METHOD.GET});
   };

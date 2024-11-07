@@ -22,7 +22,7 @@ const blur = (target: HTMLInputElement) => {
 export default class SignupPage extends Component {
   disabledSubmit = true;
 
-  constructor(changePageContent: any) {
+  constructor() {
     super('div', {
       attr: {
         class: 'signup-page',
@@ -132,11 +132,9 @@ export default class SignupPage extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                // const href = event.target.attributes.href.value;
+                const href = event.target;
+                console.log(href)
                 // history.pushState(null, null, href);
-                changePageContent({
-                  content: new LoginPage(changePageContent)
-                });
               }
             }
           })

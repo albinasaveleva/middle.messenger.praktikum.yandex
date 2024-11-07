@@ -18,7 +18,7 @@ import Attach from '../../components/attach';
 import Actions from '../../components/actions';
 
 export default class ChatPage extends Component {
-  constructor(changePageContent: any) {
+  constructor() {
     super('div', {
       attr: {
       class: 'chat-page',
@@ -37,11 +37,9 @@ export default class ChatPage extends Component {
           events: {
             click: (event: Event) => {
               event.preventDefault();
-              // const href = event.target.attributes.href.value;
+              const href = event.target;
+              console.log(href)
               // history.pushState(null, null, href);
-              changePageContent({
-                content: new ProfilePage(changePageContent)
-              });
             }
           }
         }),

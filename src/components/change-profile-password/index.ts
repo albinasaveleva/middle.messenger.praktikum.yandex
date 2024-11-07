@@ -11,7 +11,7 @@ import ProfileInfo from '../profile-info';
 import { blur } from '../../pages/profile-page';
 
 export default class ChangeProfilePassword extends Component {
-  constructor(changePageContent: any, changeProfileContent: any) {
+  constructor(changeProfileContent: any) {
     super('div', {
       attr: {
         class: 'profile',
@@ -91,7 +91,7 @@ export default class ChangeProfilePassword extends Component {
                   }
 
                   changeProfileContent({
-                    content: new ProfileInfo(changePageContent, changeProfileContent)
+                    content: new ProfileInfo(changeProfileContent)
                   })
                 }
               }

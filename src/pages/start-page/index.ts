@@ -28,7 +28,7 @@ export default class StartPage extends Component {
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
             changePageContent({
-              content: new LoginPage(changePageContent)
+              content: new LoginPage()
             });
           }
         }
@@ -45,7 +45,7 @@ export default class StartPage extends Component {
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
             changePageContent({
-              content: new SignupPage(changePageContent)
+              content: new SignupPage()
             });
           }
         }
@@ -62,7 +62,7 @@ export default class StartPage extends Component {
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
             changePageContent({
-              content: new ChatPage(changePageContent)
+              content: new ChatPage()
             });
           }
         }
@@ -79,7 +79,7 @@ export default class StartPage extends Component {
             // const href = event.target.attributes.href.value;
             // history.pushState(null, null, href);
             changePageContent({
-              content: new ProfilePage(changePageContent)
+              content: new ProfilePage()
             });
           }
         }

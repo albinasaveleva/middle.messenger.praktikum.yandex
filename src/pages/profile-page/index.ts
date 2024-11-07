@@ -20,7 +20,7 @@ export const blur = (target: HTMLInputElement) => {
 }
 
 export default class ProfilePage extends Component {
-  constructor(changePageContent: any) {
+  constructor() {
     super('div', {
       attr: {
         class: 'profile-page',
@@ -34,15 +34,13 @@ export default class ProfilePage extends Component {
         events: {
           click: (event: Event) => {
             event.preventDefault();
-            // const href = event.target.attributes.href.value;
+            const href = event.target;
+            console.log(href)
             // history.pushState(null, null, href);
-            changePageContent({
-              content: new ChatPage(changePageContent)
-            });
           }
         }
       }),
-      content: new ProfileInfo(changePageContent, (content: {[key: string]: any})=>this.setProps(content)),
+      content: new ProfileInfo((content: {[key: string]: any})=>this.setProps(content)),
       modal: new Modal('div', {
         attr: {
           class: 'modal',
