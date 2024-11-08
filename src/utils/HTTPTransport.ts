@@ -19,27 +19,26 @@ type OptionsWithoutMethod = Omit<Options, 'method'>;
 export class HTTPTransport {
   get(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     const {data} = options;
-    const url = data ? `${BASE_API_URL}${endpoint}?${queryString(data)}` : `${BASE_API_URL}${endpoint}`;
+    // const url = data ? `${BASE_API_URL}${endpoint}?${queryString(data)}` : `${BASE_API_URL}${endpoint}`;
 
-    return this.request(url, {...options, method: METHOD.GET});
+    return this.request(endpoint, {...options, method: METHOD.GET});
   };
 
   post(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    const url = `${BASE_API_URL}${endpoint}`;
-    return this.request(url, {...options, method: METHOD.POST});
+    return this.request(endpoint, {...options, method: METHOD.POST});
   };
 
   put(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    const url = `${BASE_API_URL}${endpoint}`;
-    return this.request(url, {...options, method: METHOD.PUT});
+    return this.request(endpoint, {...options, method: METHOD.PUT});
   };
 
   delete(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    const url = `${BASE_API_URL}${endpoint}`;
-    return this.request(url, {...options, method: METHOD.DELETE});
+    return this.request(endpoint, {...options, method: METHOD.DELETE});
   };
 
-  request(url: string, options: Options): Promise<XMLHttpRequest> {
+  request(endpoint: string, options: Options): Promise<XMLHttpRequest> {
+    const url = `${BASE_API_URL}${endpoint}`;
+
     const {method, data, headers = {}} = options;
 
     return new Promise((resolve, reject) => {
@@ -58,9 +57,13 @@ export class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
+
       if (method === METHOD.GET || !data) {
         xhr.send();
       } else if(data instanceof FormData) {
+        console.log(data)
         xhr.send(data);
       } else {
         xhr.setRequestHeader('Content-Type', 'application/json');

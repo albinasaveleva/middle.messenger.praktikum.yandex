@@ -7,8 +7,10 @@ import { inputValidation } from '../../utils/formValidation';
 import Form from '../../components/form';
 import SignupForm from '../../forms/signup-form';
 import Router from '../../utils/router';
+import AuthApi from '../../api/auth-api';
 
 const router = new Router("#app");
+const auth = new AuthApi();
 
 const blur = (target: HTMLInputElement) => {
     const formInput = target.closest('.form-input');
@@ -127,15 +129,15 @@ export default class SignupPage extends Component {
           }),
           buttonLink: new ButtonLink('a', {
             attr: {
-              class: "button-link",
-            },
-            action: 'Войти',
-            events: {
-              click: (event: Event) => {
-                event.preventDefault();
-                router.go('/');
+                class: "button-link",
+              },
+              action: 'Войти',
+              events: {
+                click: (event: Event) => {
+                  event.preventDefault();
+                  router.go('/');
+                }
               }
-            }
           })
         }),
         events: {
@@ -143,16 +145,15 @@ export default class SignupPage extends Component {
             event.preventDefault();
 
             const inputs = (event.target as HTMLElement).querySelectorAll('input');
-            inputs.forEach(blur)
 
             if ((Array.from(inputs).every(inputValidation))) {
-              const formData = new FormData(event.target as HTMLFormElement);
+                const data: {[key: string]: string} = {};
+                inputs.forEach((input) => data[input.name] = input.value)
+                auth.signup(data);
 
-              for (let pair of formData.entries()) {
-                console.log(`${pair[0]}: ${pair[1]}`);
-              }
-
-              (event.target as HTMLFormElement).reset();
+                (event.target as HTMLFormElement).reset();
+            } else {
+                inputs.forEach(blur);
             }
           }
         }

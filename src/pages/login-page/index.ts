@@ -91,13 +91,15 @@ export default class LoginPage extends Component {
                 event.preventDefault();
 
                 const inputs = (event.target as HTMLElement).querySelectorAll('input');
-                inputs.forEach(blur);
 
                 if ((Array.from(inputs).every(inputValidation))) {
-                  const formData = new FormData(event.target as HTMLFormElement);
-                  auth.signin(formData);
+                    const data: {[key: string]: string} = {};
+                    inputs.forEach((input) => data[input.name] = input.value)
+                    auth.signin(data);
 
-                  (event.target as HTMLFormElement).reset();
+                    (event.target as HTMLFormElement).reset();
+                } else {
+                    inputs.forEach(blur);
                 }
               }
         }

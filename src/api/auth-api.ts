@@ -7,20 +7,12 @@ import BaseAPI,
     } from "./base-api";
 
 class AuthApi extends BaseAPI {
-    signup(formData: FormData) {
-        for (let pair of formData.entries()) {
-            console.log(`${pair[0]}: ${pair[1]}`);
-        }
-
-        this.transport.post(AUTH_SIGNUP_ENDPOINT, {data: formData});
+    signup(data: {[key: string]: string}) {
+        this.transport.post(AUTH_SIGNUP_ENDPOINT, {data});
     }
 
-    signin(formData: FormData) {
-        for (let pair of formData.entries()) {
-            console.log(`${pair[0]}: ${pair[1]}`);
-        }
-
-        this.transport.post(AUTH_SIGNIN_ENDPOINT, {data: formData});
+    signin(data: {[key: string]: string}) {
+        this.transport.post(AUTH_SIGNIN_ENDPOINT, {data});
     }
 
     logout() {
