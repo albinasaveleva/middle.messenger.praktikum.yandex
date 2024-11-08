@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "../api/base-api";
 import { queryString } from "./utils";
 
 enum METHOD {
@@ -16,26 +17,29 @@ type Options = {
 type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 export class HTTPTransport {
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  get(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     const {data} = options;
-    const newUrl = data ? `${url}?${queryString(data)}` : url;
+    const url = data ? `${BASE_API_URL}${endpoint}?${queryString(data)}` : `${BASE_API_URL}${endpoint}`;
 
-    return this.request(newUrl, {...options, method: METHOD.GET});
+    return this.request(url, {...options, method: METHOD.GET});
   };
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  post(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    const url = `${BASE_API_URL}${endpoint}`;
     return this.request(url, {...options, method: METHOD.POST});
   };
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  put(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    const url = `${BASE_API_URL}${endpoint}`;
     return this.request(url, {...options, method: METHOD.PUT});
   };
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  delete(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    const url = `${BASE_API_URL}${endpoint}`;
     return this.request(url, {...options, method: METHOD.DELETE});
   };
 
-  request(url: string, options: Options = { method: METHOD.GET }): Promise<XMLHttpRequest> {
+  request(url: string, options: Options): Promise<XMLHttpRequest> {
     const {method, data, headers = {}} = options;
 
     return new Promise((resolve, reject) => {
@@ -56,10 +60,12 @@ export class HTTPTransport {
 
       if (method === METHOD.GET || !data) {
         xhr.send();
+      } else if(data instanceof FormData) {
+        xhr.send(data);
       } else {
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       }
     })
   }
 }
-//new HTTPTransport().get('https://chats');

@@ -8,6 +8,7 @@ import { inputValidation } from '../../utils/formValidation';
 import Form from '../../components/form';
 import LoginForm from '../../forms/login-form';
 import Router from '../../utils/router';
+import AuthApi from '../../api/auth-api';
 
 const router = new Router("#app");
 
@@ -21,6 +22,8 @@ const blur = (target: HTMLInputElement) => {
       (inputError as HTMLElement).style.opacity = "1";
     }
 }
+
+const auth = new AuthApi();
 
 export default class LoginPage extends Component {
   constructor() {
@@ -88,14 +91,11 @@ export default class LoginPage extends Component {
                 event.preventDefault();
 
                 const inputs = (event.target as HTMLElement).querySelectorAll('input');
-                inputs.forEach(blur)
+                inputs.forEach(blur);
 
                 if ((Array.from(inputs).every(inputValidation))) {
                   const formData = new FormData(event.target as HTMLFormElement);
-
-                  for (let pair of formData.entries()) {
-                    console.log(`${pair[0]}: ${pair[1]}`);
-                  }
+                  auth.signin(formData);
 
                   (event.target as HTMLFormElement).reset();
                 }
