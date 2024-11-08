@@ -95,9 +95,9 @@ export default class LoginPage extends Component {
                     const data: {[key: string]: string} = {};
                     inputs.forEach((input) => data[input.name] = input.value)
                     auth.signin(data);
-                    router.go('/messenger');
+                    // router.go('/messenger');
 
-                    (event.target as HTMLFormElement).reset();
+                    // (event.target as HTMLFormElement).reset();
                 } else {
                     inputs.forEach(blur);
                 }

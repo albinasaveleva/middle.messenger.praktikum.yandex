@@ -8,11 +8,13 @@ import BaseAPI,
 
 class AuthApi extends BaseAPI {
     signup(data: {[key: string]: string}) {
-        this.transport.post(AUTH_SIGNUP_ENDPOINT, {data});
+        this.transport.post(AUTH_SIGNUP_ENDPOINT, {data})
+            .then(response => console.log(response.status))
     }
 
     signin(data: {[key: string]: string}) {
-        this.transport.post(AUTH_SIGNIN_ENDPOINT, {data});
+        this.transport.post(AUTH_SIGNIN_ENDPOINT, {data})
+            .then(response => console.log(response.status))
     }
 
     logout() {
