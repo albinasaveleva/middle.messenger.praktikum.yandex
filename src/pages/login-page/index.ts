@@ -11,6 +11,7 @@ import Router from '../../utils/router';
 import AuthApi from '../../api/auth-api';
 
 const router = new Router("#app");
+const auth = new AuthApi();
 
 const blur = (target: HTMLInputElement) => {
     const formInput = target.closest('.form-input');
@@ -22,8 +23,6 @@ const blur = (target: HTMLInputElement) => {
       (inputError as HTMLElement).style.opacity = "1";
     }
 }
-
-const auth = new AuthApi();
 
 export default class LoginPage extends Component {
   constructor() {
@@ -96,6 +95,7 @@ export default class LoginPage extends Component {
                     const data: {[key: string]: string} = {};
                     inputs.forEach((input) => data[input.name] = input.value)
                     auth.signin(data);
+                    router.go('/messenger');
 
                     (event.target as HTMLFormElement).reset();
                 } else {

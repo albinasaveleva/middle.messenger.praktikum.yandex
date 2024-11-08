@@ -10,8 +10,10 @@ import Form from '../form';
 import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 import Router from '../../utils/router';
+import AuthApi from '../../api/auth-api';
 
 const router = new Router("#app");
+const auth = new AuthApi();
 
 export default class ProfileInfo extends Component {
   constructor(changeProfileContent: any) {
@@ -159,6 +161,7 @@ export default class ProfileInfo extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
+                auth.logout();
                 router.go('/');
               }
             }

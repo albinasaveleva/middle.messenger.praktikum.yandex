@@ -150,6 +150,7 @@ export default class SignupPage extends Component {
                 const data: {[key: string]: string} = {};
                 inputs.forEach((input) => data[input.name] = input.value)
                 auth.signup(data);
+                router.go('/messenger');
 
                 (event.target as HTMLFormElement).reset();
             } else {
