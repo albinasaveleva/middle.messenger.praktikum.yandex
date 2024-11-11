@@ -57,11 +57,8 @@ export default class ProfilePage extends Component {
             }
         })
         })
-        // запрашиваем данные у контроллера
         UserController.getUser();
-        // подписываемся на событие
         store.on(StoreEvents.Updated, () => {
-        // вызываем обновление компонента, передав данные из хранилища
             this.setProps(store.getState());
         });
     }

@@ -8,10 +8,9 @@ import { inputValidation } from '../../utils/formValidation';
 import Form from '../../components/form';
 import LoginForm from '../../forms/login-form';
 import Router from '../../utils/router';
-import AuthApi from '../../api/auth-api';
+import auth from '../../api/auth-api';
 
 const router = new Router("#app");
-const auth = new AuthApi();
 
 const blur = (target: HTMLInputElement) => {
     const formInput = target.closest('.form-input');

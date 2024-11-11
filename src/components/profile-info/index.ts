@@ -10,14 +10,13 @@ import Form from '../form';
 import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 import Router from '../../utils/router';
-import AuthApi from '../../api/auth-api';
-import UserApi from '../../api/user-api';
+import auth from '../../api/auth-api';
+import store from '../../store';
 
 const router = new Router("#app");
-const auth = new AuthApi();
-const user = UserApi;
-const userData = user.getUser().then((response) => response.response);
+const user = store.getUser();
 
+console.log(store)
 
 export default class ProfileInfo extends Component {
   constructor(changeProfileContent: any) {
