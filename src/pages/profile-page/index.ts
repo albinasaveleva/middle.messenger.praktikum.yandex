@@ -7,6 +7,8 @@ import Modal from '../../components/modal';
 import AvatarModal from '../../modals/avatar-modal';
 import { inputValidation } from '../../utils/formValidation';
 import Router from '../../utils/router';
+import UserController from '../../controllers/user-controller';
+import store, { StoreEvents } from '../../store';
 
 const router = new Router("#app");
 
@@ -22,41 +24,48 @@ export const blur = (target: HTMLInputElement) => {
 }
 
 export default class ProfilePage extends Component {
-  constructor() {
-    super('div', {
-      attr: {
-        class: 'profile-page',
-        id: 'profile-page'
-      },
-      buttonLink: new ButtonLink('a', {
+    constructor() {
+        super('div', {
         attr: {
-          class: 'button-back',
+            class: 'profile-page',
+            id: 'profile-page'
         },
-        events: {
-          click: (event: Event) => {
-            event.preventDefault();
-            router.go('/messenger');
-          }
-        }
-      }),
-      content: new ProfileInfo((content: {[key: string]: any})=>this.setProps(content)),
-      modal: new Modal('div', {
-        attr: {
-          class: 'modal',
-          id: 'avatar-modal'
-        },
-        content: new AvatarModal(),
-        events: {
-          click: (event: Event) => {
-            if ((event.target as HTMLElement).classList.contains("modal")) {
-              (event.target as HTMLElement).style.display = 'none';
+        buttonLink: new ButtonLink('a', {
+            attr: {
+            class: 'button-back',
+            },
+            events: {
+            click: (event: Event) => {
+                event.preventDefault();
+                router.go('/messenger');
             }
-          }
-        }
-      })
-    })
-  }
-  render() {
-    return this.compile(tpl);
-  }
+            }
+        }),
+        content: new ProfileInfo((content: {[key: string]: any})=>this.setProps(content)),
+        modal: new Modal('div', {
+            attr: {
+            class: 'modal',
+            id: 'avatar-modal'
+            },
+            content: new AvatarModal(),
+            events: {
+            click: (event: Event) => {
+                if ((event.target as HTMLElement).classList.contains("modal")) {
+                (event.target as HTMLElement).style.display = 'none';
+                }
+            }
+            }
+        })
+        })
+        // запрашиваем данные у контроллера
+        UserController.getUser();
+        // подписываемся на событие
+        store.on(StoreEvents.Updated, () => {
+        // вызываем обновление компонента, передав данные из хранилища
+            this.setProps(store.getState());
+        });
+    }
+    render() {
+        return this.compile(tpl);
+    }
 }

@@ -11,9 +11,13 @@ import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 import Router from '../../utils/router';
 import AuthApi from '../../api/auth-api';
+import UserApi from '../../api/user-api';
 
 const router = new Router("#app");
 const auth = new AuthApi();
+const user = UserApi;
+const userData = user.getUser().then((response) => response.response);
+
 
 export default class ProfileInfo extends Component {
   constructor(changeProfileContent: any) {
@@ -161,8 +165,12 @@ export default class ProfileInfo extends Component {
             events: {
               click: (event: Event) => {
                 event.preventDefault();
-                auth.logout();
-                router.go('/');
+                auth.logout()
+                    .then((response) => {
+                        if (response.status === 200) {
+                            router.go('/');
+                        }
+                    })
               }
             }
           })

@@ -1,17 +1,20 @@
-import BaseAPI from "./base-api";
+import BaseAPI, { AUTH_USER_ENDPOINT } from "./base-api";
 
 class UserApi extends BaseAPI {
-   updateAvatar() {
+    getUser() {
+        return this.transport.get(AUTH_USER_ENDPOINT);
+    }
+    updateAvatar() {
 
-   }
+    }
 
-   updateProfile() {
+    updateProfile() {
 
-   }
+    }
 
-   updatePassword() {
+    updatePassword() {
 
-   }
+    }
 }
 
-export default UserApi;
+export default new UserApi();
