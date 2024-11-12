@@ -111,6 +111,8 @@ export default class Component {
   compile(template: string, props?: { [key: string]: any }) {
     if (typeof(props) == 'undefined') {
       props = this._props;
+    } else {
+        console.log(props)
     }
 
     const propsAndStuds = { ...props };
@@ -122,6 +124,8 @@ export default class Component {
     Object.entries(this._lists).forEach(([key, ]) => {
       propsAndStuds[key] = `<div data-id="__l_${key}"></div>`;
     })
+
+    console.log(propsAndStuds)
 
     const fragment = this.createElement('template') as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(template)(propsAndStuds);

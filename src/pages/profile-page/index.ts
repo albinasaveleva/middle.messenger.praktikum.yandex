@@ -26,41 +26,37 @@ export const blur = (target: HTMLInputElement) => {
 export default class ProfilePage extends Component {
     constructor() {
         super('div', {
-        attr: {
-            class: 'profile-page',
-            id: 'profile-page'
-        },
-        buttonLink: new ButtonLink('a', {
             attr: {
-            class: 'button-back',
+                class: 'profile-page',
+                id: 'profile-page'
             },
-            events: {
-            click: (event: Event) => {
-                event.preventDefault();
-                router.go('/messenger');
-            }
-            }
-        }),
-        content: new ProfileInfo((content: {[key: string]: any})=>this.setProps(content)),
-        modal: new Modal('div', {
-            attr: {
-            class: 'modal',
-            id: 'avatar-modal'
-            },
-            content: new AvatarModal(),
-            events: {
-            click: (event: Event) => {
-                if ((event.target as HTMLElement).classList.contains("modal")) {
-                (event.target as HTMLElement).style.display = 'none';
+            buttonLink: new ButtonLink('a', {
+                attr: {
+                    class: 'button-back',
+                },
+                events: {
+                    click: (event: Event) => {
+                        event.preventDefault();
+                        router.go('/messenger');
+                    }
                 }
-            }
-            }
+            }),
+            content: new ProfileInfo((content: {[key: string]: any}) => this.setProps(content)),
+            modal: new Modal('div', {
+                attr: {
+                    class: 'modal',
+                    id: 'avatar-modal'
+                },
+                content: new AvatarModal(),
+                events: {
+                    click: (event: Event) => {
+                        if ((event.target as HTMLElement).classList.contains("modal")) {
+                        (event.target as HTMLElement).style.display = 'none';
+                        }
+                    }
+                }
+            })
         })
-        })
-        UserController.getUser();
-        store.on(StoreEvents.Updated, () => {
-            this.setProps(store.getState());
-        });
     }
     render() {
         return this.compile(tpl);
