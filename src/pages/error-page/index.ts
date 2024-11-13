@@ -4,8 +4,9 @@ import Component from '../../utils/component';
 import Error from "../../components/error";
 import ButtonLink from "../../components/button-link";
 import ChatPage from '../chat-page';
+import connect from '../../utils/connect';
 
-export default class ErrorPage extends Component {
+class ErrorPage extends Component {
   constructor(changePageContent: any) {
     super('div', {
       attr: {
@@ -42,3 +43,4 @@ export default class ErrorPage extends Component {
     return this.compile(tpl);
   }
 }
+export default connect(ErrorPage);

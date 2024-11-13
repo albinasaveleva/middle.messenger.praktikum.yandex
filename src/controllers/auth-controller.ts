@@ -25,6 +25,7 @@ class AuthController {
             .then((response) => {
                 if (response.status === 200) {
                     store.set('authorization', false);
+                    store.set('user', null);
                 }
             })
     }

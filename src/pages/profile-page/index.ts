@@ -7,8 +7,6 @@ import Modal from '../../components/modal';
 import AvatarModal from '../../modals/avatar-modal';
 import { inputValidation } from '../../utils/formValidation';
 import Router from '../../utils/router';
-import UserController from '../../controllers/user-controller';
-import store, { StoreEvents } from '../../store';
 
 const router = new Router("#app");
 
@@ -23,7 +21,7 @@ export const blur = (target: HTMLInputElement) => {
     }
 }
 
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
     constructor() {
         super('div', {
             attr: {
@@ -62,3 +60,4 @@ export default class ProfilePage extends Component {
         return this.compile(tpl);
     }
 }
+export default ProfilePage;

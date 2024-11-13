@@ -3,8 +3,8 @@ import store from "../store";
 
 class UserController {
     getUser() {
-      UserApi.getUser()
-        .then(({response}) => store.set('user', response))
+        UserApi.getUser()
+            .then(({response}) => store.set('user', response))
     }
 }
 

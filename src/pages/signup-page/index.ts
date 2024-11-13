@@ -9,6 +9,8 @@ import ButtonLink from '../../components/button-link';
 import Form from '../../components/form';
 import SignupForm from '../../forms/signup-form';
 import authController from '../../controllers/auth-controller';
+import connect from '../../utils/connect';
+import store from '../../store';
 
 const router = new Router("#app");
 
@@ -23,7 +25,7 @@ const blur = (target: HTMLInputElement) => {
     }
 }
 
-export default class SignupPage extends Component {
+class SignupPage extends Component {
     constructor() {
         super('div', {
             attr: {
@@ -145,8 +147,10 @@ export default class SignupPage extends Component {
                         const inputs = (event.target as HTMLElement).querySelectorAll('input');
                         if ((Array.from(inputs).every(inputValidation))) {
                             const data: {[key: string]: string} = {};
-                            inputs.forEach((input) => data[input.name] = input.value)
+                            inputs.forEach((input) => data[input.name] = input.value);
+
                             authController.signup(data);
+
                             router.go('/messenger');
                             (event.target as HTMLFormElement).reset();
                         } else {
@@ -160,6 +164,13 @@ export default class SignupPage extends Component {
         })
     }
     render() {
+        // const state = store.getState();
+
+        // if (state.authorization) {
+        //     router.go('/messenger');
+        // }
+
         return this.compile(tpl);
     }
 }
+export default connect(SignupPage);

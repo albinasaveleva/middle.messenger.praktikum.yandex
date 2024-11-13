@@ -10,14 +10,18 @@ import Form from '../form';
 import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 import Router from '../../utils/router';
-// import store, { StoreEvents } from '../../store';
-// import userController from '../../controllers/user-controller';
+import store, { StoreEvents } from '../../store';
+import userController from '../../controllers/user-controller';
 import authController from '../../controllers/auth-controller';
+import connect from '../../utils/connect';
 
 const router = new Router("#app");
 
-export default class ProfileInfo extends Component {
+class ProfileInfo extends Component {
   constructor(changeProfileContent: any) {
+    let state = store.getState();
+    userController.getUser();
+
     super('div', {
         attr: {
             class: 'profile'
@@ -70,7 +74,7 @@ export default class ProfileInfo extends Component {
                         name: "email",
                         type: "email",
                         placeholder: "Почта",
-                        value: "pochta@yandex.ru",
+                        value: state.user?.email || "",
                         readonly: true
                     }
                 }),
@@ -80,7 +84,7 @@ export default class ProfileInfo extends Component {
                         name: "login",
                         type: "text",
                         placeholder: "Логин",
-                        value: "ivanivanov",
+                        value: state.user?.login || "",
                         readonly: true
                     }
                 }),
@@ -90,7 +94,7 @@ export default class ProfileInfo extends Component {
                         name: "first_name",
                         type: "text",
                         placeholder: "Имя",
-                        value: "Иван",
+                        value: state.user?.first_name || "",
                         readonly: true
                     }
                 }),
@@ -100,7 +104,7 @@ export default class ProfileInfo extends Component {
                         name: "second_name",
                         type: "text",
                         placeholder: "Фамилия",
-                        value: "Иванов",
+                        value: state.user?.second_name || "",
                         readonly: true
                     }
                 }),
@@ -110,7 +114,7 @@ export default class ProfileInfo extends Component {
                         name: "display_name",
                         type: "text",
                         placeholder: "Имя в чате",
-                        value: "Иван",
+                        value: state.user?.display_name || "",
                         readonly: true
                     }
                 }),
@@ -120,7 +124,7 @@ export default class ProfileInfo extends Component {
                         name: "phone",
                         type: "text",
                         placeholder: "Телефон",
-                        value: '+7 (999) 999 99 99',
+                        value: state.user?.phone || "",
                         readonly: true
                     }
                 }),
@@ -172,13 +176,12 @@ export default class ProfileInfo extends Component {
         }),
 
     })
-    // userController.getUser();
-    // store.on(StoreEvents.Updated, () => {
-    //     this.setProps(store.getState());
-    // });
+
   }
   render() {
-    console.log('render')
-    return this.compile(tpl, {name: 'test'});
+    const user = this._props.user;
+
+    return this.compile(tpl);
   }
 }
+export default connect(ProfileInfo);

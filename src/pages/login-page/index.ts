@@ -9,6 +9,9 @@ import ButtonLink from '../../components/button-link';
 import Input from '../../components/input';
 import Form from '../../components/form';
 import LoginForm from '../../forms/login-form';
+import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
+import store from '../../store';
 
 const router = new Router("#app");
 
@@ -23,7 +26,7 @@ const blur = (target: HTMLInputElement) => {
     }
 }
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
     constructor() {
         super('div',
         {
@@ -92,9 +95,10 @@ export default class LoginPage extends Component {
                         if ((Array.from(inputs).every(inputValidation))) {
                             const data: {[key: string]: string} = {};
                             inputs.forEach((input) => data[input.name] = input.value);
+
                             authController.signin(data);
-                            (event.target as HTMLFormElement).reset();
                             router.go('/messenger');
+                            (event.target as HTMLFormElement).reset();
                         } else {
                             inputs.forEach(blur);
                         }
@@ -104,6 +108,13 @@ export default class LoginPage extends Component {
         });
     }
     render() {
+        // const state = store.getState();
+
+        // if (state.authorization) {
+        //     router.go('/messenger');
+        // }
+
         return this.compile(tpl);
     }
 }
+export default connect(LoginPage);

@@ -3,8 +3,9 @@ import Component from '../../utils/component';
 import Input from '../../components/input';
 import ButtonAction from '../../components/button-action';
 import AvatarForm from '../../forms/avatar-form';
+import connect from '../../utils/connect';
 
-export default class AvatarModal extends Component {
+class AvatarModal extends Component {
   constructor() {
     super('div', {
       attr: {
@@ -51,3 +52,4 @@ export default class AvatarModal extends Component {
     return this.compile(tpl);
   }
 }
+export default connect(AvatarModal);

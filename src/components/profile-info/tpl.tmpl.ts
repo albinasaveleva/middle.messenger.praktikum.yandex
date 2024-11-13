@@ -3,6 +3,6 @@ export default `
     {{{avatar}}}
     {{{avatarHover}}}
   </div>
-  <span class="name">${name}</span>
+  <span class="name">{{name}}</span>
   {{{form}}}
 `;

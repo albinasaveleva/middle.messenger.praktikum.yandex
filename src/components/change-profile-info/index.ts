@@ -9,8 +9,9 @@ import ChangeProfileInfoForm from '../../forms/change-profile-info-form';
 import { inputValidation } from '../../utils/formValidation';
 import ProfileInfo from '../profile-info';
 import { blur } from '../../pages/profile-page';
+import connect from '../../utils/connect';
 
-export default class ChangeProfileInfo extends Component {
+class ChangeProfileInfo extends Component {
   constructor(changeProfileContent: any) {
     super('div', {
       attr: {
@@ -140,3 +141,4 @@ export default class ChangeProfileInfo extends Component {
     return this.compile(tpl);
   }
 }
+export default connect(ChangeProfileInfo);
