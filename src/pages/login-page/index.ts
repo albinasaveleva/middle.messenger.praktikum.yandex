@@ -95,6 +95,7 @@ class LoginPage extends Component {
                             inputs.forEach((input) => data[input.name] = input.value);
 
                             authController.signin(data);
+
                             router.go('/messenger');
                             (event.target as HTMLFormElement).reset();
                         } else {

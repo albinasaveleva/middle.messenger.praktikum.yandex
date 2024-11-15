@@ -40,6 +40,7 @@ export class HTTPTransport {
     const url = `${BASE_API_URL}${endpoint}`;
 
     const {method, data, headers = {}} = options;
+    console.log(method, data)
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -65,10 +66,8 @@ export class HTTPTransport {
       xhr.withCredentials = true;
       xhr.responseType = 'json';
 
-      if (method === METHOD.GET || !data) {
+      if (method === METHOD.GET) {
         xhr.send();
-      } else if(data instanceof FormData) {
-        xhr.send(data);
       } else {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));

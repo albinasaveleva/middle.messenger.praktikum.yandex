@@ -10,18 +10,13 @@ import Form from '../form';
 import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 import Router from '../../utils/router';
-import store, { StoreEvents } from '../../store';
-import userController from '../../controllers/user-controller';
 import authController from '../../controllers/auth-controller';
 import connect from '../../utils/connect';
 
 const router = new Router("#app");
 
 class ProfileInfo extends Component {
-  constructor(changeProfileContent: any) {
-    userController.getUser();
-    let state = store.getState();
-
+  constructor(props: any) {
     super({
         attr: {
             class: 'profile'
@@ -58,6 +53,7 @@ class ProfileInfo extends Component {
                 }
             }
         }, 'div'),
+        name: props.user?.display_name || "",
         form: new Form({
             attr: {
                 class: 'form',
@@ -74,7 +70,7 @@ class ProfileInfo extends Component {
                         name: "email",
                         type: "email",
                         placeholder: "Почта",
-                        value: state.user?.email || "",
+                        value: props.user?.email || "",
                         readonly: true
                     }
                 }, 'input'),
@@ -84,7 +80,7 @@ class ProfileInfo extends Component {
                         name: "login",
                         type: "text",
                         placeholder: "Логин",
-                        value: state.user?.login || "",
+                        value: props.user?.login || "",
                         readonly: true
                     }
                 }, 'input'),
@@ -94,7 +90,7 @@ class ProfileInfo extends Component {
                         name: "first_name",
                         type: "text",
                         placeholder: "Имя",
-                        value: state.user?.first_name || "",
+                        value: props.user?.first_name || "",
                         readonly: true
                     }
                 }, 'input'),
@@ -104,7 +100,7 @@ class ProfileInfo extends Component {
                         name: "second_name",
                         type: "text",
                         placeholder: "Фамилия",
-                        value: state.user?.second_name || "",
+                        value: props.user?.second_name || "",
                         readonly: true
                     }
                 }, 'input'),
@@ -114,7 +110,7 @@ class ProfileInfo extends Component {
                         name: "display_name",
                         type: "text",
                         placeholder: "Имя в чате",
-                        value: state.user?.display_name || "",
+                        value: props.user?.display_name || "",
                         readonly: true
                     }
                 }, 'input'),
@@ -124,7 +120,7 @@ class ProfileInfo extends Component {
                         name: "phone",
                         type: "text",
                         placeholder: "Телефон",
-                        value: state.user?.phone || "",
+                        value: props.user?.phone || "",
                         readonly: true
                     }
                 }, 'input'),
@@ -137,8 +133,10 @@ class ProfileInfo extends Component {
                     events: {
                         click: (event: Event) => {
                             event.preventDefault();
-                            changeProfileContent({
-                                content: new ChangeProfileInfo(changeProfileContent)
+                            props.changeProfileContent({
+                                content: new ChangeProfileInfo({
+                                    changeProfileContent: props.changeProfileContent
+                                })
                             })
                         }
                     }
@@ -152,8 +150,10 @@ class ProfileInfo extends Component {
                     events: {
                         click: (event: Event) => {
                             event.preventDefault();
-                            changeProfileContent({
-                                content: new ChangeProfilePassword(changeProfileContent)
+                            props.changeProfileContent({
+                                content: new ChangeProfilePassword({
+                                    changeProfileContent: props.changeProfileContent
+                                })
                             })
                         }
                     }

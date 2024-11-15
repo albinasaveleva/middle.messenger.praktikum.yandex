@@ -10,9 +10,10 @@ import { inputValidation } from '../../utils/formValidation';
 import ProfileInfo from '../profile-info';
 import { blur } from '../../pages/profile-page';
 import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
 
 class ChangeProfileInfo extends Component {
-  constructor(changeProfileContent: any) {
+  constructor(props: any) {
     super({
       attr: {
         class: 'profile'
@@ -22,6 +23,7 @@ class ChangeProfileInfo extends Component {
           class: 'avatar'
         }
       }, 'div'),
+      name: props.user?.display_name || "",
       form: new Form({
         attr: {
           class: 'form',
@@ -38,7 +40,7 @@ class ChangeProfileInfo extends Component {
               name: "email",
               type: "text",
               placeholder: "Почта",
-              value: "pochta@yandex.ru",
+              value: props.user?.email || "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -50,7 +52,7 @@ class ChangeProfileInfo extends Component {
               name: "login",
               type: "text",
               placeholder: "Логин",
-              value: "ivanivanov",
+              value: props.user?.login || "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -62,7 +64,7 @@ class ChangeProfileInfo extends Component {
               name: "first_name",
               type: "text",
               placeholder: "Имя",
-              value: "Иван",
+              value: props.user?.first_name || "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -74,7 +76,7 @@ class ChangeProfileInfo extends Component {
               name: "second_name",
               type: "text",
               placeholder: "Фамилия",
-              value: "Иванов",
+              value: props.user?.second_name || "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -86,7 +88,7 @@ class ChangeProfileInfo extends Component {
               name: "display_name",
               type: "text",
               placeholder: "Имя в чате",
-              value: "Иван",
+              value: props.user?.display_name || "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -98,7 +100,7 @@ class ChangeProfileInfo extends Component {
               name: "phone",
               type: "text",
               placeholder: "Телефон",
-              value: '+79999999999',
+              value: props.user?.phone || "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -118,18 +120,17 @@ class ChangeProfileInfo extends Component {
                 event.preventDefault();
 
                 const inputs = (event.target as HTMLElement).querySelectorAll('input');
-                inputs.forEach(blur)
-
                 if (Array.from(inputs).every(inputValidation)) {
-                  const formData = new FormData(event.target as HTMLFormElement);
+                    const data: {[key: string]: string} = {};
+                    inputs.forEach((input) => data[input.name] = input.value);
 
-                  for (let pair of formData.entries()) {
-                    console.log(`${pair[0]}: ${pair[1]}`);
-                  }
+                    userController.updateProfile(data);
 
-                  changeProfileContent({
-                    content: new ProfileInfo(changeProfileContent)
-                  })
+                    props.changeProfileContent({
+                        content: new ProfileInfo(props.changeProfileContent)
+                    });
+                } else {
+                    inputs.forEach(blur);
                 }
               }
         }
