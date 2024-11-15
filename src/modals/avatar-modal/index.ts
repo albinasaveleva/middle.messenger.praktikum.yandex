@@ -7,31 +7,31 @@ import connect from '../../utils/connect';
 
 class AvatarModal extends Component {
   constructor() {
-    super('div', {
+    super({
       attr: {
         class: 'modal-content'
       },
-      form: new AvatarForm('form', {
+      form: new AvatarForm({
         attr: {
           class: 'form',
           name: "avatar-form",
           id: "avatar-form"
         },
-        avatarInput: new Input('input', {
+        avatarInput: new Input({
           attr: {
             class: 'input-field',
             type: 'file',
             name: 'avatar'
           }
-        }),
-        changeButton: new ButtonAction('button', {
+        }, 'input'),
+        changeButton: new ButtonAction({
           attr: {
             class: 'button-action',
             type: 'submit',
             form: 'avatar-form'
           },
           action: 'Поменять'
-        }),
+        }, 'button'),
         events: {
           submit: (event: Event) => {
             event.preventDefault();
@@ -45,8 +45,8 @@ class AvatarModal extends Component {
             (document.querySelector('#avatar-modal') as HTMLElement).style.display = 'none';
           }
         }
-      }),
-    })
+      }, 'form'),
+    }, 'div')
   }
   render() {
     return this.compile(tpl);

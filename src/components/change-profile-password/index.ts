@@ -13,26 +13,26 @@ import connect from '../../utils/connect';
 
 class ChangeProfilePassword extends Component {
   constructor(changeProfileContent: any) {
-    super('div', {
+    super({
       attr: {
         class: 'profile',
       },
-      avatar: new Avatar('div', {
+      avatar: new Avatar({
         attr: {
           class: 'avatar'
         }
-      }),
-      form: new Form('form', {
+      }, 'div'),
+      form: new Form({
         attr: {
           class: 'form',
           name: "profile-form",
           id: "profile-form"
         },
-        content: new ChangeProfilePasswordForm('div', {
+        content: new ChangeProfilePasswordForm({
           attr: {
             class: 'form-wrapper',
           },
-          oldPasswordInput: new Input('input', {
+          oldPasswordInput: new Input({
             attr: {
               class: "input-field",
               name: "password",
@@ -43,8 +43,8 @@ class ChangeProfilePassword extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          newPasswordInput: new Input('input', {
+          }, 'input'),
+          newPasswordInput: new Input({
             attr: {
               class: "input-field",
               name: "password",
@@ -55,8 +55,8 @@ class ChangeProfilePassword extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          doubleNewPasswordInput: new Input('input', {
+          }, 'input'),
+          doubleNewPasswordInput: new Input({
             attr: {
               class: "input-field",
               name: "password",
@@ -67,16 +67,16 @@ class ChangeProfilePassword extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          saveButton: new ButtonAction('button', {
+          }, 'input'),
+          saveButton: new ButtonAction({
             attr: {
               class: 'button-action',
               type: 'submit',
               name: 'profile-form'
             },
             action: 'Сохранить',
-          })
-        }),
+          }, 'button')
+        }, 'div'),
         events: {
             submit: (event: Event) => {
                 event.preventDefault();
@@ -97,8 +97,8 @@ class ChangeProfilePassword extends Component {
                 }
               }
         }
-      }),
-    })
+      }, 'form'),
+    }, 'div')
   }
   render() {
     return this.compile(tpl);

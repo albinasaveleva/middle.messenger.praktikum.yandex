@@ -19,14 +19,14 @@ const router = new Router("#app");
 
 class ProfileInfo extends Component {
   constructor(changeProfileContent: any) {
-    let state = store.getState();
     userController.getUser();
+    let state = store.getState();
 
-    super('div', {
+    super({
         attr: {
             class: 'profile'
         },
-        avatar: new Avatar('div', {
+        avatar: new Avatar({
             attr: {
                 class: 'avatar'
             },
@@ -46,8 +46,8 @@ class ProfileInfo extends Component {
                     avatarModal.style.display = 'flex';
                 }
             }
-        }),
-        avatarHover: new AvatarHover('div', {
+        }, 'div'),
+        avatarHover: new AvatarHover({
             attr: {
                 class: 'avatar-hover'
             },
@@ -57,18 +57,18 @@ class ProfileInfo extends Component {
                     avatarModal.style.display = 'flex';
                 }
             }
-        }),
-        form: new Form('form', {
+        }, 'div'),
+        form: new Form({
             attr: {
                 class: 'form',
                 name: "profile-form",
                 id: "profile-form"
             },
-            content: new ProfileInfoForm('div', {
+            content: new ProfileInfoForm({
                 attr: {
                     class: 'form-wrapper',
                 },
-                emailInput: new Input('input', {
+                emailInput: new Input({
                     attr: {
                         class: "input-field",
                         name: "email",
@@ -77,8 +77,8 @@ class ProfileInfo extends Component {
                         value: state.user?.email || "",
                         readonly: true
                     }
-                }),
-                loginInput: new Input('input', {
+                }, 'input'),
+                loginInput: new Input({
                     attr: {
                         class: "input-field",
                         name: "login",
@@ -87,8 +87,8 @@ class ProfileInfo extends Component {
                         value: state.user?.login || "",
                         readonly: true
                     }
-                }),
-                firstNameInput: new Input('input', {
+                }, 'input'),
+                firstNameInput: new Input({
                     attr: {
                         class: "input-field",
                         name: "first_name",
@@ -97,8 +97,8 @@ class ProfileInfo extends Component {
                         value: state.user?.first_name || "",
                         readonly: true
                     }
-                }),
-                secondNameInput: new Input('input', {
+                }, 'input'),
+                secondNameInput: new Input({
                     attr: {
                         class: "input-field",
                         name: "second_name",
@@ -107,8 +107,8 @@ class ProfileInfo extends Component {
                         value: state.user?.second_name || "",
                         readonly: true
                     }
-                }),
-                displayNameInput: new Input('input', {
+                }, 'input'),
+                displayNameInput: new Input({
                     attr: {
                         class: "input-field",
                         name: "display_name",
@@ -117,8 +117,8 @@ class ProfileInfo extends Component {
                         value: state.user?.display_name || "",
                         readonly: true
                     }
-                }),
-                phoneInput: new Input('input', {
+                }, 'input'),
+                phoneInput: new Input({
                     attr: {
                         class: "input-field",
                         name: "phone",
@@ -127,8 +127,8 @@ class ProfileInfo extends Component {
                         value: state.user?.phone || "",
                         readonly: true
                     }
-                }),
-                changeInfoButton: new ButtonLink('a', {
+                }, 'input'),
+                changeInfoButton: new ButtonLink({
                     attr: {
                         class: "button-link",
                         href: "/profile/changeInfo"
@@ -142,8 +142,8 @@ class ProfileInfo extends Component {
                             })
                         }
                     }
-                }),
-                changePasswordButton: new ButtonLink('a', {
+                }, 'a'),
+                changePasswordButton: new ButtonLink({
                     attr: {
                         class: "button-link",
                         href: "/profile/changePassword"
@@ -157,8 +157,8 @@ class ProfileInfo extends Component {
                             })
                         }
                     }
-                }),
-                logoutButton: new ButtonLink('a', {
+                }, 'a'),
+                logoutButton: new ButtonLink({
                     attr: {
                         class: "button-link",
                     },
@@ -171,16 +171,14 @@ class ProfileInfo extends Component {
                             router.go('/');
                         }
                     }
-                })
-            })
-        }),
+                }, 'a')
+            }, 'div')
+        }, 'form'),
 
-    })
+    }, 'div')
 
   }
   render() {
-    const user = this._props.user;
-
     return this.compile(tpl);
   }
 }

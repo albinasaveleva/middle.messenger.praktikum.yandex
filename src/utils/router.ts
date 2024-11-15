@@ -32,7 +32,7 @@ class Router {
         console.log('start')
         // Реагируем на изменения в адресной строке и вызываем перерисовку
         window.onpopstate = (event) => {
-            this._onRoute(event.currentTarget.location.pathname);
+            this._onRoute(event.currentTarget?.location.pathname);
         };
 
         this._onRoute(window.location.pathname);

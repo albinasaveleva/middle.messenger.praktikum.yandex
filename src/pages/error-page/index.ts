@@ -8,18 +8,18 @@ import connect from '../../utils/connect';
 
 class ErrorPage extends Component {
   constructor(changePageContent: any) {
-    super('div', {
+    super({
       attr: {
         class: 'error-page',
         id: 'error-page'
       },
-      error: new Error('div', {
+      error: new Error({
         attr: {
           class: 'error-wrapper'
         },
         title: '500',
         subtitle: 'Мы уже фиксим',
-        buttonLink: new ButtonLink('a', {
+        buttonLink: new ButtonLink({
           attr: {
             href: '/chats',
             class: 'button-link'
@@ -35,9 +35,9 @@ class ErrorPage extends Component {
               });
             }
           }
-        })
-      })
-    })
+        }, 'a')
+      }, 'div')
+    }, 'div')
   }
   render() {
     return this.compile(tpl);

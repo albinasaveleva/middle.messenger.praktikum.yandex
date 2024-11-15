@@ -1,7 +1,7 @@
 import BaseAPI, { AUTH_USER_ENDPOINT } from "./base-api";
 
 class UserApi extends BaseAPI {
-    getUser() {
+    async getUser() {
         return this.transport.get(AUTH_USER_ENDPOINT);
     }
     updateAvatar() {

@@ -10,8 +10,6 @@ import Input from '../../components/input';
 import Form from '../../components/form';
 import LoginForm from '../../forms/login-form';
 import connect from '../../utils/connect';
-import userController from '../../controllers/user-controller';
-import store from '../../store';
 
 const router = new Router("#app");
 
@@ -28,23 +26,23 @@ const blur = (target: HTMLInputElement) => {
 
 class LoginPage extends Component {
     constructor() {
-        super('div',
+        super(
         {
             attr: {
                 class: 'login-page',
                 id: 'login-page'
             },
-            form: new Form('form', {
+            form: new Form({
                 attr: {
                     class: "form",
                     name: "login-form",
                     id: "login-form"
                 },
-                content: new LoginForm('div', {
+                content: new LoginForm({
                     attr: {
                         class: 'form-wrapper'
                     },
-                    loginInput: new Input('input', {
+                    loginInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "login",
@@ -54,8 +52,8 @@ class LoginPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    passwordInput: new Input('input', {
+                    }, 'input'),
+                    passwordInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "password",
@@ -65,16 +63,16 @@ class LoginPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    buttonAction: new ButtonAction('button', {
+                    }, 'input'),
+                    buttonAction: new ButtonAction({
                         attr: {
                             class: "button-action",
                             type: "submit",
                             form: 'login-form'
                         },
                         action: "Войти",
-                    }),
-                    buttonLink: new ButtonLink('a', {
+                    }, 'button'),
+                    buttonLink: new ButtonLink({
                         attr: {
                             class: "button-link",
                         },
@@ -85,8 +83,8 @@ class LoginPage extends Component {
                                 router.go('/sign-up');
                             }
                         }
-                    }),
-                }),
+                    }, 'a'),
+                }, 'div'),
                 events: {
                     submit: (event: Event) => {
                         event.preventDefault();
@@ -104,16 +102,10 @@ class LoginPage extends Component {
                         }
                     }
                 }
-            }),
-        });
+            }, 'form'),
+        }, 'div');
     }
     render() {
-        // const state = store.getState();
-
-        // if (state.authorization) {
-        //     router.go('/messenger');
-        // }
-
         return this.compile(tpl);
     }
 }

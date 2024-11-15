@@ -49,13 +49,18 @@ export class HTTPTransport {
         xhr.setRequestHeader(key, headers[key]);
       });
 
-      xhr.onload = function() {
-        resolve(xhr);
-      };
+      xhr.onload = () => {
+        const status = xhr.status || 0;
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+        if (status >= 200 && status < 300) {
+            resolve(xhr);
+        } else {
+            reject({reason: xhr.response.reason});
+        }
+      };
+      xhr.onabort = () => reject({reason: 'abort'});
+      xhr.onerror = () => reject({reason: 'error'});
+      xhr.ontimeout = () => reject({reason: 'timeout'});
 
       xhr.withCredentials = true;
       xhr.responseType = 'json';
@@ -63,7 +68,6 @@ export class HTTPTransport {
       if (method === METHOD.GET || !data) {
         xhr.send();
       } else if(data instanceof FormData) {
-        console.log(data)
         xhr.send(data);
       } else {
         xhr.setRequestHeader('Content-Type', 'application/json');

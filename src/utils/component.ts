@@ -20,14 +20,15 @@ export default class Component {
   _eventBus: EventBus;
   _setUpdate: boolean = false;
 
-  constructor(tag: string = "div", componentProps: { [key: string]: any } = {}) {
+  constructor(componentProps: { [key: string]: any } = {}, tag: string = "div" ) {
+    console.log(componentProps, tag)
     const { props, children, lists } = this.getProps(componentProps);
 
     this._children = this.makePropsProxy(children);
     this._lists = this.makePropsProxy(lists);
     this._id = makeUUID();
     this._props = this.makePropsProxy({ ...props, _id: this._id })
-    this._meta = { tag, props };
+    this._meta = { props, tag };
     this._eventBus = new EventBus();
 
     this.registerEvents();

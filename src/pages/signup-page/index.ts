@@ -10,7 +10,6 @@ import Form from '../../components/form';
 import SignupForm from '../../forms/signup-form';
 import authController from '../../controllers/auth-controller';
 import connect from '../../utils/connect';
-import store from '../../store';
 
 const router = new Router("#app");
 
@@ -27,22 +26,22 @@ const blur = (target: HTMLInputElement) => {
 
 class SignupPage extends Component {
     constructor() {
-        super('div', {
+        super({
             attr: {
                 class: 'signup-page',
                 id: 'signup-page'
             },
-            form: new Form('form', {
+            form: new Form({
                 attr: {
                     class: 'form',
                     name: 'signup-form',
                     id: 'signup-form'
                 },
-                content: new SignupForm('div', {
+                content: new SignupForm({
                     attr: {
                         class: 'form-wrapper'
                     },
-                    emailInput: new Input('input', {
+                    emailInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "email",
@@ -52,8 +51,8 @@ class SignupPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    loginInput: new Input('input', {
+                    }, 'input'),
+                    loginInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "login",
@@ -63,8 +62,8 @@ class SignupPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    firstNameInput: new Input('input', {
+                    }, 'input'),
+                    firstNameInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "first_name",
@@ -74,8 +73,8 @@ class SignupPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    secondNameInput: new Input('input', {
+                    }, 'input'),
+                    secondNameInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "second_name",
@@ -85,8 +84,8 @@ class SignupPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    phoneInput: new Input('input', {
+                    }, 'input'),
+                    phoneInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "phone",
@@ -96,8 +95,8 @@ class SignupPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    passwordInput: new Input('input', {
+                    }, 'input'),
+                    passwordInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "password",
@@ -107,8 +106,8 @@ class SignupPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    doublePasswordInput: new Input('input', {
+                    }, 'input'),
+                    doublePasswordInput: new Input({
                         attr: {
                             class: "input-field",
                             name: "password",
@@ -118,16 +117,16 @@ class SignupPage extends Component {
                         events: {
                             blur: (event: Event) => blur(event.target as HTMLInputElement)
                         }
-                    }),
-                    buttonAction: new ButtonAction('button', {
+                    }, 'input'),
+                    buttonAction: new ButtonAction({
                         attr: {
                             class: "button-action",
                             type: "submit",
                             form: 'signup-form'
                         },
                         action: "Зарегистрироваться",
-                    }),
-                    buttonLink: new ButtonLink('a', {
+                    }, 'button'),
+                    buttonLink: new ButtonLink({
                         attr: {
                             class: "button-link",
                         },
@@ -138,8 +137,8 @@ class SignupPage extends Component {
                                 router.go('/');
                             }
                         }
-                    })
-                }),
+                    }, 'a')
+                }, 'div'),
                 events: {
                     submit: (event: Event) => {
                         event.preventDefault();
@@ -158,18 +157,12 @@ class SignupPage extends Component {
                         }
                     }
                 }
-            }),
+            }, 'form'),
 
 
-        })
+        }, 'div')
     }
     render() {
-        // const state = store.getState();
-
-        // if (state.authorization) {
-        //     router.go('/messenger');
-        // }
-
         return this.compile(tpl);
     }
 }

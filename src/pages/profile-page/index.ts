@@ -7,6 +7,7 @@ import Modal from '../../components/modal';
 import AvatarModal from '../../modals/avatar-modal';
 import { inputValidation } from '../../utils/formValidation';
 import Router from '../../utils/router';
+import connect from '../../utils/connect';
 
 const router = new Router("#app");
 
@@ -23,12 +24,12 @@ export const blur = (target: HTMLInputElement) => {
 
 class ProfilePage extends Component {
     constructor() {
-        super('div', {
+        super({
             attr: {
                 class: 'profile-page',
                 id: 'profile-page'
             },
-            buttonLink: new ButtonLink('a', {
+            buttonLink: new ButtonLink({
                 attr: {
                     class: 'button-back',
                 },
@@ -38,9 +39,9 @@ class ProfilePage extends Component {
                         router.go('/messenger');
                     }
                 }
-            }),
+            }, 'a'),
             content: new ProfileInfo((content: {[key: string]: any}) => this.setProps(content)),
-            modal: new Modal('div', {
+            modal: new Modal({
                 attr: {
                     class: 'modal',
                     id: 'avatar-modal'
@@ -53,11 +54,11 @@ class ProfilePage extends Component {
                         }
                     }
                 }
-            })
-        })
+            }, 'div')
+        }, 'div')
     }
     render() {
         return this.compile(tpl);
     }
 }
-export default ProfilePage;
+export default connect(ProfilePage);

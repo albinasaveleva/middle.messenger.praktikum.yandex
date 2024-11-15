@@ -13,26 +13,26 @@ import connect from '../../utils/connect';
 
 class ChangeProfileInfo extends Component {
   constructor(changeProfileContent: any) {
-    super('div', {
+    super({
       attr: {
         class: 'profile'
       },
-      avatar: new Avatar('div', {
+      avatar: new Avatar({
         attr: {
           class: 'avatar'
         }
-      }),
-      form: new Form('form', {
+      }, 'div'),
+      form: new Form({
         attr: {
           class: 'form',
           name: "profile-form",
           id: "profile-form"
         },
-        content: new ChangeProfileInfoForm('div', {
+        content: new ChangeProfileInfoForm({
           attr: {
             class: 'form-wrapper',
           },
-          emailInput: new Input('input', {
+          emailInput: new Input({
             attr: {
               class: "input-field",
               name: "email",
@@ -43,8 +43,8 @@ class ChangeProfileInfo extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          loginInput: new Input('input', {
+          }, 'input'),
+          loginInput: new Input({
             attr: {
               class: "input-field",
               name: "login",
@@ -55,8 +55,8 @@ class ChangeProfileInfo extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          firstNameInput: new Input('input', {
+          }, 'input'),
+          firstNameInput: new Input({
             attr: {
               class: "input-field",
               name: "first_name",
@@ -67,8 +67,8 @@ class ChangeProfileInfo extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          secondNameInput: new Input('input', {
+          }, 'input'),
+          secondNameInput: new Input({
             attr: {
               class: "input-field",
               name: "second_name",
@@ -79,8 +79,8 @@ class ChangeProfileInfo extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          displayNameInput: new Input('input', {
+          }, 'input'),
+          displayNameInput: new Input({
             attr: {
               class: "input-field",
               name: "display_name",
@@ -91,8 +91,8 @@ class ChangeProfileInfo extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          phoneInput: new Input('input', {
+          }, 'input'),
+          phoneInput: new Input({
             attr: {
               class: "input-field",
               name: "phone",
@@ -103,16 +103,16 @@ class ChangeProfileInfo extends Component {
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
             }
-          }),
-          saveButton: new ButtonAction('button', {
+          }, 'input'),
+          saveButton: new ButtonAction({
             attr: {
               class: 'button-action',
               type: 'submit',
               form: 'profile-form'
             },
             action: 'Сохранить',
-          })
-        }),
+          }, 'button')
+        }, 'div'),
         events: {
             submit: (event: Event) => {
                 event.preventDefault();
@@ -133,9 +133,9 @@ class ChangeProfileInfo extends Component {
                 }
               }
         }
-      }),
+      }, 'form'),
 
-    })
+    }, 'div')
   }
   render() {
     return this.compile(tpl);

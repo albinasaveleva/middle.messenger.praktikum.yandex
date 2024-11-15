@@ -26,12 +26,21 @@ class Store extends EventBus {
     };
 
     public getState() {
-      return this.state;
+        return this.state;
+    }
+
+    public cleanState() {
+        this.state = {
+            user: null,
+            authorization: false
+        };
+        this.emit(StoreEvents.Updated);
     }
 
     public set(path: string, value: unknown) {
-      set(this.state, path, value);
-      this.emit(StoreEvents.Updated);
+        set(this.state, path, value);
+        this.emit(StoreEvents.Updated);
+        return this;
     };
 }
 
