@@ -23,16 +23,16 @@ router
     .start();
 
 
-// if(user === null) {
-//     if (window.location.pathname === '/sign-up') {
-//         router.go('/sign-up');
-//     } else {
-//         router.go('/');
-//     }
-// } else {
-//     if (window.location.pathname === '/settings') {
-//         router.go('/settings');
-//     } else {
-//         router.go('/messenger');
-//     }
-// }
+if(user === null) {
+    if (window.location.pathname === '/sign-up') {
+        router.go('/sign-up');
+    } else {
+        router.go('/');
+    }
+} else {
+    if (window.location.pathname === '/settings') {
+        router.go('/settings');
+    } else {
+        router.go('/messenger');
+    }
+}

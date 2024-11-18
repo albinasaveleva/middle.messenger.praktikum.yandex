@@ -37,9 +37,11 @@ class AvatarModal extends Component {
           submit: (event: Event) => {
             event.preventDefault();
 
-            const inputs = (event.target as HTMLElement).querySelectorAll('input');
+            const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
+            const file = (input.files as FileList)[0];
+
             const formData = new FormData();
-            formData.append('avatar', inputs[0].value);
+            formData.append('avatar', file);
 
             userController.updateAvatar(formData);
 

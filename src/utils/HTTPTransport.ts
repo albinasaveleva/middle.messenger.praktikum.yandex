@@ -40,7 +40,6 @@ export class HTTPTransport {
     const url = `${BASE_API_URL}${endpoint}`;
 
     const {method, data, headers = {}} = options;
-    console.log(method, data)
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
