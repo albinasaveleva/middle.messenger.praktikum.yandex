@@ -8,6 +8,7 @@ export const AUTH_USER_ENDPOINT = '/auth/user';
 export const AUTH_LOGOUT_ENDPOINT = '/auth/logout';
 
 export const USER_GET_INFO_ENDPOINT = '/user/';
+export const USER_GET_AVATAR_ENDPOINT = '/swagger/resources';
 export const USER_SEARCH_ENDPOINT = '/user/search';
 export const USER_UPDATE_PROFILE_ENDPOINT = '/user/profile';
 export const USER_UPDATE_AVATAR_ENDPOINT = '/user/profile/avatar';

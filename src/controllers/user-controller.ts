@@ -8,7 +8,11 @@ class UserController {
             .catch(({reason}) => console.log(reason))
     }
     deleteUser() {
-        store.set('user', null)
+        store.set('user', null);
+    }
+    async getAvatar(src: string) {
+        await UserApi.getAvatar(src)
+            .then(({response}) => response)
     }
     async updateAvatar(data: FormData) {
         await UserApi.updateAvatar(data)

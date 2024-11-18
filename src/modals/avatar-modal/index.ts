@@ -34,7 +34,7 @@ class AvatarModal extends Component {
           action: 'Поменять'
         }, 'button'),
         events: {
-          submit: (event: Event) => {
+          submit: async (event: Event) => {
             event.preventDefault();
 
             const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
@@ -43,7 +43,16 @@ class AvatarModal extends Component {
             const formData = new FormData();
             formData.append('avatar', file);
 
-            userController.updateAvatar(formData);
+            const request = async() => {
+                try {
+                    await userController.updateAvatar(formData);
+                } catch (error) {
+                    console.log(error)
+                }
+            };
+            await request();
+
+
 
             (document.querySelector('#avatar-modal') as HTMLElement).style.display = 'none';
           }
