@@ -2,12 +2,12 @@ import authApi from "../api/auth-api";
 import store from "../store";
 
 class AuthController {
-    signup(data: {[key: string]: string}) {
-        authApi.signup(data)
+    async signup(data: {[key: string]: string}) {
+        await authApi.signup(data)
     }
 
-    signin(data: {[key: string]: string}) {
-        authApi.signin(data)
+    async signin(data: {[key: string]: string}) {
+        await authApi.signin(data)
     }
 
     logout() {

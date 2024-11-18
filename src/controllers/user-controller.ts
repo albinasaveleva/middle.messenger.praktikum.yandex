@@ -10,14 +10,18 @@ class UserController {
     deleteUser() {
         store.set('user', null)
     }
-    updateAvatar(options) {
-        UserApi.updateAvatar(options)
+    async updateAvatar(data: FormData) {
+        await UserApi.updateAvatar(data)
+            .then(({response}) => store.set('user', response))
+            .catch(({reason}) => console.log(reason))
     }
-    updateProfile(options) {
-        UserApi.updateProfile(options)
+    async updateProfile(data: {[key: string]: string}) {
+        await UserApi.updateProfile(data)
+            .then(({response}) => store.set('user', response))
+            .catch(({reason}) => console.log(reason))
     }
-    updatePassword(options) {
-        UserApi.updatePassword(options)
+    updatePassword(data: {[key: string]: string}) {
+        UserApi.updatePassword(data)
     }
 }
 

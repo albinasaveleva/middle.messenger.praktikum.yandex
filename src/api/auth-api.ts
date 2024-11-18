@@ -6,11 +6,11 @@ import BaseAPI,
     } from "./base-api";
 
 class AuthApi extends BaseAPI {
-    signup(data: {[key: string]: string}) {
+    async signup(data: {[key: string]: string}) {
         return this.transport.post(AUTH_SIGNUP_ENDPOINT, {data})
     }
 
-    signin(data: {[key: string]: string}) {
+    async signin(data: {[key: string]: string}) {
         return this.transport.post(AUTH_SIGNIN_ENDPOINT, {data})
     }
 

@@ -116,7 +116,7 @@ class ChangeProfileInfo extends Component {
           }, 'button')
         }, 'div'),
         events: {
-            submit: (event: Event) => {
+            submit: async (event: Event) => {
                 event.preventDefault();
 
                 const inputs = (event.target as HTMLElement).querySelectorAll('input');
@@ -124,11 +124,20 @@ class ChangeProfileInfo extends Component {
                     const data: {[key: string]: string} = {};
                     inputs.forEach((input) => data[input.name] = input.value);
 
-                    userController.updateProfile(data);
+                    const request = async() => {
+                        try {
+                            await userController.updateProfile(data);
 
-                    props.changeProfileContent({
-                        content: new ProfileInfo(props.changeProfileContent)
-                    });
+                            props.changeProfileContent({
+                                content: new ProfileInfo({
+                                    changeProfileContent: props.changeProfileContent
+                                })
+                            });
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    };
+                    await request();
                 } else {
                     inputs.forEach(blur);
                 }

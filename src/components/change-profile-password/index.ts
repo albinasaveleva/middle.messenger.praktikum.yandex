@@ -10,9 +10,10 @@ import { inputValidation } from '../../utils/formValidation';
 import ProfileInfo from '../profile-info';
 import { blur } from '../../pages/profile-page';
 import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
 
 class ChangeProfilePassword extends Component {
-  constructor(changeProfileContent: any) {
+  constructor(props: any) {
     super({
       attr: {
         class: 'profile',
@@ -38,7 +39,7 @@ class ChangeProfilePassword extends Component {
               name: "password",
               type: "password",
               placeholder: "Старый пароль",
-              value: "Password1",
+              value: "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -50,7 +51,7 @@ class ChangeProfilePassword extends Component {
               name: "password",
               type: "password",
               placeholder: "Новый пароль",
-              value: "Password1",
+              value: "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -62,7 +63,7 @@ class ChangeProfilePassword extends Component {
               name: "password",
               type: "password",
               placeholder: "Повторите новый пароль",
-              value: "Password1",
+              value: "",
             },
             events: {
               blur: (event: Event) => blur(event.target as HTMLInputElement)
@@ -82,18 +83,22 @@ class ChangeProfilePassword extends Component {
                 event.preventDefault();
 
                 const inputs = (event.target as HTMLElement).querySelectorAll('input');
-                inputs.forEach(blur)
-
                 if (Array.from(inputs).every(inputValidation)) {
-                  const formData = new FormData(event.target as HTMLFormElement);
+                    const data: {[key: string]: string} = {
+                        oldPassword: inputs[0].value,
+                        newPassword: inputs[1].value
+                    };
 
-                  for (let pair of formData.entries()) {
-                    console.log(`${pair[0]}: ${pair[1]}`);
-                  }
+                    userController.updatePassword(data);
 
-                  changeProfileContent({
-                    content: new ProfileInfo(changeProfileContent)
-                  })
+                    props.changeProfileContent({
+                        content: new ProfileInfo({
+                            changeProfileContent: props.changeProfileContent
+                        })
+                    })
+
+                } else {
+                    inputs.forEach(blur);
                 }
               }
         }

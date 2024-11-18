@@ -8,6 +8,8 @@ import AvatarModal from '../../modals/avatar-modal';
 import { inputValidation } from '../../utils/formValidation';
 import Router from '../../utils/router';
 import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
+import store from '../../store';
 
 const router = new Router("#app");
 
@@ -21,6 +23,17 @@ export const blur = (target: HTMLInputElement) => {
       (inputLabel as HTMLElement).style.color = "red";
     }
 }
+
+// const init = async() => {
+//     try {
+//         await userController.getUser();
+//     } catch (error) {
+//         console.log(error)
+//     }
+// };
+
+// init();
+console.log(store.getState())
 
 class ProfilePage extends Component {
     constructor() {

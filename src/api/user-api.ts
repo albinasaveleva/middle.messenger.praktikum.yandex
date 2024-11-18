@@ -1,19 +1,19 @@
-import BaseAPI, { AUTH_USER_ENDPOINT, USER_UPDATE_AVATAR_ENDPOINT, USER_UPDATE_PROFILE_ENDPOINT } from "./base-api";
+import BaseAPI, { AUTH_USER_ENDPOINT, USER_UPDATE_AVATAR_ENDPOINT, USER_UPDATE_PROFILE_ENDPOINT, USER_UPDATE_PASSWORD_ENDPOINT } from "./base-api";
 
 class UserApi extends BaseAPI {
     async getUser() {
         return this.transport.get(AUTH_USER_ENDPOINT);
     }
-    updateAvatar(options) {
-        return this.transport.put(USER_UPDATE_AVATAR_ENDPOINT, options);
+    async updateAvatar(data: FormData) {
+        return this.transport.put(USER_UPDATE_AVATAR_ENDPOINT, {data});
     }
 
-    updateProfile(options) {
-        return this.transport.put(USER_UPDATE_PROFILE_ENDPOINT, options);
+    async updateProfile(data: {[key: string]: string}) {
+        return this.transport.put(USER_UPDATE_PROFILE_ENDPOINT, {data});
     }
 
-    updatePassword(options) {
-        return this.transport.put(USER_UPDATE_PASSWORD_ENDPOINT, options);
+    updatePassword(data: {[key: string]: string}) {
+        return this.transport.put(USER_UPDATE_PASSWORD_ENDPOINT, {data});
     }
 }
 

@@ -21,7 +21,6 @@ export default class Component {
   _setUpdate: boolean = false;
 
   constructor(componentProps: { [key: string]: any } = {}, tag: string = "div" ) {
-    console.log(componentProps, tag)
     const { props, children, lists } = this.getProps(componentProps);
 
     this._children = this.makePropsProxy(children);

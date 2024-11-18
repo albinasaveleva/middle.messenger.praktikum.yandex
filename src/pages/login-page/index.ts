@@ -10,6 +10,7 @@ import Input from '../../components/input';
 import Form from '../../components/form';
 import LoginForm from '../../forms/login-form';
 import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
 
 const router = new Router("#app");
 
@@ -86,7 +87,7 @@ class LoginPage extends Component {
                     }, 'a'),
                 }, 'div'),
                 events: {
-                    submit: (event: Event) => {
+                    submit: async (event: Event) => {
                         event.preventDefault();
 
                         const inputs = (event.target as HTMLElement).querySelectorAll('input');
@@ -94,10 +95,18 @@ class LoginPage extends Component {
                             const data: {[key: string]: string} = {};
                             inputs.forEach((input) => data[input.name] = input.value);
 
-                            authController.signin(data);
+                            const request = async() => {
+                                try {
+                                    await authController.signin(data);
+                                    await userController.getUser();
 
-                            router.go('/messenger');
-                            (event.target as HTMLFormElement).reset();
+                                    router.go('/messenger');
+                                    (event.target as HTMLFormElement).reset();
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            };
+                            await request();
                         } else {
                             inputs.forEach(blur);
                         }

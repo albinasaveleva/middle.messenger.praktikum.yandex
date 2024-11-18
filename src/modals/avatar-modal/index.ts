@@ -4,6 +4,7 @@ import Input from '../../components/input';
 import ButtonAction from '../../components/button-action';
 import AvatarForm from '../../forms/avatar-form';
 import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
 
 class AvatarModal extends Component {
   constructor() {
@@ -36,11 +37,11 @@ class AvatarModal extends Component {
           submit: (event: Event) => {
             event.preventDefault();
 
-            const formData = new FormData(event.target as HTMLFormElement);
+            const inputs = (event.target as HTMLElement).querySelectorAll('input');
+            const formData = new FormData();
+            formData.append('avatar', inputs[0].value);
 
-            for (let pair of formData.entries()) {
-              console.log(`${pair[0]}: ${pair[1]}`);
-            }
+            userController.updateAvatar(formData);
 
             (document.querySelector('#avatar-modal') as HTMLElement).style.display = 'none';
           }

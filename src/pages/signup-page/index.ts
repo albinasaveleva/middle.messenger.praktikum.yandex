@@ -10,6 +10,7 @@ import Form from '../../components/form';
 import SignupForm from '../../forms/signup-form';
 import authController from '../../controllers/auth-controller';
 import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
 
 const router = new Router("#app");
 
@@ -140,7 +141,7 @@ class SignupPage extends Component {
                     }, 'a')
                 }, 'div'),
                 events: {
-                    submit: (event: Event) => {
+                    submit: async (event: Event) => {
                         event.preventDefault();
 
                         const inputs = (event.target as HTMLElement).querySelectorAll('input');
@@ -148,10 +149,18 @@ class SignupPage extends Component {
                             const data: {[key: string]: string} = {};
                             inputs.forEach((input) => data[input.name] = input.value);
 
-                            authController.signup(data);
+                            const request = async() => {
+                                try {
+                                    await authController.signup(data);
+                                    await userController.getUser();
 
-                            router.go('/messenger');
-                            (event.target as HTMLFormElement).reset();
+                                    router.go('/messenger');
+                                    (event.target as HTMLFormElement).reset();
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            };
+                            await request();
                         } else {
                             inputs.forEach(blur);
                         }
