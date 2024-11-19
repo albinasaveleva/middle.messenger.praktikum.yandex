@@ -20,7 +20,6 @@ export const CHATS_DELETE_ENDPOINT = '/chats';
 export const CHATS_ADD_USER_ENDPOINT = '/chats/users';
 export const CHATS_DELETE_USER_ENDPOINT = '/chats/users';
 
-
 class BaseAPI {
     transport;
 

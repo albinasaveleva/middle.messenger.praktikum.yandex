@@ -52,8 +52,6 @@ class AvatarModal extends Component {
             };
             await request();
 
-
-
             (document.querySelector('#avatar-modal') as HTMLElement).style.display = 'none';
           }
         }

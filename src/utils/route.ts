@@ -21,7 +21,6 @@ export default class Route {
   }
 
   navigate(path) {
-    console.log('navigate')
     if (this.match(path)) {
       this._pathname = path;
       this.render();
@@ -29,16 +28,13 @@ export default class Route {
   }
 
   leave() {
-    console.log('leave')
   }
 
   match(path) {
-    console.log('match')
     return isEqual(path, this._pathname);
   }
 
   render() {
-    console.log('render');
     this._block = new this._blockClass();
     render(this._props.rootQuery, this._block);
     return;

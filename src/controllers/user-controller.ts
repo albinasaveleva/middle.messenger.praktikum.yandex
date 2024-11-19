@@ -12,7 +12,7 @@ class UserController {
     }
     async getAvatar(src: string) {
         await UserApi.getAvatar(src)
-            .then(({response}) => response)
+            .then((response) => console.log(response))
     }
     async updateAvatar(data: FormData) {
         await UserApi.updateAvatar(data)

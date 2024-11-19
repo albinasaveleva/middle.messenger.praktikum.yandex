@@ -22,14 +22,12 @@ class Router {
     }
 
     use(path: string, block: Block) {
-        console.log('use')
         const route = new Route(path, block, {rootQuery: this._rootQuery});
         this.routes.push(route);
         return this;
     }
 
     start() {
-        console.log('start')
         // Реагируем на изменения в адресной строке и вызываем перерисовку
         window.onpopstate = (event) => {
             this._onRoute(event.currentTarget?.location.pathname);
@@ -40,27 +38,20 @@ class Router {
     }      // запустить роутер
 
     go(path: string) {
-        console.log('go')
         this.history.pushState({}, "", path);
         this._onRoute(path);
     }
 
     back() {
-        console.log('back')
         window.history.back();
-
     }       // переход назад по истории браузера
     forward() {
-        console.log('forward')
         window.history.forward();
     }    // переход вперёд по истории браузера
 
     _onRoute(path) {
-        console.log('_onRoute')
         const route = this.getRoute(path);
-        console.log(route)
         if (!route) {
-            console.log('!route')
             return;
         }
 
@@ -72,7 +63,6 @@ class Router {
     }
 
     getRoute(path) {
-        console.log('getRoute')
         return this.routes.find(route => route.match(path));
     }
 }

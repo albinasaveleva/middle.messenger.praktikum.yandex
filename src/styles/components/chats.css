@@ -9,7 +9,7 @@
 .chats .top-bar {
   display: flex;
   flex-direction: column;
-  padding: 10px 0 14px;
+  padding: 10px 0;
 }
 
 .chats .profile-link {

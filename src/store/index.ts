@@ -16,13 +16,13 @@ type TState = {
         phone: string,
         second_name: string
     } | null,
-    authorization: boolean
+    chats: []
 };
 
 class Store extends EventBus {
     private state: TState = {
         user: null,
-        authorization: false
+        chats: []
     };
 
     public getState() {
@@ -32,7 +32,7 @@ class Store extends EventBus {
     public cleanState() {
         this.state = {
             user: null,
-            authorization: false
+            chats: []
         };
         this.emit(StoreEvents.Updated);
     }
