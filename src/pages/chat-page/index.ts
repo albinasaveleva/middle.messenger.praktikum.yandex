@@ -22,6 +22,8 @@ import store from '../../store';
 import AddChatModal from '../../modals/add-chat-modal';
 import Modal from '../../components/modal';
 import Frame from '../../components/frame';
+import AddUserModal from '../../modals/add-user-modal';
+import DeleteUserModal from '../../modals/delete-user-modal';
 
 const router = new Router("#app");
 
@@ -137,7 +139,64 @@ class ChatPage extends Component {
                                                 attr: {
                                                     class: 'frame'
                                                 },
-                                                content: [],
+                                                content: [
+                                                    new ButtonAction({
+                                                        attr: {
+                                                            class: 'button-frame'
+                                                        },
+                                                        action: 'Добавить пользователя',
+                                                        events: {
+                                                            click: () => {
+                                                                this.setProps({
+                                                                    modal: new Modal({
+                                                                        attr: {
+                                                                            class: 'modal',
+                                                                            id: 'add-user-modal'
+                                                                        },
+                                                                        content: new AddUserModal(),
+                                                                        events: {
+                                                                            click: (event: Event) => {
+                                                                                if ((event.target as HTMLElement).classList.contains("modal")) {
+                                                                                (event.target as HTMLElement).style.display = 'none';
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }, 'div')
+                                                                })
+                                                                const avatarModal = document.querySelector('#add-user-modal') as HTMLElement;
+                                                                avatarModal.style.display = 'flex';
+                                                            }
+                                                        }
+                                                    }, 'button'),
+                                                    new ButtonAction({
+                                                        attr: {
+                                                            class: 'button-frame'
+                                                        },
+                                                        action: 'Удалить пользователя',
+                                                        events: {
+                                                            click: () => {
+                                                                this.setProps({
+                                                                    modal: new Modal({
+                                                                        attr: {
+                                                                            class: 'modal',
+                                                                            id: 'delete-user-modal'
+                                                                        },
+                                                                        content: new DeleteUserModal(),
+                                                                        events: {
+                                                                            click: (event: Event) => {
+                                                                                if ((event.target as HTMLElement).classList.contains("modal")) {
+                                                                                (event.target as HTMLElement).style.display = 'none';
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }, 'div')
+                                                                })
+                                                                const avatarModal = document.querySelector('#delete-user-modal') as HTMLElement;
+                                                                avatarModal.style.display = 'flex';
+                                                            }
+                                                        }
+                                                    }, 'button'),
+                                                ],
                                             }, 'div'),
                                             messages: [
                                                 new Message({
