@@ -1,6 +1,10 @@
 import { HTTPTransport } from "../utils/HTTPTransport";
+import { WSTransport } from "../utils/WSTransport";
 
 export const BASE_API_URL = 'https://ya-praktikum.tech/api/v2';
+export const BASE_WS_URL = 'wss://ya-praktikum.tech/ws';
+
+export const WS_CHATS_ENDPOINT = '/chats';
 
 export const AUTH_SIGNUP_ENDPOINT = '/auth/signup';
 export const AUTH_SIGNIN_ENDPOINT = '/auth/signin';
@@ -19,6 +23,7 @@ export const CHATS_ADD_ENDPOINT = '/chats';
 export const CHATS_DELETE_ENDPOINT = '/chats';
 export const CHATS_ADD_USER_ENDPOINT = '/chats/users';
 export const CHATS_DELETE_USER_ENDPOINT = '/chats/users';
+export const CHATS_GET_TOKEN_ENDPOINT = '/chats/token';
 
 class BaseAPI {
     transport;

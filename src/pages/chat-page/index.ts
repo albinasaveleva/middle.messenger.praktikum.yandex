@@ -24,23 +24,12 @@ import Modal from '../../components/modal';
 import Frame from '../../components/frame';
 import AddUserModal from '../../modals/add-user-modal';
 import DeleteUserModal from '../../modals/delete-user-modal';
+import messageApi from '../../api/message-api';
 
 const router = new Router("#app");
 
-const init = async() => {
-    try {
-        await chatController.getChats();
-    } catch (error) {
-        console.log(error)
-    }
-};
-await init();
-
 class ChatPage extends Component {
-    constructor() {
-        const {chats} = store.getState();
-        console.log(chats);
-
+    constructor(props: any) {
         super({
             attr: {
                 class: 'chat-page',
@@ -87,7 +76,7 @@ class ChatPage extends Component {
                                     events: {
                                         click: (event: Event) => {
                                             if ((event.target as HTMLElement).classList.contains("modal")) {
-                                            (event.target as HTMLElement).style.display = 'none';
+                                                (event.target as HTMLElement).style.display = 'none';
                                             }
                                         }
                                     }
@@ -98,9 +87,9 @@ class ChatPage extends Component {
                         }
                     }
                 }, 'button'),
-                content: chats.length === 0
+                content: props.chats.length === 0
                     ? ''
-                    : chats.map((chat: any) => {
+                    : props.chats.map((chat: any) => {
                         return new Chat({
                             attr: {
                                 class: 'chat',
@@ -113,11 +102,18 @@ class ChatPage extends Component {
                             }, 'div'),
                             title: chat.title,
                             events: {
-                                click: (event: Event) => {
+                                click: async (event: Event) => {
                                     event.preventDefault();
 
                                     const chatId = (event.target as HTMLElement).closest('.chat')?.dataset.chatId;
-                                    store.set('currentChat', { id: chatId });
+
+                                    const connect = async () => {
+                                        store.set('currentChat', { id: chatId });
+                                        const { currentChat } = store.getState();
+                                        await chatController.getToken(chatId);
+                                        messageApi.connect(props.user?.id, currentChat?.id, currentChat?.token)
+                                    }
+                                    await connect();
 
                                     this.setProps({
                                         chatFeed: new ChatFeed({

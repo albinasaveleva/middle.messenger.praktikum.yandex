@@ -17,7 +17,10 @@ type TState = {
         second_name: string
     } | null,
     chats: [],
-    currentChat: { id: number } | null
+    currentChat: {
+        id: number,
+        token: number
+     } | null
 };
 
 class Store extends EventBus {

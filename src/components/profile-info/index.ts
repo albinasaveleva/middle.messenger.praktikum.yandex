@@ -18,6 +18,7 @@ const router = new Router("#app");
 
 class ProfileInfo extends Component {
     constructor(props: any) {
+        const { user } = props;
         super({
             attr: {
                 class: 'profile'
@@ -56,7 +57,7 @@ class ProfileInfo extends Component {
                     }
                 }
             }, 'div'),
-            name: props.user?.display_name || "",
+            name: user?.display_name || "",
             form: new Form({
                 attr: {
                     class: 'form',
@@ -73,7 +74,7 @@ class ProfileInfo extends Component {
                             name: "email",
                             type: "email",
                             placeholder: "Почта",
-                            value: props.user?.email || "",
+                            value: user?.email || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -83,7 +84,7 @@ class ProfileInfo extends Component {
                             name: "login",
                             type: "text",
                             placeholder: "Логин",
-                            value: props.user?.login || "",
+                            value: user?.login || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -93,7 +94,7 @@ class ProfileInfo extends Component {
                             name: "first_name",
                             type: "text",
                             placeholder: "Имя",
-                            value: props.user?.first_name || "",
+                            value: user?.first_name || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -103,7 +104,7 @@ class ProfileInfo extends Component {
                             name: "second_name",
                             type: "text",
                             placeholder: "Фамилия",
-                            value: props.user?.second_name || "",
+                            value: user?.second_name || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -113,7 +114,7 @@ class ProfileInfo extends Component {
                             name: "display_name",
                             type: "text",
                             placeholder: "Имя в чате",
-                            value: props.user?.display_name || "",
+                            value: user?.display_name || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -123,7 +124,7 @@ class ProfileInfo extends Component {
                             name: "phone",
                             type: "text",
                             placeholder: "Телефон",
-                            value: props.user?.phone || "",
+                            value: user?.phone || "",
                             readonly: true
                         }
                     }, 'input'),

@@ -1,3 +1,4 @@
+import chatController from './src/controllers/chat-controller';
 import userController from './src/controllers/user-controller';
 import { ChatPage, LoginPage, NonFoundPage, ProfilePage, SignupPage } from './src/pages/index';
 import store from './src/store';
@@ -6,6 +7,7 @@ import Router from './src/utils/router';
 const init = async() => {
     try {
         await userController.getUser();
+        await chatController.getChats();
     } catch ({reason}) {
         console.log(reason)
     }

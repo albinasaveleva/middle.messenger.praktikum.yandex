@@ -3,11 +3,11 @@ import store from "../store";
 
 class AuthController {
     async signup(data: {[key: string]: string}) {
-        await authApi.signup(data)
+        await authApi.signup(data);
     }
 
     async signin(data: {[key: string]: string}) {
-        await authApi.signin(data)
+        await authApi.signin(data);
     }
 
     logout() {

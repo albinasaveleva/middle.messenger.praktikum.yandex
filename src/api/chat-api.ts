@@ -1,4 +1,4 @@
-import BaseAPI, { CHATS_ADD_ENDPOINT, CHATS_ADD_USER_ENDPOINT, CHATS_DELETE_ENDPOINT, CHATS_DELETE_USER_ENDPOINT, CHATS_GET_ENDPOINT } from "./base-api";
+import BaseAPI, { CHATS_ADD_ENDPOINT, CHATS_ADD_USER_ENDPOINT, CHATS_DELETE_ENDPOINT, CHATS_DELETE_USER_ENDPOINT, CHATS_GET_ENDPOINT, CHATS_GET_TOKEN_ENDPOINT } from "./base-api";
 
 class ChatAPI extends BaseAPI {
     async getChats() {
@@ -15,6 +15,9 @@ class ChatAPI extends BaseAPI {
     }
     deleteUser(data: {[key: string]: number}) {
         return this.transport.delete(CHATS_DELETE_USER_ENDPOINT, {data})
+    }
+    async getToken(id: number) {
+        return this.transport.post(`${CHATS_GET_TOKEN_ENDPOINT}/${id}`)
     }
 }
 

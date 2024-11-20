@@ -8,6 +8,7 @@ class ChatController {
                 if (response.length > 0) {
                     store.set('chats', response)
                 }
+                console.log(store.getState())
             })
             .catch(({reason}) => console.log(reason))
     }
@@ -22,6 +23,10 @@ class ChatController {
     }
     deleteUser(data: {[key: string]: number}) {
         chatApi.deleteUser(data)
+    }
+    async getToken(id: number) {
+        await chatApi.getToken(id)
+            .then(({response}) => store.set('currentChat', response))
     }
 }
 

@@ -11,6 +11,7 @@ import SignupForm from '../../forms/signup-form';
 import authController from '../../controllers/auth-controller';
 import connect from '../../utils/connect';
 import userController from '../../controllers/user-controller';
+import chatApi from '../../api/chat-api';
 
 const router = new Router("#app");
 
@@ -153,6 +154,7 @@ class SignupPage extends Component {
                                 try {
                                     await authController.signup(data);
                                     await userController.getUser();
+                                    await chatApi.getChats();
 
                                     router.go('/messenger');
                                     (event.target as HTMLFormElement).reset();
