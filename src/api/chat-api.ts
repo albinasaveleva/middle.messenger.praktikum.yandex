@@ -10,11 +10,11 @@ class ChatAPI extends BaseAPI {
     deleteChat() {
         return this.transport.delete(CHATS_DELETE_ENDPOINT)
     }
-    addUser() {
-        return this.transport.put(CHATS_ADD_USER_ENDPOINT)
+    addUser(data: {[key: string]: number}) {
+        return this.transport.put(CHATS_ADD_USER_ENDPOINT, {data})
     }
-    deleteUser() {
-        return this.transport.delete(CHATS_DELETE_USER_ENDPOINT)
+    deleteUser(data: {[key: string]: number}) {
+        return this.transport.delete(CHATS_DELETE_USER_ENDPOINT, {data})
     }
 }
 

@@ -115,7 +115,9 @@ class ChatPage extends Component {
                             events: {
                                 click: (event: Event) => {
                                     event.preventDefault();
+
                                     const chatId = (event.target as HTMLElement).closest('.chat')?.dataset.chatId;
+                                    store.set('currentChat', { id: chatId });
 
                                     this.setProps({
                                         chatFeed: new ChatFeed({

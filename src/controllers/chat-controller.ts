@@ -17,11 +17,11 @@ class ChatController {
     deleteChat() {
         chatApi.deleteChat()
     }
-    addUser() {
-        chatApi.addUser()
+    addUser(data: {[key: string]: number}) {
+        chatApi.addUser(data)
     }
-    deleteUser() {
-        chatApi.deleteUser()
+    deleteUser(data: {[key: string]: number}) {
+        chatApi.deleteUser(data)
     }
 }
 

@@ -6,6 +6,7 @@ import connect from '../../utils/connect';
 import userController from '../../controllers/user-controller';
 import chatController from '../../controllers/chat-controller';
 import addUserForm from '../../forms/add-user-form';
+import store from '../../store';
 
 class AddUserModal extends Component {
     constructor() {
@@ -39,25 +40,26 @@ class AddUserModal extends Component {
                     submit: async (event: Event) => {
                         event.preventDefault();
 
-                        // {
-                        //     "users": [
-                        //       0
-                        //     ],
-                        //     "chatId": 0
-                        //   }
+                        const { currentChat } = store.getState();
 
-                        // const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
-                        // const data: {[key: string]: string} = { title: input.value };
+                        const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
+                        const newUser = await userController.searchUser({ login: input.value });
 
-                        // const request = async() => {
-                        //     try {
-                        //         await chatController.addChat(data);
-                        //         await chatController.getChats();
-                        //     } catch (error) {
-                        //         console.log(error)
-                        //     }
-                        // };
-                        // await request();
+                        const data = {
+                            users: [
+                                newUser[0].id
+                            ],
+                            chatId: currentChat?.id
+                         };
+
+                        const request = async() => {
+                            try {
+                                await chatController.addUser(data);
+                            } catch (error) {
+                                console.log(error)
+                            }
+                        };
+                        await request();
 
                         (document.querySelector('#add-user-modal') as HTMLElement).style.display = 'none';
                     }

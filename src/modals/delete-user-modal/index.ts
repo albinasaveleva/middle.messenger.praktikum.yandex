@@ -7,6 +7,7 @@ import userController from '../../controllers/user-controller';
 import addChatForm from '../../forms/add-chat-form';
 import chatController from '../../controllers/chat-controller';
 import deleteUserForm from '../../forms/delete-user-form';
+import store from '../../store';
 
 class DeleteUserModal extends Component {
     constructor() {
@@ -40,25 +41,26 @@ class DeleteUserModal extends Component {
                     submit: async (event: Event) => {
                         event.preventDefault();
 
-                        // {
-                        //     "users": [
-                        //       0
-                        //     ],
-                        //     "chatId": 0
-                        //   }
+                        const { currentChat } = store.getState();
 
-                        // const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
-                        // const data: {[key: string]: string} = { title: input.value };
+                        const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
+                        const newUser = await userController.searchUser({ login: input.value });
 
-                        // const request = async() => {
-                        //     try {
-                        //         await chatController.addChat(data);
-                        //         await chatController.getChats();
-                        //     } catch (error) {
-                        //         console.log(error)
-                        //     }
-                        // };
-                        // await request();
+                        const data = {
+                            users: [
+                                newUser[0].id
+                            ],
+                            chatId: currentChat?.id
+                         };
+
+                        const request = async() => {
+                            try {
+                                await chatController.deleteUser(data);
+                            } catch (error) {
+                                console.log(error)
+                            }
+                        };
+                        await request();
 
                         (document.querySelector('#delete-user-modal') as HTMLElement).style.display = 'none';
                     }

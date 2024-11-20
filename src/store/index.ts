@@ -16,13 +16,15 @@ type TState = {
         phone: string,
         second_name: string
     } | null,
-    chats: []
+    chats: [],
+    currentChat: { id: number } | null
 };
 
 class Store extends EventBus {
     private state: TState = {
         user: null,
-        chats: []
+        chats: [],
+        currentChat: null
     };
 
     public getState() {
@@ -32,7 +34,8 @@ class Store extends EventBus {
     public cleanState() {
         this.state = {
             user: null,
-            chats: []
+            chats: [],
+            currentChat: null
         };
         this.emit(StoreEvents.Updated);
     }

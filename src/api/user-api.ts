@@ -1,4 +1,4 @@
-import BaseAPI, { AUTH_USER_ENDPOINT, USER_UPDATE_AVATAR_ENDPOINT, USER_UPDATE_PROFILE_ENDPOINT, USER_UPDATE_PASSWORD_ENDPOINT, USER_GET_AVATAR_ENDPOINT } from "./base-api";
+import BaseAPI, { AUTH_USER_ENDPOINT, USER_UPDATE_AVATAR_ENDPOINT, USER_UPDATE_PROFILE_ENDPOINT, USER_UPDATE_PASSWORD_ENDPOINT, USER_GET_AVATAR_ENDPOINT, USER_SEARCH_ENDPOINT } from "./base-api";
 
 class UserApi extends BaseAPI {
     async getUser() {
@@ -17,6 +17,9 @@ class UserApi extends BaseAPI {
 
     updatePassword(data: {[key: string]: string}) {
         return this.transport.put(USER_UPDATE_PASSWORD_ENDPOINT, {data});
+    }
+    async searchUser(data: {[key: string]: string}) {
+        return this.transport.post(USER_SEARCH_ENDPOINT, {data})
     }
 }
 

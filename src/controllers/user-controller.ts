@@ -27,6 +27,10 @@ class UserController {
     updatePassword(data: {[key: string]: string}) {
         UserApi.updatePassword(data)
     }
+    async searchUser(data: {[key: string]: string}) {
+        return await UserApi.searchUser(data)
+            .then(({response}) => response )
+    }
 }
 
 export default new UserController();
