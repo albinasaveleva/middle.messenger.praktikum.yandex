@@ -10,8 +10,8 @@ export enum WSTransportEvents {
 
 
 export class WSTransport extends EventBus {
-    socket?: WebSocket;
-    pingInterval?: ReturnType<typeof setInterval>;
+    socket: WebSocket | null = null;
+    pingInterval: ReturnType<typeof setInterval> | null;
     pingIntervalTime = 30000;
     endpoint?: string;
 
@@ -30,12 +30,24 @@ export class WSTransport extends EventBus {
             type: "message"
         }))
     }
-    connect(): Promise<void> {
+
+    getStatus() {
+        return this.socket;
+    }
+
+    connect(endpoint: string): Promise<void> {
         if (this.socket) {
-            throw new Error('The socket is already connected');
+            this.close();
+            // if (this.endpoint === endpoint) {
+            //     throw new Error('The socket is already connected');
+            // } else {
+            //     this.close();
+            // }
         }
 
-        this.socket = new WebSocket(`${BASE_WS_URL}/${this.endpoint}`);
+        // this.setEndpoint(endpoint);
+
+        this.socket = new WebSocket(`${BASE_WS_URL}/${endpoint}`);
         this.subscribe(this.socket);
         this.setupPing();
 
@@ -49,7 +61,6 @@ export class WSTransport extends EventBus {
     }
     close() {
         this.socket?.close();
-        clearInterval(this.pingInterval);
     }
 
     setupPing() {
@@ -59,18 +70,19 @@ export class WSTransport extends EventBus {
 
         this.on(WSTransportEvents.Close, () => {
             clearInterval(this.pingInterval);
-            this.pingInterval = undefined;
+            this.pingInterval = null;
         })
     }
 
     subscribe(socket: WebSocket) {
         socket.addEventListener('open', () => {
             this.emit(WSTransportEvents.Connected);
-            console.log('open')
         });
 
         socket.addEventListener('close', () => {
             this.emit(WSTransportEvents.Close);
+            this.socket = null;
+            clearInterval(this.pingInterval);
             console.log('close')
         });
 

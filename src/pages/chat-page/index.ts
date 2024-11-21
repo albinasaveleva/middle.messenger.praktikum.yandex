@@ -24,7 +24,7 @@ import Modal from '../../components/modal';
 import Frame from '../../components/frame';
 import AddUserModal from '../../modals/add-user-modal';
 import DeleteUserModal from '../../modals/delete-user-modal';
-import MessageController from '../../controllers/message-controller';
+import messageController from '../../controllers/message-controller';
 
 const router = new Router("#app");
 
@@ -113,12 +113,11 @@ class ChatPage extends Component {
                             events: {
                                 click: async (event: Event) => {
                                     event.preventDefault();
-                                    const messageController = new MessageController();
 
                                     const chatId = (event.target as HTMLElement).closest('.chat')?.dataset.chatId;
 
                                     // if (chatId !== store.getState().currentChat?.id) {
-                                    //     await new MessageController.close();
+                                    //     await messageController.close();
                                     // }
 
                                     store.set('currentChat', { id: chatId });
@@ -131,8 +130,9 @@ class ChatPage extends Component {
 
                                     }
                                     await connect();
+
+                                    messageController.getStatus()
                                     // await messageController.getOld(0)
-                                    window.setTimeout(() => { messageController.close()}, 5000);
 
 
                                     this.setProps({

@@ -1,14 +1,12 @@
-import { WSTransport } from "../utils/WSTransport";
 import BaseAPI, { WS_CHATS_ENDPOINT } from "./base-api";
 
 class MessageApi extends BaseAPI {
-    wstransport = new WSTransport()
     async connect(userId: number, chatId: number, token: number) {
-        this.wstransport.setEndpoint(`${WS_CHATS_ENDPOINT}/${userId}/${chatId}/${token}`);
-        this.wstransport.connect();
+        this.wstransport.connect(`${WS_CHATS_ENDPOINT}/${userId}/${chatId}/${token}`);
+
     }
     async close() {
-        this.wstransport.close();
+        this.wstransport.close()
     }
     async send(data: string | number | object) {
         this.wstransport.send(data);
@@ -19,6 +17,9 @@ class MessageApi extends BaseAPI {
             type: 'get old',
           })
     }
+    getStatus() {
+        return this.wstransport.getStatus()
+    }
 }
 
-export default MessageApi;
+export default new MessageApi();

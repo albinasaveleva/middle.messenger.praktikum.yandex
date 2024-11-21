@@ -37,7 +37,7 @@ export class HTTPTransport {
   };
 
   request(endpoint: string, options: Options): Promise<XMLHttpRequest> {
-    const url = `${BASE_API_URL}${endpoint}`;
+    const url = `${BASE_API_URL}/${endpoint}`;
 
     const {method, data, headers = {}} = options;
 
