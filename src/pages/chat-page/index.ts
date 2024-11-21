@@ -24,7 +24,7 @@ import Modal from '../../components/modal';
 import Frame from '../../components/frame';
 import AddUserModal from '../../modals/add-user-modal';
 import DeleteUserModal from '../../modals/delete-user-modal';
-import messageApi from '../../api/message-api';
+import messageController from '../../controllers/message-controller';
 
 const router = new Router("#app");
 
@@ -110,8 +110,10 @@ class ChatPage extends Component {
                                     const connect = async () => {
                                         store.set('currentChat', { id: chatId });
                                         const { currentChat } = store.getState();
+
                                         await chatController.getToken(chatId);
-                                        messageApi.connect(props.user?.id, currentChat?.id, currentChat?.token)
+                                        await messageController.close();
+                                        await messageController.connect(props.user?.id, currentChat?.id, currentChat?.token)
                                     }
                                     await connect();
 
@@ -242,19 +244,22 @@ class ChatPage extends Component {
                                                     }, 'button')
                                                 }, 'div'),
                                                 events: {
-                                                    submit: (event: Event) => {
+                                                    submit: async (event: Event) => {
                                                         event.preventDefault();
 
-                                                        const inputs = (event.target as HTMLElement).querySelectorAll('input');
+                                                        const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
 
-                                                        if (Array.from(inputs).every(inputValidation)) {
-                                                        const formData = new FormData(event.target as HTMLFormElement);
+                                                        if (inputValidation(input)) {
+                                                            const request = async() => {
+                                                                try {
+                                                                    await messageController.send(input.value)
+                                                                } catch (error) {
+                                                                    console.log(error)
+                                                                }
+                                                            };
+                                                            await request();
 
-                                                        for (let pair of formData.entries()) {
-                                                            console.log(`${pair[0]}: ${pair[1]}`);
-                                                        }
-
-                                                        (event.target as HTMLFormElement).reset();
+                                                            (event.target as HTMLFormElement).reset();
                                                         }
                                                     }
                                                 }

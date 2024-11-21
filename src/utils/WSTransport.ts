@@ -25,7 +25,10 @@ export class WSTransport extends EventBus {
             throw new Error('Socket is not connected');
         }
 
-        this.socket.send(JSON.stringify(data))
+        this.socket.send(JSON.stringify({
+            content: data,
+            type: "message"
+        }))
     }
     connect(): Promise<void> {
         if (this.socket) {
@@ -63,10 +66,6 @@ export class WSTransport extends EventBus {
     subscribe(socket: WebSocket) {
         socket.addEventListener('open', () => {
             this.emit(WSTransportEvents.Connected);
-            socket.send(JSON.stringify({
-                content: 'Моё первое сообщение миру!',
-                type: 'message',
-              }));
         });
 
         socket.addEventListener('close', () => {

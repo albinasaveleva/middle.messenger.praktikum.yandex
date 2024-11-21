@@ -14,7 +14,7 @@ class AuthController {
         authApi.logout()
             .then((response) => {
                 if (response.status === 200) {
-                    store.set('user', null);
+                    store.cleanState();
                 }
             })
     }

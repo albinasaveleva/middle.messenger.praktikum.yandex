@@ -27,9 +27,11 @@ export const CHATS_GET_TOKEN_ENDPOINT = '/chats/token';
 
 class BaseAPI {
     transport;
+    wstransport;
 
     constructor() {
         this.transport = new HTTPTransport();
+        this.wstransport = new WSTransport();
     }
 }
 
