@@ -100,7 +100,16 @@ class ChatPage extends Component {
                                     class: 'avatar'
                                 }
                             }, 'div'),
-                            title: chat.title,
+                            title: `<span class="title">${chat.title}</span>`,
+                            timestamp: chat.last_message === null
+                                ? ''
+                                : `<span class="timestamp">12:00</span>`,
+                            content: chat.last_message === null
+                                ? ''
+                                : `<span class="content">${chat.last_message.content}</span>`,
+                            count: chat.unread_count === 0
+                                ? ''
+                                : `<span class="count">${chat.unread_count}</span>` ,
                             events: {
                                 click: async (event: Event) => {
                                     event.preventDefault();
