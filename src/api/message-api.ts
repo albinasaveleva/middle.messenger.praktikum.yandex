@@ -21,4 +21,4 @@ class MessageApi extends BaseAPI {
     }
 }
 
-export default new MessageApi();
+export default MessageApi;

@@ -1,20 +1,22 @@
-import messageApi from "../api/message-api";
+import MessageApi from "../api/message-api";
 import store from "../store";
 
 class MessageController {
+    messageApi = new MessageApi();
+
     async connect(userId: number, chatId: number, token: number) {
-        await messageApi.connect(userId, chatId, token)
+        await this.messageApi.connect(userId, chatId, token)
     }
     async close() {
-        await messageApi.close()
+        await this.messageApi.close()
     }
     async send(data: string | number | object) {
-        await messageApi.send(data)
+        await this.messageApi.send(data)
     }
     async getOld(number: number) {
-        await messageApi.getOld(number)
+        await this.messageApi.getOld(number)
             .then((response) => console.log(response))
     }
 }
 
-export default new MessageController();
+export default MessageController;

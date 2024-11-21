@@ -66,10 +66,12 @@ export class WSTransport extends EventBus {
     subscribe(socket: WebSocket) {
         socket.addEventListener('open', () => {
             this.emit(WSTransportEvents.Connected);
+            console.log('open')
         });
 
         socket.addEventListener('close', () => {
             this.emit(WSTransportEvents.Close);
+            console.log('close')
         });
 
         socket.addEventListener('error', (event) => {
