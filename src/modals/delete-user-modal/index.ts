@@ -4,7 +4,6 @@ import Input from '../../components/input';
 import ButtonAction from '../../components/button-action';
 import connect from '../../utils/connect';
 import userController from '../../controllers/user-controller';
-import addChatForm from '../../forms/add-chat-form';
 import chatController from '../../controllers/chat-controller';
 import deleteUserForm from '../../forms/delete-user-form';
 import store from '../../store';

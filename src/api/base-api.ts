@@ -1,5 +1,4 @@
 import { HTTPTransport } from "../utils/HTTPTransport";
-import { WSTransport } from "../utils/WSTransport";
 
 export const BASE_API_URL = 'https://ya-praktikum.tech/api/v2';
 export const BASE_WS_URL = 'wss://ya-praktikum.tech/ws';
@@ -27,11 +26,9 @@ export const CHATS_GET_TOKEN_ENDPOINT = '/chats/token';
 
 class BaseAPI {
     transport;
-    wstransport;
 
     constructor() {
         this.transport = new HTTPTransport();
-        this.wstransport = new WSTransport();
     }
 }
 

@@ -11,6 +11,10 @@ class MessageController {
     async send(data: string | number | object) {
         await messageApi.send(data)
     }
+    async getOld(number: number) {
+        await messageApi.getOld(number)
+            .then((response) => console.log(response))
+    }
 }
 
 export default new MessageController();

@@ -116,15 +116,21 @@ class ChatPage extends Component {
 
                                     const chatId = (event.target as HTMLElement).closest('.chat')?.dataset.chatId;
 
-                                    const connect = async () => {
-                                        store.set('currentChat', { id: chatId });
-                                        const { currentChat } = store.getState();
+                                    // if (chatId !== store.getState().currentChat?.id) {
+                                    //     await new MessageController.close();
+                                    // }
 
-                                        await chatController.getToken(chatId);
-                                        await messageController.close();
-                                        await messageController.connect(props.user?.id, currentChat?.id, currentChat?.token)
+                                    store.set('currentChat', { id: chatId });
+
+                                    const connect = async () => {
+                                        const currentChatId = chatId;
+                                        const { token: currentChatToken } = await chatController.getToken(chatId);
+
+                                        await messageController.connect(props.user?.id, currentChatId, currentChatToken);
+
                                     }
                                     await connect();
+                                    await messageController.getOld(0)
 
                                     this.setProps({
                                         chatFeed: new ChatFeed({

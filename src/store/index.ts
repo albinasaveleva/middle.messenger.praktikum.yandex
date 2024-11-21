@@ -18,8 +18,7 @@ type TState = {
     } | null,
     chats: [],
     currentChat: {
-        id: number,
-        token: number
+        id: number
      } | null
 };
 

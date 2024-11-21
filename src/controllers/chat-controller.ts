@@ -18,15 +18,15 @@ class ChatController {
     deleteChat() {
         chatApi.deleteChat()
     }
-    addUser(data: {[key: string]: number}) {
+    addUser(data: {[key: string]: string}) {
         chatApi.addUser(data)
     }
-    deleteUser(data: {[key: string]: number}) {
+    deleteUser(data: {[key: string]: string}) {
         chatApi.deleteUser(data)
     }
     async getToken(id: number) {
-        await chatApi.getToken(id)
-            .then(({response}) => store.set('currentChat', response))
+        return await chatApi.getToken(id)
+            .then(({response}) => response)
     }
 }
 
