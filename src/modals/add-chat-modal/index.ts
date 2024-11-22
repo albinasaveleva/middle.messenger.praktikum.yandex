@@ -8,8 +8,9 @@ import addChatForm from '../../forms/add-chat-form';
 import chatController from '../../controllers/chat-controller';
 
 class AddChatModal extends Component {
-    constructor() {
+    constructor(props: any) {
         super({
+            ...props,
             attr: {
                 class: 'modal-content'
             },

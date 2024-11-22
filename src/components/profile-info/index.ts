@@ -20,6 +20,7 @@ class ProfileInfo extends Component {
     constructor(props: any) {
         const { user } = props;
         super({
+            ...props,
             attr: {
                 class: 'profile'
             },

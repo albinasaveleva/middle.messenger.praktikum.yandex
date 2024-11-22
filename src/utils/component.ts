@@ -18,9 +18,9 @@ export default class Component {
   _element: HTMLElement | null = null;
   _meta: { [key: string]: any };
   _eventBus: EventBus;
-  _setUpdate: boolean = false;
+//   _setUpdate: boolean = false;
 
-  constructor(componentProps: { [key: string]: any } = {}, tag: string = "div" ) {
+  constructor(componentProps: { [key: string]: any } = {}, tag: string = "div") {
     const { props, children, lists } = this.getProps(componentProps);
 
     this._children = this.makePropsProxy(children);
@@ -187,8 +187,10 @@ export default class Component {
     if (!newProps) {
       return;
     }
-
+    console.log(newProps)
     const { children, props } = this.getProps(newProps);
+    console.log(children, props)
+
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);

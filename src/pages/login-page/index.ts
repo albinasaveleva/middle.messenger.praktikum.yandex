@@ -27,9 +27,9 @@ const blur = (target: HTMLInputElement) => {
 }
 
 class LoginPage extends Component {
-    constructor() {
-        super(
-        {
+    constructor(props: any) {
+        super({
+            ...props,
             attr: {
                 class: 'login-page',
                 id: 'login-page'

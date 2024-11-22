@@ -9,8 +9,9 @@ import addUserForm from '../../forms/add-user-form';
 import store from '../../store';
 
 class AddUserModal extends Component {
-    constructor() {
+    constructor(props: any) {
         super({
+            ...props,
             attr: {
                 class: 'modal-content'
             },

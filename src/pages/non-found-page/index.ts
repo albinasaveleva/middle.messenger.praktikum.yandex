@@ -7,36 +7,37 @@ import ChatPage from '../chat-page';
 import connect from '../../utils/connect';
 
 class NonFoundPage extends Component {
-  constructor(changePageContent: any) {
+  constructor(props: any) {
     super({
-      attr: {
-        class: 'non-found-page',
-        id: 'non-found-page'
-      },
-      error: new Error({
+        ...props,
         attr: {
-          class: 'error-wrapper'
+            class: 'non-found-page',
+            id: 'non-found-page'
         },
-        title: '404',
-        subtitle: 'Не туда попали',
-        buttonLink: new ButtonLink({
-          attr: {
-            href: '/chats',
-            class: 'button-link'
-          },
-          action: 'Назад к чатам',
-          events: {
-            click: (event: Event) => {
-              event.preventDefault();
-              // const href = event.target.attributes.href.value;
-              // history.pushState(null, null, href);
-              changePageContent({
-                content: new ChatPage(changePageContent)
-              });
+        error: new Error({
+            attr: {
+            class: 'error-wrapper'
+            },
+            title: '404',
+            subtitle: 'Не туда попали',
+            buttonLink: new ButtonLink({
+            attr: {
+                href: '/chats',
+                class: 'button-link'
+            },
+            action: 'Назад к чатам',
+            events: {
+                click: (event: Event) => {
+                event.preventDefault();
+                // const href = event.target.attributes.href.value;
+                // history.pushState(null, null, href);
+                props.changePageContent({
+                    content: new ChatPage(props.changePageContent)
+                });
+                }
             }
-          }
-        }, 'a')
-      }, 'div')
+            }, 'a')
+        }, 'div')
     }, 'div')
   }
   render() {

@@ -8,7 +8,6 @@ class ChatController {
                 if (response.length > 0) {
                     store.set('chats', response)
                 }
-                console.log(store.getState())
             })
             .catch(({reason}) => console.log(reason))
     }

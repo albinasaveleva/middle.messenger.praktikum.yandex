@@ -9,8 +9,9 @@ import deleteUserForm from '../../forms/delete-user-form';
 import store from '../../store';
 
 class DeleteUserModal extends Component {
-    constructor() {
+    constructor(props: any) {
         super({
+            ...props,
             attr: {
                 class: 'modal-content'
             },

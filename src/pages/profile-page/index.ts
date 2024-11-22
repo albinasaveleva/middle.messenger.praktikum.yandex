@@ -23,8 +23,9 @@ export const blur = (target: HTMLInputElement) => {
 }
 
 class ProfilePage extends Component {
-    constructor() {
+    constructor(props: any) {
         super({
+            ...props,
             attr: {
                 class: 'profile-page',
                 id: 'profile-page'

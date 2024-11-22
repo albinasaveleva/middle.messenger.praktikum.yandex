@@ -19,7 +19,7 @@ type TState = {
     chats: [],
     currentChat: {
         id: number
-     } | null
+    } | null
 };
 
 class Store extends EventBus {
@@ -45,7 +45,9 @@ class Store extends EventBus {
     public set(path: string, value: unknown) {
         set(this.state, path, value);
         this.emit(StoreEvents.Updated);
+        console.log(this.state)
         return this;
+
     };
 }
 

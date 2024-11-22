@@ -30,7 +30,9 @@ const router = new Router("#app");
 
 class ChatPage extends Component {
     constructor(props: any) {
+        console.log(props)
         super({
+            ...props,
             attr: {
                 class: 'chat-page',
                 id: 'chat-page'
