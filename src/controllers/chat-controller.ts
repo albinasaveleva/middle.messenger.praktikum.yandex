@@ -6,7 +6,7 @@ class ChatController {
         await chatApi.getChats()
             .then(({response}) => {
                 if (response.length > 0) {
-                    store.set('chats', response)
+                    store.set('chatList', response)
                 }
             })
             .catch(({reason}) => console.log(reason))

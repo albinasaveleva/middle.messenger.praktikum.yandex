@@ -90,24 +90,6 @@ export default class Component {
     })
   }
 
-  getProps(componentProps: {[key: string]: any}) {
-    const props: { [key: string]: any } = {};
-    const children: { [key: string]: any } = {};
-    const lists: { [key: string]: any } = {};
-
-    Object.entries(componentProps).forEach(([key, value]) => {
-      if (value instanceof Component) {
-        children[key] = value;
-      } else if (Array.isArray(value)) {
-        lists[key] = value;
-      } else {
-        props[key] = value;
-      }
-    })
-
-    return { props, children, lists };
-  }
-
   compile(template: string, props?: { [key: string]: any }) {
     if (typeof(props) == 'undefined') {
       props = this._props;
@@ -183,20 +165,39 @@ export default class Component {
     return true;
   }
 
+  getProps(componentProps: {[key: string]: any}) {
+    const props: { [key: string]: any } = {};
+    const children: { [key: string]: any } = {};
+    const lists: { [key: string]: any } = {};
+
+    Object.entries(componentProps).forEach(([key, value]) => {
+      if (value instanceof Component) {
+        children[key] = value;
+      } else if (Array.isArray(value) && value[0] !instanceof Component) {
+        lists[key] = value;
+      } else {
+        props[key] = value;
+      }
+    })
+
+    return { props, children, lists };
+  }
+
   setProps = (newProps: { [key: string]: any }) => {
     if (!newProps) {
       return;
     }
-    console.log(newProps)
-    const { children, props } = this.getProps(newProps);
-    console.log(children, props)
 
+    const { props, children, lists } = this.getProps(newProps);
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);
     }
     if (Object.values(props).length) {
       Object.assign(this._props, props);
+    }
+    if (Object.values(lists).length) {
+        Object.assign(this._lists, lists);
     }
   };
 

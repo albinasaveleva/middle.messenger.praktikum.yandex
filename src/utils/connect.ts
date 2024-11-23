@@ -6,8 +6,6 @@ export default function connect(Component) {
             super({ ...props, ...store.getState()}, tag);
 
             store.on(StoreEvents.Updated, () => {
-                console.log(this)
-
                 this.setProps({...store.getState()});
             });
         }

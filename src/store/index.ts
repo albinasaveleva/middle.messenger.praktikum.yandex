@@ -16,7 +16,7 @@ type TState = {
         phone: string,
         second_name: string
     } | null,
-    chats: [],
+    chatList: [],
     currentChat: {
         id: number
     } | null
@@ -25,7 +25,7 @@ type TState = {
 class Store extends EventBus {
     private state: TState = {
         user: null,
-        chats: [],
+        chatList: [],
         currentChat: null
     };
 
@@ -36,7 +36,7 @@ class Store extends EventBus {
     public cleanState() {
         this.state = {
             user: null,
-            chats: [],
+            chatList: [],
             currentChat: null
         };
         this.emit(StoreEvents.Updated);
@@ -47,7 +47,6 @@ class Store extends EventBus {
         this.emit(StoreEvents.Updated);
         console.log(this.state)
         return this;
-
     };
 }
 

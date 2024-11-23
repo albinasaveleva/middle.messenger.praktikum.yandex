@@ -30,7 +30,6 @@ const router = new Router("#app");
 
 class ChatPage extends Component {
     constructor(props: any) {
-        console.log(props)
         super({
             ...props,
             attr: {
@@ -89,9 +88,9 @@ class ChatPage extends Component {
                         }
                     }
                 }, 'button'),
-                content: props.chats.length === 0
+                content: props.chatList.length === 0
                     ? ''
-                    : props.chats.map((chat: any) => {
+                    : props.chatList.map((chat: any) => {
                         return new Chat({
                             attr: {
                                 class: 'chat',
