@@ -11,7 +11,6 @@ import ProfileInfoForm from '../../forms/profile-info-form';
 import AvatarHover from '../avatar-hover';
 import Router from '../../utils/router';
 import authController from '../../controllers/auth-controller';
-import connect from '../../utils/connect';
 import userController from '../../controllers/user-controller';
 
 const router = new Router("#app");
@@ -187,4 +186,4 @@ class ProfileInfo extends Component {
         return this.compile(tpl);
     }
 }
-export default connect(ProfileInfo);
+export default ProfileInfo;

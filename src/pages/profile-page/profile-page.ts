@@ -40,9 +40,9 @@ class ProfilePage extends Component {
                     }
                 }
             }, 'a'),
-            // content: new ProfileInfo({
-            //     changeProfileContent: (content: {[key: string]: any}) => this.setProps(content)
-            // }),
+            content: new ProfileInfo({
+                changeProfileContent: (content: {[key: string]: any}) => this.setProps(content)
+            }),
             modal: new Modal({
                 attr: {
                     class: 'modal',
