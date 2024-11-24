@@ -9,4 +9,5 @@ class Avatar extends Component {
         return this.compile(tpl);
     }
 }
+
 export default Avatar;

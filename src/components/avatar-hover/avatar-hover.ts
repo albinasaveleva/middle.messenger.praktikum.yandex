@@ -9,4 +9,5 @@ class AvatarHover extends Component {
         return this.compile(tpl);
     }
 }
+
 export default AvatarHover;

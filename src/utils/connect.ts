@@ -1,6 +1,7 @@
 import store, { StoreEvents } from "../store";
+import Component from "./component";
 
-export default function Connect(Component, mapStateToProps: (state: Indexed) => Indexed) {
+export default function Connect(Component, mapStateToProps) {
     return class extends Component {
         constructor(props?: any, tag?: string) {
             super({ ...props, ...mapStateToProps(store.getState())}, tag);
@@ -10,12 +11,4 @@ export default function Connect(Component, mapStateToProps: (state: Indexed) => 
             });
         }
       }
-}
-
-function mapUserToProps(state) {
-    return {
-        user: state.user,
-        chatList: state.chatList,
-        currentChat: state.currentChat,
-    };
 }

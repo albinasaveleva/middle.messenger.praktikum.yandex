@@ -8,7 +8,7 @@ import Form from '../form';
 import ChangeProfilePasswordForm from '../../forms/change-profile-password-form';
 import { inputValidation } from '../../utils/formValidation';
 import ProfileInfo from '../profile-info';
-import { blur } from '../../pages/profile-page';
+import { blur } from '../../pages/profile-page/profile-page';
 import userController from '../../controllers/user-controller';
 
 class ChangeProfilePassword extends Component {

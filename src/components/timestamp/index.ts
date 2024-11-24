@@ -1,13 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
-import connect from '../../utils/connect';
+import Connect from "../../utils/connect";
+import Timestamp from "./timestamp";
 
-class Timestamp extends Component {
-    constructor(props: any, tag: string) {
-        super({...props}, tag)
-    }
-    render() {
-        return this.compile(tpl);
-    }
-}
-export default connect(Timestamp);
+export default Connect(Timestamp, state => state);

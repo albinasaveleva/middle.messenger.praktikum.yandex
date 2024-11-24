@@ -8,7 +8,7 @@ import Form from '../form';
 import ChangeProfileInfoForm from '../../forms/change-profile-info-form';
 import { inputValidation } from '../../utils/formValidation';
 import ProfileInfo from '../profile-info';
-import { blur } from '../../pages/profile-page';
+import { blur } from '../../pages/profile-page/profile-page';
 import userController from '../../controllers/user-controller';
 
 class ChangeProfileInfo extends Component {

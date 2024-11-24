@@ -1,4 +1,4 @@
-import { Form } from "react-bootstrap";
 import Connect from "../../utils/connect";
+import Form from "./form";
 
-export default Connect(Form, () => {});
+export default Connect(Form, state => state);

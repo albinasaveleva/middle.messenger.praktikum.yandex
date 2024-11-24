@@ -1,4 +1,4 @@
 import Connect from '../../utils/connect';
 import ChangeProfilePassword from './change-profile-password';
 
-export default Connect(ChangeProfilePassword, () => {});
+export default Connect(ChangeProfilePassword, state => state);

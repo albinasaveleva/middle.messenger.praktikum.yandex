@@ -1,0 +1,190 @@
+import tpl from './tpl.tmpl';
+import Component from '../../utils/component';
+
+import Avatar from "../avatar/avatar";
+import ButtonLink from "../button-link";
+import Input from "../input";
+import ChangeProfileInfo from '../change-profile-info';
+import ChangeProfilePassword from '../change-profile-password';
+import Form from '../form';
+import ProfileInfoForm from '../../forms/profile-info-form';
+import AvatarHover from '../avatar-hover';
+import Router from '../../utils/router';
+import authController from '../../controllers/auth-controller';
+import connect from '../../utils/connect';
+import userController from '../../controllers/user-controller';
+
+const router = new Router("#app");
+
+class ProfileInfo extends Component {
+    constructor(props: any) {
+        const { user } = props;
+        super({
+            ...props,
+            attr: {
+                class: 'profile'
+            },
+            avatar: new Avatar({
+                attr: {
+                    class: 'avatar'
+                },
+                // image: props.user?.avatar ? userController.getAvatar(props.user.avatar) : '',
+                image: '',
+                events: {
+                    mouseover: (event: Event) => {
+                        const avatarWrapper = (event.target as HTMLElement).closest('.avatar-wrapper');
+                        const avatarHover = (avatarWrapper as HTMLElement).querySelector('.avatar-hover');
+                        (avatarHover as HTMLElement).style.display = "flex";
+                    },
+                    mouseout: (event: Event) => {
+                        const avatarWrapper = (event.target as HTMLElement).closest('.avatar-wrapper');
+                        const avatarHover = (avatarWrapper as HTMLElement).querySelector('.avatar-hover');
+                        (avatarHover as HTMLElement).style.display = "none";
+                    },
+                    click: () => {
+                        const avatarModal = document.querySelector('#avatar-modal') as HTMLElement;
+                        avatarModal.style.display = 'flex';
+                    }
+                }
+            }, 'div'),
+            avatarHover: new AvatarHover({
+                attr: {
+                    class: 'avatar-hover'
+                },
+                events: {
+                    click: () => {
+                        const avatarModal = document.querySelector('#avatar-modal') as HTMLElement;
+                        avatarModal.style.display = 'flex';
+                    }
+                }
+            }, 'div'),
+            name: user?.display_name || "",
+            form: new Form({
+                attr: {
+                    class: 'form',
+                    name: "profile-form",
+                    id: "profile-form"
+                },
+                content: new ProfileInfoForm({
+                    attr: {
+                        class: 'form-wrapper',
+                    },
+                    emailInput: new Input({
+                        attr: {
+                            class: "input-field",
+                            name: "email",
+                            type: "email",
+                            placeholder: "Почта",
+                            value: user?.email || "",
+                            readonly: true
+                        }
+                    }, 'input'),
+                    loginInput: new Input({
+                        attr: {
+                            class: "input-field",
+                            name: "login",
+                            type: "text",
+                            placeholder: "Логин",
+                            value: user?.login || "",
+                            readonly: true
+                        }
+                    }, 'input'),
+                    firstNameInput: new Input({
+                        attr: {
+                            class: "input-field",
+                            name: "first_name",
+                            type: "text",
+                            placeholder: "Имя",
+                            value: user?.first_name || "",
+                            readonly: true
+                        }
+                    }, 'input'),
+                    secondNameInput: new Input({
+                        attr: {
+                            class: "input-field",
+                            name: "second_name",
+                            type: "text",
+                            placeholder: "Фамилия",
+                            value: user?.second_name || "",
+                            readonly: true
+                        }
+                    }, 'input'),
+                    displayNameInput: new Input({
+                        attr: {
+                            class: "input-field",
+                            name: "display_name",
+                            type: "text",
+                            placeholder: "Имя в чате",
+                            value: user?.display_name || "",
+                            readonly: true
+                        }
+                    }, 'input'),
+                    phoneInput: new Input({
+                        attr: {
+                            class: "input-field",
+                            name: "phone",
+                            type: "text",
+                            placeholder: "Телефон",
+                            value: user?.phone || "",
+                            readonly: true
+                        }
+                    }, 'input'),
+                    changeInfoButton: new ButtonLink({
+                        attr: {
+                            class: "button-link",
+                            href: "/profile/changeInfo"
+                        },
+                        action: 'Изменить данные',
+                        events: {
+                            click: (event: Event) => {
+                                event.preventDefault();
+                                props.changeProfileContent({
+                                    content: new ChangeProfileInfo({
+                                        changeProfileContent: props.changeProfileContent
+                                    })
+                                })
+                            }
+                        }
+                    }, 'a'),
+                    changePasswordButton: new ButtonLink({
+                        attr: {
+                            class: "button-link",
+                            href: "/profile/changePassword"
+                        },
+                        action: 'Изменить пароль',
+                        events: {
+                            click: (event: Event) => {
+                                event.preventDefault();
+                                props.changeProfileContent({
+                                    content: new ChangeProfilePassword({
+                                        changeProfileContent: props.changeProfileContent
+                                    })
+                                })
+                            }
+                        }
+                    }, 'a'),
+                    logoutButton: new ButtonLink({
+                        attr: {
+                            class: "button-link",
+                        },
+                        action: 'Выйти',
+                        events: {
+                            click: (event: Event) => {
+                                event.preventDefault();
+
+                                authController.logout();
+                                router.go('/');
+                            }
+                        }
+                    }, 'a')
+                }, 'div')
+            }, 'form'),
+
+        }, 'div')
+
+    }
+    render() {
+        return this.compile(tpl);
+    }
+}
+export default connect(ProfileInfo);
