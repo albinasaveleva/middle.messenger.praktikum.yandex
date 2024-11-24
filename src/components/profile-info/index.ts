@@ -1,7 +1,7 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Avatar from "../avatar";
+import Avatar from "../avatar/avatar";
 import ButtonLink from "../button-link";
 import Input from "../input";
 import ChangeProfileInfo from '../change-profile-info';

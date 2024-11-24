@@ -1,7 +1,7 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Avatar from '../../components/avatar';
+import Avatar from '../../components/avatar/avatar';
 import Chat from '../../components/chat';
 import Chats from '../../components/chats';
 import ButtonLink from '../../components/button-link';
@@ -13,8 +13,8 @@ import Form from '../../components/form';
 import MessageForm from '../../forms/message-form';
 import { inputValidation } from '../../utils/formValidation';
 import Message from '../../components/message';
-import Attach from '../../components/attach';
-import Actions from '../../components/actions';
+import Attach from '../../components/attach/attach';
+import Actions from '../../components/actions/actions';
 import Router from '../../utils/router';
 import connect from '../../utils/connect';
 import chatController from '../../controllers/chat-controller';
