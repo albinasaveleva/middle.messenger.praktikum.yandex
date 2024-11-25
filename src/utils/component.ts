@@ -182,7 +182,7 @@ export default class Component {
     return { props, children, lists };
   }
 
-  setProps = (newProps: { [key: string]: any }) => {
+  setProps(newProps: { [key: string]: any }) {
     if (!newProps) {
       return;
     }

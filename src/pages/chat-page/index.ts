@@ -22,10 +22,11 @@ import Chats from '../../components/chats/chats';
 import ButtonLink from '../../components/button-link/button-link';
 import Router from '../../utils/router';
 import AddChatModal from '../../modals/add-chat-modal/add-chat-modal';
+import EmptyChatFeed from '../../components/empty-chat-feed/empty-chat-feed';
 
 const router = new Router("#app");
 
-export default Connect(ChatPage, (state) => {
+export default Connect(ChatPage, function (state) {
     return {
         user: state.user,
         chatList: state.chatList,
@@ -60,23 +61,7 @@ export default Connect(ChatPage, (state) => {
                 },
                 action: 'Добавить новый чат',
                 events: {
-                    click: function () {
-                        this.setProps({
-                            modal: new Modal({
-                                attr: {
-                                    class: 'modal',
-                                    id: 'add-chat-modal'
-                                },
-                                content: new AddChatModal(),
-                                events: {
-                                    click: (event: Event) => {
-                                        if ((event.target as HTMLElement).classList.contains("modal")) {
-                                            (event.target as HTMLElement).style.display = 'none';
-                                        }
-                                    }
-                                }
-                            }, 'div')
-                        })
+                    click: () => {
                         const avatarModal = document.querySelector('#add-chat-modal') as HTMLElement;
                         avatarModal.style.display = 'flex';
                     }
@@ -114,8 +99,8 @@ export default Connect(ChatPage, (state) => {
                                 // if (chatId !== store.getState().currentChat?.id) {
                                 //     await messageController.close();
                                 // }
-
-                                // store.set('currentChat', { id: chatId });
+                                // store.set('currentChat', null);
+                                store.set('currentChat', { id: chatId });
 
                                 // const connect = async () => {
                                 //     const currentChatId = chatId;
@@ -128,160 +113,176 @@ export default Connect(ChatPage, (state) => {
 
                                 // messageController.getStatus()
                                 // await messageController.getOld(0)
-
-                                // this.setProps({
-                                //     chatFeed: new ChatFeed({
-                                //         attr: {
-                                //             class: 'chat-feed'
-                                //         },
-                                //         title: chat.title,
-                                //         actions: new Actions({
-                                //             attr: {
-                                //                 class: 'actions'
-                                //             },
-                                //             events: {
-                                //                 click: (event: Event) => {
-                                //                     const topBarElement = (event.target as HTMLElement).closest('.top-bar');
-                                //                     const frame = (topBarElement as HTMLElement).querySelector('.frame');
-                                //                     (frame as HTMLElement).classList.toggle('visible');
-                                //                 }
-                                //             }
-                                //         }, 'div'),
-                                //         frame: new Frame({
-                                //             attr: {
-                                //                 class: 'frame'
-                                //             },
-                                //             content: [
-                                //                 new ButtonAction({
-                                //                     attr: {
-                                //                         class: 'button-frame'
-                                //                     },
-                                //                     action: 'Добавить пользователя',
-                                //                     events: {
-                                //                         click: () => {
-                                //                             this.setProps({
-                                //                                 modal: new Modal({
-                                //                                     attr: {
-                                //                                         class: 'modal',
-                                //                                         id: 'add-user-modal'
-                                //                                     },
-                                //                                     content: new AddUserModal(),
-                                //                                     events: {
-                                //                                         click: (event: Event) => {
-                                //                                             if ((event.target as HTMLElement).classList.contains("modal")) {
-                                //                                             (event.target as HTMLElement).style.display = 'none';
-                                //                                             }
-                                //                                         }
-                                //                                     }
-                                //                                 }, 'div')
-                                //                             })
-                                //                             const avatarModal = document.querySelector('#add-user-modal') as HTMLElement;
-                                //                             avatarModal.style.display = 'flex';
-                                //                         }
-                                //                     }
-                                //                 }, 'button'),
-                                //                 new ButtonAction({
-                                //                     attr: {
-                                //                         class: 'button-frame'
-                                //                     },
-                                //                     action: 'Удалить пользователя',
-                                //                     events: {
-                                //                         click: () => {
-                                //                             this.setProps({
-                                //                                 modal: new Modal({
-                                //                                     attr: {
-                                //                                         class: 'modal',
-                                //                                         id: 'delete-user-modal'
-                                //                                     },
-                                //                                     content: new DeleteUserModal(),
-                                //                                     events: {
-                                //                                         click: (event: Event) => {
-                                //                                             if ((event.target as HTMLElement).classList.contains("modal")) {
-                                //                                             (event.target as HTMLElement).style.display = 'none';
-                                //                                             }
-                                //                                         }
-                                //                                     }
-                                //                                 }, 'div')
-                                //                             })
-                                //                             const avatarModal = document.querySelector('#delete-user-modal') as HTMLElement;
-                                //                             avatarModal.style.display = 'flex';
-                                //                         }
-                                //                     }
-                                //                 }, 'button'),
-                                //             ],
-                                //         }, 'div'),
-                                //         messages: [
-                                //             new Message({
-                                //                 attr: {
-                                //                     class: 'outcoming-message'
-                                //                 },
-                                //                 message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
-                                //             }, 'div'),
-                                //             new Message({
-                                //                 attr: {
-                                //                     class: 'incoming-message'
-                                //                 },
-                                //                 message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
-                                //             }, 'div'),
-                                //         ],
-                                //         form: new Form({
-                                //             attr: {
-                                //                 class: 'form',
-                                //                 name: "message-form",
-                                //                 id: "message-form"
-                                //             },
-                                //             content: new MessageForm({
-                                //                 attr: {
-                                //                     class: 'form-wrapper'
-                                //                 },
-                                //                 attach: new Attach({
-                                //                     attr: {
-                                //                         class: 'attach'
-                                //                     },
-                                //                 }, 'div'),
-                                //                 messageInput: new Input({
-                                //                     attr: {
-                                //                         class: "input-field",
-                                //                         type: "text",
-                                //                         name: "message",
-                                //                         placeholder: "Сообщение"
-                                //                     },
-                                //                 }, 'input'),
-                                //                 buttonSend: new ButtonAction({
-                                //                     attr: {
-                                //                         class: 'button-send',
-                                //                         type: 'submit',
-                                //                         form: 'message-form'
-                                //                     },
-                                //                 }, 'button')
-                                //             }, 'div'),
-                                //             events: {
-                                //                 submit: async (event: Event) => {
-                                //                     event.preventDefault();
-
-                                //                     const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
-
-                                //                     if (inputValidation(input)) {
-                                //                         const request = async() => {
-                                //                             try {
-                                //                                 await messageController.send(input.value)
-                                //                             } catch (error) {
-                                //                                 console.log(error)
-                                //                             }
-                                //                         };
-                                //                         await request();
-
-                                //                         (event.target as HTMLFormElement).reset();
-                                //                     }
-                                //                 }
-                                //             }
-                                //         }, 'form')
-                                //     }, 'div')
-                                // })
                             }
                         }
                     }, 'div')
                 }),
         }, 'div'),
+        chatFeed: state.currentChat
+            ? new ChatFeed({
+                attr: {
+                    class: 'chat-feed'
+                },
+                title: 'title',
+                actions: new Actions({
+                    attr: {
+                        class: 'actions'
+                    },
+                    events: {
+                        click: (event: Event) => {
+                            const topBarElement = (event.target as HTMLElement).closest('.top-bar');
+                            const frame = (topBarElement as HTMLElement).querySelector('.frame');
+                            (frame as HTMLElement).classList.toggle('visible');
+                        }
+                    }
+                }, 'div'),
+                frame: new Frame({
+                    attr: {
+                        class: 'frame'
+                    },
+                    content: [
+                        new ButtonAction({
+                            attr: {
+                                class: 'button-frame'
+                            },
+                            action: 'Добавить пользователя',
+                            events: {
+                                click: () => {
+                                    const avatarModal = document.querySelector('#add-user-modal') as HTMLElement;
+                                    avatarModal.style.display = 'flex';
+                                }
+                            }
+                        }, 'button'),
+                        new ButtonAction({
+                            attr: {
+                                class: 'button-frame'
+                            },
+                            action: 'Удалить пользователя',
+                            events: {
+                                click: () => {
+                                    const avatarModal = document.querySelector('#delete-user-modal') as HTMLElement;
+                                    avatarModal.style.display = 'flex';
+                                }
+                            }
+                        }, 'button'),
+                    ],
+                }, 'div'),
+                messages: [
+                    new Message({
+                        attr: {
+                            class: 'outcoming-message'
+                        },
+                        message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
+                    }, 'div'),
+                    new Message({
+                        attr: {
+                            class: 'incoming-message'
+                        },
+                        message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
+                    }, 'div'),
+                ],
+                form: new Form({
+                    attr: {
+                        class: 'form',
+                        name: "message-form",
+                        id: "message-form"
+                    },
+                    content: new MessageForm({
+                        attr: {
+                            class: 'form-wrapper'
+                        },
+                        attach: new Attach({
+                            attr: {
+                                class: 'attach'
+                            },
+                        }, 'div'),
+                        messageInput: new Input({
+                            attr: {
+                                class: "input-field",
+                                type: "text",
+                                name: "message",
+                                placeholder: "Сообщение"
+                            },
+                        }, 'input'),
+                        buttonSend: new ButtonAction({
+                            attr: {
+                                class: 'button-send',
+                                type: 'submit',
+                                form: 'message-form'
+                            },
+                        }, 'button')
+                    }, 'div'),
+                    events: {
+                        submit: async (event: Event) => {
+                            event.preventDefault();
+
+                            const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
+
+                            if (inputValidation(input)) {
+                                const request = async() => {
+                                    try {
+                                        await messageController.send(input.value)
+                                    } catch (error) {
+                                        console.log(error)
+                                    }
+                                };
+                                await request();
+
+                                (event.target as HTMLFormElement).reset();
+                            }
+                        }
+                    }
+                }, 'form')
+            }, 'div')
+            : new EmptyChatFeed({
+                attr: {
+                    class: 'chat-feed'
+                }
+            }, 'div'),
+        modal: [
+            new Modal({
+                attr: {
+                    class: 'modal',
+                    id: 'add-chat-modal'
+                },
+                content: new AddChatModal(),
+                events: {
+                    click: (event: Event) => {
+                        if ((event.target as HTMLElement).classList.contains("modal")) {
+                            (event.target as HTMLElement).style.display = 'none';
+                        }
+                    }
+                }
+            }, 'div'),
+            new Modal({
+                attr: {
+                    class: 'modal',
+                    id: 'add-user-modal'
+                },
+                content: new AddUserModal(),
+                events: {
+                    click: (event: Event) => {
+                        if ((event.target as HTMLElement).classList.contains("modal")) {
+                        (event.target as HTMLElement).style.display = 'none';
+                        }
+                    }
+                }
+            }, 'div'),
+            new Modal({
+                attr: {
+                    class: 'modal',
+                    id: 'delete-user-modal'
+                },
+                content: new DeleteUserModal(),
+                events: {
+                    click: (event: Event) => {
+                        if ((event.target as HTMLElement).classList.contains("modal")) {
+                        (event.target as HTMLElement).style.display = 'none';
+                        }
+                    }
+                }
+            }, 'div')
+        ]
     }
 });
+

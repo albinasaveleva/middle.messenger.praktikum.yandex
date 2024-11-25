@@ -27,7 +27,6 @@ import messageController from '../../controllers/message-controller';
 
 class ChatPage extends Component {
     constructor(props: any) {
-        console.log(props)
         super({
             ...props,
             attr: {
@@ -35,11 +34,8 @@ class ChatPage extends Component {
                 id: 'chat-page'
             },
             chats: props.chats,
-            chatFeed: new EmptyChatFeed({
-                attr: {
-                    class: 'chat-feed'
-                }
-            }, 'div'),
+            chatFeed: props.chatFeed,
+            modal: props.modal
 
         }, 'div')
     }
