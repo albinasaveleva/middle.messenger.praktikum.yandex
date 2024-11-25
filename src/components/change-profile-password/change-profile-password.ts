@@ -23,6 +23,7 @@ class ChangeProfilePassword extends Component {
                 class: 'avatar'
                 }
             }, 'div'),
+            name: props.user ? `<span class="name">${props.user.display_name}</span>` : "",
             form: new Form({
                 attr: {
                 class: 'form',

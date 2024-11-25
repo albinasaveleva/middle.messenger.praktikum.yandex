@@ -1,4 +1,4 @@
 import Connect from "../../utils/connect";
 import Modal from "./modal";
 
-export default Connect(Modal, state => state);
+export default Connect(Modal, () => {});

@@ -28,8 +28,6 @@ class NonFoundPage extends Component {
             events: {
                 click: (event: Event) => {
                 event.preventDefault();
-                // const href = event.target.attributes.href.value;
-                // history.pushState(null, null, href);
                 props.changePageContent({
                     content: new ChatPage(props.changePageContent)
                 });

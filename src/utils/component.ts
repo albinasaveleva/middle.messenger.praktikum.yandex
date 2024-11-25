@@ -22,7 +22,6 @@ export default class Component {
 
   constructor(componentProps: { [key: string]: any } = {}, tag: string = "div") {
     const { props, children, lists } = this.getProps(componentProps);
-
     this._children = this.makePropsProxy(children);
     this._lists = this.makePropsProxy(lists);
     this._id = makeUUID();

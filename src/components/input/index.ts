@@ -1,4 +1,4 @@
 import Connect from "../../utils/connect";
 import Input from "./input";
 
-export default Connect(Input, state => state);
+export default Connect(Input, () => {});
