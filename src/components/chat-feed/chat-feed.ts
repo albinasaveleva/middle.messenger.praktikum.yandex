@@ -13,7 +13,6 @@ import Message from '../message/message';
 
 class ChatFeed extends Component {
     constructor(props?: any) {
-        console.log(props)
         super({
             ...props,
             attr: {
@@ -129,6 +128,7 @@ class ChatFeed extends Component {
         }, 'div')
     }
     render() {
+        messageController.getOld(0)
         return this.compile(tpl);
     }
 }

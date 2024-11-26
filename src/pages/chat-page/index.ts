@@ -118,10 +118,6 @@ export default Connect(ChatPage, (state) => {
 
                                     await connect();
                                 }
-
-                                // if (state.socketReadyState === 1) {
-                                //     messageController.getOld(0);
-                                // }
                             }
                         }
                     }, 'div')

@@ -10,7 +10,7 @@ import Form from '../../components/form/index';
 import SignupForm from '../../forms/signup-form/index';
 import authController from '../../controllers/auth-controller';
 import userController from '../../controllers/user-controller';
-import chatApi from '../../api/chat-api';
+import chatController from '../../controllers/chat-controller';
 
 const router = new Router("#app");
 
@@ -154,7 +154,7 @@ class SignupPage extends Component {
                                 try {
                                     await authController.signup(data);
                                     await userController.getUser();
-                                    await chatApi.getChats();
+                                    await chatController.getChats();
 
                                     router.go('/messenger');
                                     (event.target as HTMLFormElement).reset();

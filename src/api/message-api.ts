@@ -11,10 +11,10 @@ class MessageApi extends BaseAPI {
         this.wstransport.send(data);
     }
     async getOld(number: number) {
-        this.wstransport.send({
+        this.wstransport.send(JSON.stringify({
             content: number,
             type: 'get old',
-          })
+          }))
     }
     getStatus() {
         return this.wstransport.getStatus()
