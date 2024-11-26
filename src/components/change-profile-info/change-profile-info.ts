@@ -2,12 +2,12 @@ import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
 import Avatar from "../avatar/index";
-import Input from "../../components/input";
-import ButtonAction from "../../components/button-action";
-import Form from '../form';
-import ChangeProfileInfoForm from '../../forms/change-profile-info-form';
+import Input from "../../components/input/index";
+import ButtonAction from "../../components/button-action/index";
+import Form from '../form/index';
+import ChangeProfileInfoForm from '../../forms/change-profile-info-form/index';
 import { inputValidation } from '../../utils/formValidation';
-import ProfileInfo from '../profile-info';
+import ProfileInfo from '../profile-info/index';
 import { blur } from '../../pages/profile-page/profile-page';
 import userController from '../../controllers/user-controller';
 

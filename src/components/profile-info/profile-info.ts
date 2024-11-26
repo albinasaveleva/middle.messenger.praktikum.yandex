@@ -1,17 +1,16 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Avatar from "../avatar/avatar";
-import ButtonLink from "../button-link";
-import Input from "../input";
-import ChangeProfileInfo from '../change-profile-info';
-import ChangeProfilePassword from '../change-profile-password';
-import Form from '../form';
-import ProfileInfoForm from '../../forms/profile-info-form';
-import AvatarHover from '../avatar-hover';
+import Avatar from "../avatar/index";
+import ButtonLink from "../button-link/index";
+import Input from "../input/index";
+import ChangeProfileInfo from '../change-profile-info/index';
+import ChangeProfilePassword from '../change-profile-password/index';
+import Form from '../form/index';
+import ProfileInfoForm from '../../forms/profile-info-form/index';
+import AvatarHover from '../avatar-hover/index';
 import Router from '../../utils/router';
 import authController from '../../controllers/auth-controller';
-import userController from '../../controllers/user-controller';
 
 const router = new Router("#app");
 

@@ -1,4 +1,5 @@
 import { BASE_WS_URL } from "../api/base-api";
+import store from "../store";
 import EventBus from "./event-bus";
 
 export enum WSTransportEvents {
@@ -36,17 +37,6 @@ export class WSTransport extends EventBus {
     }
 
     connect(endpoint: string): Promise<void> {
-        if (this.socket) {
-            this.close();
-            // if (this.endpoint === endpoint) {
-            //     throw new Error('The socket is already connected');
-            // } else {
-            //     this.close();
-            // }
-        }
-
-        // this.setEndpoint(endpoint);
-
         this.socket = new WebSocket(`${BASE_WS_URL}/${endpoint}`);
         this.subscribe(this.socket);
         this.setupPing();
@@ -77,13 +67,14 @@ export class WSTransport extends EventBus {
     subscribe(socket: WebSocket) {
         socket.addEventListener('open', () => {
             this.emit(WSTransportEvents.Connected);
+            store.set('socketReadyState', socket.readyState);
         });
 
         socket.addEventListener('close', () => {
             this.emit(WSTransportEvents.Close);
             this.socket = null;
             clearInterval(this.pingInterval);
-            console.log('close')
+            store.set('socketReadyState', socket.readyState);
         });
 
         socket.addEventListener('error', (event) => {

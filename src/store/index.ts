@@ -18,15 +18,19 @@ type TState = {
     } | null,
     chatList: [],
     currentChat: {
-        id: number
-    } | null
+        id: number,
+        title: string,
+        messages: []
+    } | null,
+    socketReadyState: number
 };
 
 class Store extends EventBus {
     private state: TState = {
         user: null,
         chatList: [],
-        currentChat: null
+        currentChat: null,
+        socketReadyState: 0
     };
 
     public getState() {
@@ -37,7 +41,8 @@ class Store extends EventBus {
         this.state = {
             user: null,
             chatList: [],
-            currentChat: null
+            currentChat: null,
+            socketReadyState: 0
         };
         this.emit(StoreEvents.Updated);
     }

@@ -1,14 +1,14 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
-import Input from '../../components/input';
-import ButtonAction from '../../components/button-action';
+import Input from '../../components/input/index';
+import ButtonAction from '../../components/button-action/index';
 import userController from '../../controllers/user-controller';
 import chatController from '../../controllers/chat-controller';
-import deleteUserForm from '../../forms/delete-user-form';
+import deleteUserForm from '../../forms/delete-user-form/index';
 import store from '../../store';
 
 class DeleteUserModal extends Component {
-    constructor(props: any) {
+    constructor(props?: any) {
         super({
             ...props,
             attr: {

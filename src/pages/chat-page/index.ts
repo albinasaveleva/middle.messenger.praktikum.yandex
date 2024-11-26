@@ -1,36 +1,31 @@
 import ChatPage from './chat-page';
+import Chat from '../../components/chat/index';
+import Avatar from '../../components/avatar/index';
+import ChatFeed from '../../components/chat-feed/index';
+import ButtonAction from '../../components/button-action/index';
+import Modal from '../../components/modal/index';
+import AddUserModal from '../../modals/add-user-modal/index';
+import DeleteUserModal from '../../modals/delete-user-modal/index';
+import Input from '../../components/input/index';
+import Chats from '../../components/chats/index';
+import ButtonLink from '../../components/button-link/index';
+import AddChatModal from '../../modals/add-chat-modal/index';
+import EmptyChatFeed from '../../components/empty-chat-feed/index';
+
 import Connect from "../../utils/connect";
-import Chat from '../../components/chat/chat';
-import Avatar from '../../components/avatar/avatar';
-import store from '../../store';
 import chatController from '../../controllers/chat-controller';
 import messageController from '../../controllers/message-controller';
-import ChatFeed from '../../components/chat-feed/chat-feed';
-import Actions from '../../components/actions/actions';
-import Frame from '../../components/frame/frame';
-import ButtonAction from '../../components/button-action/button-action';
-import Modal from '../../components/modal/modal';
-import AddUserModal from '../../modals/add-user-modal/add-user-modal';
-import DeleteUserModal from '../../modals/delete-user-modal/delete-user-modal';
-import Message from '../../components/message/message';
-import Form from '../../components/form/form';
-import MessageForm from '../../forms/message-form/message-form';
-import Attach from '../../components/attach/attach';
-import Input from '../../components/input/input';
-import { inputValidation } from '../../utils/formValidation';
-import Chats from '../../components/chats/chats';
-import ButtonLink from '../../components/button-link/button-link';
+import store from '../../store';
 import Router from '../../utils/router';
-import AddChatModal from '../../modals/add-chat-modal/add-chat-modal';
-import EmptyChatFeed from '../../components/empty-chat-feed/empty-chat-feed';
 
 const router = new Router("#app");
 
-export default Connect(ChatPage, function (state) {
+export default Connect(ChatPage, (state) => {
     return {
         user: state.user,
         chatList: state.chatList,
         currentChat: state.currentChat,
+        socketReadyState: state.socketReadyState,
         chats: new Chats({
             attr: {
                 class: 'chats'
@@ -95,150 +90,44 @@ export default Connect(ChatPage, function (state) {
                                 event.preventDefault();
 
                                 const chatId = (event.target as HTMLElement).closest('.chat')?.dataset.chatId;
+                                const connect = async () => {
+                                    const currentChatId = chatId;
+                                    const { token: currentChatToken } = await chatController.getToken(chatId);
 
-                                // if (chatId !== store.getState().currentChat?.id) {
-                                //     await messageController.close();
-                                // }
-                                // store.set('currentChat', null);
-                                store.set('currentChat', { id: chatId });
+                                    await messageController.connect(state.user.id, currentChatId, currentChatToken);
+                                }
+                                const closeConnect = async () => {
+                                    await messageController.close();
+                                }
 
-                                // const connect = async () => {
-                                //     const currentChatId = chatId;
-                                //     const { token: currentChatToken } = await chatController.getToken(chatId);
+                                if (!state.currentChat) {
+                                    store.set('currentChat', {
+                                        id: chatId,
+                                        title: chat.title,
+                                        messages: []
+                                    });
+                                    await connect();
+                                } else if (state.currentChat && state.currentChat.id !== chatId) {
+                                    store.set('currentChat', {
+                                        id: chatId,
+                                        title: chat.title,
+                                        messages: []
+                                    });
+                                    await closeConnect();
+                                    await connect();
+                                }
 
-                                //     await messageController.connect(state.user?.id, currentChatId, currentChatToken);
-
-                                // }
-                                // await connect();
-
-                                // messageController.getStatus()
-                                // await messageController.getOld(0)
+                                if (state.socketReadyState === 1) {
+                                    messageController.getOld(0);
+                                }
                             }
                         }
                     }, 'div')
                 }),
         }, 'div'),
         chatFeed: state.currentChat
-            ? new ChatFeed({
-                attr: {
-                    class: 'chat-feed'
-                },
-                title: 'title',
-                actions: new Actions({
-                    attr: {
-                        class: 'actions'
-                    },
-                    events: {
-                        click: (event: Event) => {
-                            const topBarElement = (event.target as HTMLElement).closest('.top-bar');
-                            const frame = (topBarElement as HTMLElement).querySelector('.frame');
-                            (frame as HTMLElement).classList.toggle('visible');
-                        }
-                    }
-                }, 'div'),
-                frame: new Frame({
-                    attr: {
-                        class: 'frame'
-                    },
-                    content: [
-                        new ButtonAction({
-                            attr: {
-                                class: 'button-frame'
-                            },
-                            action: 'Добавить пользователя',
-                            events: {
-                                click: () => {
-                                    const avatarModal = document.querySelector('#add-user-modal') as HTMLElement;
-                                    avatarModal.style.display = 'flex';
-                                }
-                            }
-                        }, 'button'),
-                        new ButtonAction({
-                            attr: {
-                                class: 'button-frame'
-                            },
-                            action: 'Удалить пользователя',
-                            events: {
-                                click: () => {
-                                    const avatarModal = document.querySelector('#delete-user-modal') as HTMLElement;
-                                    avatarModal.style.display = 'flex';
-                                }
-                            }
-                        }, 'button'),
-                    ],
-                }, 'div'),
-                messages: [
-                    new Message({
-                        attr: {
-                            class: 'outcoming-message'
-                        },
-                        message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
-                    }, 'div'),
-                    new Message({
-                        attr: {
-                            class: 'incoming-message'
-                        },
-                        message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
-                    }, 'div'),
-                ],
-                form: new Form({
-                    attr: {
-                        class: 'form',
-                        name: "message-form",
-                        id: "message-form"
-                    },
-                    content: new MessageForm({
-                        attr: {
-                            class: 'form-wrapper'
-                        },
-                        attach: new Attach({
-                            attr: {
-                                class: 'attach'
-                            },
-                        }, 'div'),
-                        messageInput: new Input({
-                            attr: {
-                                class: "input-field",
-                                type: "text",
-                                name: "message",
-                                placeholder: "Сообщение"
-                            },
-                        }, 'input'),
-                        buttonSend: new ButtonAction({
-                            attr: {
-                                class: 'button-send',
-                                type: 'submit',
-                                form: 'message-form'
-                            },
-                        }, 'button')
-                    }, 'div'),
-                    events: {
-                        submit: async (event: Event) => {
-                            event.preventDefault();
-
-                            const input = (event.target as HTMLElement).querySelector('input') as HTMLInputElement;
-
-                            if (inputValidation(input)) {
-                                const request = async() => {
-                                    try {
-                                        await messageController.send(input.value)
-                                    } catch (error) {
-                                        console.log(error)
-                                    }
-                                };
-                                await request();
-
-                                (event.target as HTMLFormElement).reset();
-                            }
-                        }
-                    }
-                }, 'form')
-            }, 'div')
-            : new EmptyChatFeed({
-                attr: {
-                    class: 'chat-feed'
-                }
-            }, 'div'),
+            ? new ChatFeed()
+            : new EmptyChatFeed(),
         modal: [
             new Modal({
                 attr: {

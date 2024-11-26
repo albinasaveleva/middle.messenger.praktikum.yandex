@@ -18,7 +18,7 @@ class MessageController {
             .then((response) => console.log(response))
     }
     getStatus() {
-        console.log(messageApi.getStatus())
+        return messageApi.getStatus()?.readyState;
     }
 }
 

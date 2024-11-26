@@ -1,9 +1,9 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Error from "../../components/error";
-import ButtonLink from "../../components/button-link";
-import ChatPage from '../chat-page';
+import Error from "../../components/error/index";
+import ButtonLink from "../../components/button-link/index";
+import ChatPage from '../chat-page/index';
 
 class NonFoundPage extends Component {
   constructor(props: any) {

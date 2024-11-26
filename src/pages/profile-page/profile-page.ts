@@ -1,10 +1,10 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import ProfileInfo from '../../components/profile-info';
-import ButtonLink from '../../components/button-link';
-import Modal from '../../components/modal';
-import AvatarModal from '../../modals/avatar-modal';
+import ProfileInfo from '../../components/profile-info/index';
+import ButtonLink from '../../components/button-link/index';
+import Modal from '../../components/modal/index';
+import AvatarModal from '../../modals/avatar-modal/index';
 import { inputValidation } from '../../utils/formValidation';
 import Router from '../../utils/router';
 

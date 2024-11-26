@@ -4,11 +4,11 @@ import Router from '../../utils/router';
 import { inputValidation } from '../../utils/formValidation';
 import authController from '../../controllers/auth-controller';
 
-import ButtonAction from '../../components/button-action';
-import ButtonLink from '../../components/button-link';
-import Input from '../../components/input';
-import Form from '../../components/form';
-import LoginForm from '../../forms/login-form';
+import ButtonAction from '../../components/button-action/index';
+import ButtonLink from '../../components/button-link/index';
+import Input from '../../components/input/index';
+import Form from '../../components/form/index';
+import LoginForm from '../../forms/login-form/index';
 import userController from '../../controllers/user-controller';
 import chatApi from '../../api/chat-api';
 

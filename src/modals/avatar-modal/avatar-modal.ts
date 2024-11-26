@@ -1,12 +1,12 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
-import Input from '../../components/input';
-import ButtonAction from '../../components/button-action';
-import AvatarForm from '../../forms/avatar-form';
+import Input from '../../components/input/index';
+import ButtonAction from '../../components/button-action/index';
+import AvatarForm from '../../forms/avatar-form/index';
 import userController from '../../controllers/user-controller';
 
 class AvatarModal extends Component {
-  constructor(props: any) {
+  constructor(props?: any) {
     super({
         ...props,
         attr: {

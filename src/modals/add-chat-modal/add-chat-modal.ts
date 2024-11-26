@@ -1,13 +1,12 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
-import Input from '../../components/input';
-import ButtonAction from '../../components/button-action';
-import userController from '../../controllers/user-controller';
-import addChatForm from '../../forms/add-chat-form';
+import Input from '../../components/input/index';
+import ButtonAction from '../../components/button-action/index';
+import addChatForm from '../../forms/add-chat-form/index';
 import chatController from '../../controllers/chat-controller';
 
 class AddChatModal extends Component {
-    constructor(props: any) {
+    constructor(props?: any) {
         super({
             ...props,
             attr: {
