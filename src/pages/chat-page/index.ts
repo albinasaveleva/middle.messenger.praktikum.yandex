@@ -108,24 +108,26 @@ export default Connect(ChatPage, (state) => {
                                     });
                                     await connect();
                                 } else if (state.currentChat && state.currentChat.id !== chatId) {
+                                    await closeConnect();
+
                                     store.set('currentChat', {
                                         id: chatId,
                                         title: chat.title,
                                         messages: []
                                     });
-                                    await closeConnect();
+
                                     await connect();
                                 }
 
-                                if (state.socketReadyState === 1) {
-                                    messageController.getOld(0);
-                                }
+                                // if (state.socketReadyState === 1) {
+                                //     messageController.getOld(0);
+                                // }
                             }
                         }
                     }, 'div')
                 }),
         }, 'div'),
-        chatFeed: state.currentChat
+        chatFeed: state.currentChat && state.socketReadyState === 1
             ? new ChatFeed()
             : new EmptyChatFeed(),
         modal: [

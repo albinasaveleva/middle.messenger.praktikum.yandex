@@ -9,9 +9,11 @@ import Attach from '../attach/index';
 import Input from '../input/index';
 import { inputValidation } from '../../utils/formValidation';
 import messageController from '../../controllers/message-controller';
+import Message from '../message/message';
 
 class ChatFeed extends Component {
     constructor(props?: any) {
+        console.log(props)
         super({
             ...props,
             attr: {
@@ -62,7 +64,16 @@ class ChatFeed extends Component {
                     }, 'button'),
                 ],
             }, 'div'),
-            messages: props.message,
+            messages: props.currentChat.messages.length > 0
+                ? props.currentChat.messages.map((message) => {
+                    return new Message({
+                        attr: {
+                            class: message.user_id === props.user.id ? 'outcoming-message' : 'incoming-message'
+                        },
+                        message: message.content
+                    }, 'div')
+                })
+                : "",
             form: new Form({
                 attr: {
                     class: 'form',

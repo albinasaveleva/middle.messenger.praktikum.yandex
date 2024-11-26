@@ -22,7 +22,7 @@ type TState = {
         title: string,
         messages: []
     } | null,
-    socketReadyState: number
+    socketReadyState: number | null
 };
 
 class Store extends EventBus {
@@ -30,7 +30,7 @@ class Store extends EventBus {
         user: null,
         chatList: [],
         currentChat: null,
-        socketReadyState: 0
+        socketReadyState: null
     };
 
     public getState() {
@@ -42,7 +42,7 @@ class Store extends EventBus {
             user: null,
             chatList: [],
             currentChat: null,
-            socketReadyState: 0
+            socketReadyState: null
         };
         this.emit(StoreEvents.Updated);
     }

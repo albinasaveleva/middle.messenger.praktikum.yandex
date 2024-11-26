@@ -2,8 +2,6 @@ import messageApi from "../api/message-api";
 import store from "../store";
 
 class MessageController {
-    // messageApi = new MessageApi();
-
     async connect(userId: number, chatId: number, token: number) {
         await messageApi.connect(userId, chatId, token)
     }
@@ -15,7 +13,6 @@ class MessageController {
     }
     async getOld(number: number) {
         await messageApi.getOld(number)
-            .then((response) => console.log(response))
     }
     getStatus() {
         return messageApi.getStatus()?.readyState;
