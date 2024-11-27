@@ -41,7 +41,6 @@ export class WSTransport extends EventBus {
         this.socket = new WebSocket(`${BASE_WS_URL}/${endpoint}`);
         this.subscribe(this.socket);
         this.setupPing();
-        console.log('connect')
         store.set('socketReadyState', this.socket.readyState);
 
         return new Promise((resolve, reject) => {
@@ -70,7 +69,6 @@ export class WSTransport extends EventBus {
     subscribe(socket: WebSocket) {
         socket.addEventListener('open', () => {
             this.emit(WSTransportEvents.Connected);
-            console.log('open')
             store.set('socketReadyState', this.socket?.readyState);
         });
 
@@ -96,20 +94,13 @@ export class WSTransport extends EventBus {
                     store.set('currentChat', {
                         messages: data.reverse()
                     });
-                    console.log(data)
                 } else if (typeof data.content === 'string') {
                     this.emit(WSTransportEvents.Message, data);
                     const oldMessages = store.getState().currentChat?.messages || [];
                     store.set('currentChat', {
                         messages: [...oldMessages, data]
                     });
-                    console.log(data)
                 }
-                // if (typeof data.content === 'string') {
-                //     this.emit(WSTransportEvents.Message, data);
-                //     const oldMessages = store.getState().currentChat?.messages || [];
-
-                // }
             } catch (e) {
 
             }

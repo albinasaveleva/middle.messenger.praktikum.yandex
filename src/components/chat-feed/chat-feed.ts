@@ -43,7 +43,6 @@ class ChatFeed extends Component {
                         action: 'Добавить пользователя',
                         events: {
                             click: (event) => {
-                                console.log(event.target)
                                 const avatarModal = document.querySelector('#add-user-modal') as HTMLElement;
                                 avatarModal.style.display = 'flex';
                             }

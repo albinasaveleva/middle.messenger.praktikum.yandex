@@ -12,7 +12,7 @@ const init = async() => {
         console.log(reason)
     }
 
-    setInterval(() => {chatController.getChats()}, 10000)
+    setInterval(() => {chatController.getChats()}, 15000)
 };
 await init();
 
