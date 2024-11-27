@@ -17,6 +17,7 @@ import chatController from '../../controllers/chat-controller';
 import messageController from '../../controllers/message-controller';
 import store from '../../store';
 import Router from '../../utils/router';
+import { TChat, TState } from '../../types/data';
 
 const router = new Router("#app");
 const renderChatFeed = (checkedOld: boolean) => {
@@ -162,7 +163,7 @@ const renderChatTimeStamp = (time: string) => {
     return `<span class="timestamp">${timestampProp}</span>`
 }
 
-export default Connect(ChatPage, (state) => {
+export default Connect(ChatPage, (state: TState) => {
     return {
         user: state.user,
         chatList: state.chatList,
@@ -206,7 +207,7 @@ export default Connect(ChatPage, (state) => {
             }, 'button'),
             content: state.chatList.length === 0
                 ? ""
-                : state.chatList.map((chat: any) => {
+                : state.chatList.map((chat: TChat) => {
                     return new Chat({
                         attr: {
                             class: 'chat',
@@ -231,12 +232,14 @@ export default Connect(ChatPage, (state) => {
                             click: async (event: Event) => {
                                 event.preventDefault();
 
-                                const chatId = (event.target as HTMLElement).closest('.chat')?.dataset.chatId;
+                                const chatElement = (event.target as HTMLElement).closest('.chat')
+                                const chatId = Number((chatElement as HTMLElement).dataset.chatId);
                                 const connect = async () => {
+                                    const userId = state.user?.id as number;
                                     const currentChatId = chatId;
                                     const { token: currentChatToken } = await chatController.getToken(chatId);
 
-                                    await messageController.connect(state.user.id, currentChatId, currentChatToken);
+                                    await messageController.connect(userId, currentChatId, currentChatToken);
                                 }
                                 const closeConnect = async () => {
                                     await messageController.close();
@@ -267,7 +270,7 @@ export default Connect(ChatPage, (state) => {
                     }, 'div')
                 }),
         }, 'div'),
-        chatFeed: state.currentChat && state.chatList.some((chat) => Number(chat.id) === Number(state.currentChat.id)) && state.socketReadyState === 1
+        chatFeed: state.currentChat && state.chatList.some((chat: TChat) => Number(chat.id) === Number(state.currentChat?.id)) && state.socketReadyState === 1
             ? renderChatFeed(state.currentChat.checkedOld)
             : new EmptyChatFeed(),
         modal: [

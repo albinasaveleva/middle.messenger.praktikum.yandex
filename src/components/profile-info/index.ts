@@ -1,8 +1,9 @@
+import { TState } from "../../types/data";
 import Connect from "../../utils/connect";
 import Avatar from "../avatar/avatar";
 import ProfileInfo from "./profile-info";
 
-export default Connect(ProfileInfo, (state) => {
+export default Connect(ProfileInfo, (state: TState) => {
     return {
         user: state.user,
         avatar: new Avatar({

@@ -9,8 +9,8 @@ class Router {
     __instance;
 
     constructor(rootQuery) {
-        if (Router.__instance) {
-          return Router.__instance;
+        if (this.__instance) {
+          return this.__instance;
         }
 
         this.routes = [];
@@ -18,12 +18,12 @@ class Router {
         this._currentRoute = null;
         this._rootQuery = rootQuery;
 
-        Router.__instance = this;
+        this.__instance = this;
     }
 
-    use(path: string, block: Block) {
+    use(path: string, block: any) {
         const route = new Route(path, block, {rootQuery: this._rootQuery});
-        this.routes.push(route);
+        this.routes?.push(route);
         return this;
     }
 
@@ -36,7 +36,7 @@ class Router {
     }
 
     go(path: string) {
-        this.history.pushState({}, "", path);
+        this.history?.pushState({}, "", path);
         this._onRoute(path);
     }
 
@@ -48,7 +48,7 @@ class Router {
         window.history.forward();
     }
 
-    _onRoute(path) {
+    _onRoute(path: string) {
         const route = this.getRoute(path);
         if (!route) {
             return;
@@ -61,8 +61,8 @@ class Router {
         route.render(route, path);
     }
 
-    getRoute(path) {
-        return this.routes.find(route => route.match(path));
+    getRoute(path: string) {
+        return this.routes?.find(route => route.match(path));
     }
 }
 

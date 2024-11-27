@@ -18,7 +18,6 @@ export default class Component {
   _element: HTMLElement | null = null;
   _meta: { [key: string]: any };
   _eventBus: EventBus;
-//   _setUpdate: boolean = false;
 
   constructor(componentProps: { [key: string]: any } = {}, tag: string = "div") {
     const { props, children, lists } = this.getProps(componentProps);

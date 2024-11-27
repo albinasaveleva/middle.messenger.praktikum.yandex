@@ -46,7 +46,6 @@ class AvatarModal extends Component {
                 const request = async() => {
                     try {
                         await userController.updateAvatar(formData);
-                        // await userController.getAvatar(props.user.avatar);
                     } catch (error) {
                         console.log(error)
                     }
