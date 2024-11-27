@@ -28,6 +28,12 @@ const renderChatFeed = (checkedOld) => {
     }
     return new ChatFeed();
 }
+const renderChatTimeStamp = (time) => {
+    //"2024-11-27T10:56:37+00:00"
+    const today = new Date();
+    console.log(new Date(time), today)
+    return `<span class="timestamp">12:00</span>`
+}
 
 export default Connect(ChatPage, (state) => {
     return {
@@ -87,7 +93,7 @@ export default Connect(ChatPage, (state) => {
                         title: `<span class="title">${chat.title}</span>`,
                         timestamp: chat.last_message === null
                             ? ''
-                            : `<span class="timestamp">12:00</span>`,
+                            : renderChatTimeStamp(chat.last_message.time),
                         content: chat.last_message === null
                             ? ''
                             : `<span class="content">${chat.last_message.content}</span>`,

@@ -4,15 +4,19 @@ import { isEqual } from "../utils/utils";
 
 class ChatController {
     async getChats() {
-        await chatApi.getChats()
-            .then(({response}) => {
-                const {chatList} = store.getState();
+        const {user} = store.getState()
 
-                if (response.length > 0 && !isEqual(response, chatList)) {
-                    store.set('chatList', response)
-                }
-            })
-            .catch(({reason}) => console.log(reason))
+        if (user) {
+            await chatApi.getChats()
+                .then(({response}) => {
+                    const {chatList} = store.getState();
+
+                    if (response.length > 0 && !isEqual(response, chatList)) {
+                        store.set('chatList', response)
+                    }
+                })
+                .catch(({reason}) => console.log(reason))
+        }
     }
     async addChat(data: {[key: string]: string}) {
         await chatApi.addChat(data)
