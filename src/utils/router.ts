@@ -28,14 +28,12 @@ class Router {
     }
 
     start() {
-        // Реагируем на изменения в адресной строке и вызываем перерисовку
         window.onpopstate = (event) => {
             this._onRoute(event.currentTarget?.location.pathname);
         };
 
         this._onRoute(window.location.pathname);
-
-    }      // запустить роутер
+    }
 
     go(path: string) {
         this.history.pushState({}, "", path);
@@ -44,10 +42,11 @@ class Router {
 
     back() {
         window.history.back();
-    }       // переход назад по истории браузера
+    }
+
     forward() {
         window.history.forward();
-    }    // переход вперёд по истории браузера
+    }
 
     _onRoute(path) {
         const route = this.getRoute(path);

@@ -1,50 +1,26 @@
 import tpl from './tpl.tmpl';
 import Component from '../../utils/component';
 
-import Avatar from "../avatar/index";
 import ButtonLink from "../button-link/index";
 import Input from "../input/index";
 import ChangeProfileInfo from '../change-profile-info/index';
 import ChangeProfilePassword from '../change-profile-password/index';
 import Form from '../form/index';
 import ProfileInfoForm from '../../forms/profile-info-form/index';
-import AvatarHover from '../avatar-hover/index';
 import Router from '../../utils/router';
 import authController from '../../controllers/auth-controller';
+import AvatarHover from '../avatar-hover/avatar-hover';
 
 const router = new Router("#app");
 
 class ProfileInfo extends Component {
     constructor(props: any) {
-        const { user } = props;
         super({
             ...props,
             attr: {
                 class: 'profile'
             },
-            avatar: new Avatar({
-                attr: {
-                    class: 'avatar'
-                },
-                // image: props.user?.avatar ? userController.getAvatar(props.user.avatar) : '',
-                image: '',
-                events: {
-                    mouseover: (event: Event) => {
-                        const avatarWrapper = (event.target as HTMLElement).closest('.avatar-wrapper');
-                        const avatarHover = (avatarWrapper as HTMLElement).querySelector('.avatar-hover');
-                        (avatarHover as HTMLElement).style.display = "flex";
-                    },
-                    mouseout: (event: Event) => {
-                        const avatarWrapper = (event.target as HTMLElement).closest('.avatar-wrapper');
-                        const avatarHover = (avatarWrapper as HTMLElement).querySelector('.avatar-hover');
-                        (avatarHover as HTMLElement).style.display = "none";
-                    },
-                    click: () => {
-                        const avatarModal = document.querySelector('#avatar-modal') as HTMLElement;
-                        avatarModal.style.display = 'flex';
-                    }
-                }
-            }, 'div'),
+            avatar: props.avatar,
             avatarHover: new AvatarHover({
                 attr: {
                     class: 'avatar-hover'
@@ -56,7 +32,7 @@ class ProfileInfo extends Component {
                     }
                 }
             }, 'div'),
-            name: user?.display_name || "",
+            name: props.name,
             form: new Form({
                 attr: {
                     class: 'form',
@@ -73,7 +49,7 @@ class ProfileInfo extends Component {
                             name: "email",
                             type: "email",
                             placeholder: "Почта",
-                            value: user?.email || "",
+                            value: props.user?.email || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -83,7 +59,7 @@ class ProfileInfo extends Component {
                             name: "login",
                             type: "text",
                             placeholder: "Логин",
-                            value: user?.login || "",
+                            value: props.user?.login || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -93,7 +69,7 @@ class ProfileInfo extends Component {
                             name: "first_name",
                             type: "text",
                             placeholder: "Имя",
-                            value: user?.first_name || "",
+                            value: props.user?.first_name || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -103,7 +79,7 @@ class ProfileInfo extends Component {
                             name: "second_name",
                             type: "text",
                             placeholder: "Фамилия",
-                            value: user?.second_name || "",
+                            value: props.user?.second_name || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -113,7 +89,7 @@ class ProfileInfo extends Component {
                             name: "display_name",
                             type: "text",
                             placeholder: "Имя в чате",
-                            value: user?.display_name || "",
+                            value: props.user?.display_name || "",
                             readonly: true
                         }
                     }, 'input'),
@@ -123,7 +99,7 @@ class ProfileInfo extends Component {
                             name: "phone",
                             type: "text",
                             placeholder: "Телефон",
-                            value: user?.phone || "",
+                            value: props.user?.phone || "",
                             readonly: true
                         }
                     }, 'input'),
