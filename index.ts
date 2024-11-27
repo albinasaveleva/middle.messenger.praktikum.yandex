@@ -11,6 +11,8 @@ const init = async() => {
     } catch ({reason}) {
         console.log(reason)
     }
+
+    setInterval(() => {chatController.getChats()}, 10000)
 };
 await init();
 

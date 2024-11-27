@@ -20,7 +20,8 @@ type TState = {
     currentChat: {
         id: number,
         title: string,
-        messages: []
+        messages: [],
+        checkedOld: false,
     } | null,
     socketReadyState: number | null
 };

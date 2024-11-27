@@ -7,6 +7,5 @@ export default Connect(ChatFeed, (state) => {
         chatList: state.chatList,
         currentChat: state.currentChat,
         socketReadyState: state.socketReadyState,
-        title: state.currentChat.title,
     }
 });

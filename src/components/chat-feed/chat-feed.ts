@@ -18,7 +18,7 @@ class ChatFeed extends Component {
             attr: {
                 class: 'chat-feed'
             },
-            title: props.title,
+            title: props.currentChat.title || '',
             actions: new Actions({
                 attr: {
                     class: 'actions'
@@ -113,7 +113,10 @@ class ChatFeed extends Component {
                         if (inputValidation(input)) {
                             const request = async() => {
                                 try {
-                                    await messageController.send(input.value)
+                                    await messageController.send({
+                                        content: input.value,
+                                        type: "message"
+                                    })
                                 } catch (error) {
                                     console.log(error)
                                 }
@@ -128,7 +131,6 @@ class ChatFeed extends Component {
         }, 'div')
     }
     render() {
-        messageController.getOld(0)
         return this.compile(tpl);
     }
 }

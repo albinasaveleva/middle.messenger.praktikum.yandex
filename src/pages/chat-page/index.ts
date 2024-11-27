@@ -19,6 +19,15 @@ import store from '../../store';
 import Router from '../../utils/router';
 
 const router = new Router("#app");
+const renderChatFeed = (checkedOld) => {
+    if (!checkedOld) {
+        messageController.getOld(0);
+        store.set('currentChat', {
+            checkedOld: true,
+        });
+    }
+    return new ChatFeed();
+}
 
 export default Connect(ChatPage, (state) => {
     return {
@@ -104,16 +113,18 @@ export default Connect(ChatPage, (state) => {
                                     store.set('currentChat', {
                                         id: chatId,
                                         title: chat.title,
-                                        messages: []
+                                        messages: [],
+                                        checkedOld: false,
                                     });
                                     await connect();
                                 } else if (state.currentChat && state.currentChat.id !== chatId) {
                                     await closeConnect();
-
+                                    store.set('socketReadyState', null);
                                     store.set('currentChat', {
                                         id: chatId,
                                         title: chat.title,
-                                        messages: []
+                                        messages: [],
+                                        checkedOld: false,
                                     });
 
                                     await connect();
@@ -124,7 +135,7 @@ export default Connect(ChatPage, (state) => {
                 }),
         }, 'div'),
         chatFeed: state.currentChat && state.socketReadyState === 1
-            ? new ChatFeed()
+            ? renderChatFeed(state.currentChat.checkedOld)
             : new EmptyChatFeed(),
         modal: [
             new Modal({

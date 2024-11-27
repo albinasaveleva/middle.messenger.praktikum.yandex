@@ -26,10 +26,11 @@ export class WSTransport extends EventBus {
             throw new Error('Socket is not connected');
         }
 
-        this.socket.send(JSON.stringify({
-            content: data,
-            type: "message"
-        }))
+        try {
+            this.socket.send(JSON.stringify(data))
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     getStatus() {
@@ -77,7 +78,6 @@ export class WSTransport extends EventBus {
             this.emit(WSTransportEvents.Close);
             this.socket = null;
             clearInterval(this.pingInterval);
-            store.set('socketReadyState', null);
         });
 
         socket.addEventListener('error', (event) => {
@@ -90,13 +90,26 @@ export class WSTransport extends EventBus {
                 if (['pong', 'ping', 'user connected'].includes(data?.type)) {
                     return;
                 }
-                if (typeof data.content === 'string') {
+
+                if (Array.isArray(data)) {
+                    this.emit(WSTransportEvents.Message, data);
+                    store.set('currentChat', {
+                        messages: data.reverse()
+                    });
+                    console.log(data)
+                } else if (typeof data.content === 'string') {
                     this.emit(WSTransportEvents.Message, data);
                     const oldMessages = store.getState().currentChat?.messages || [];
                     store.set('currentChat', {
-                        messages: [ ...oldMessages, data ]
+                        messages: [...oldMessages, data]
                     });
+                    console.log(data)
                 }
+                // if (typeof data.content === 'string') {
+                //     this.emit(WSTransportEvents.Message, data);
+                //     const oldMessages = store.getState().currentChat?.messages || [];
+
+                // }
             } catch (e) {
 
             }
