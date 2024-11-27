@@ -92,13 +92,13 @@ export class WSTransport extends EventBus {
                 if (Array.isArray(data)) {
                     this.emit(WSTransportEvents.Message, data);
                     store.set('currentChat', {
-                        messages: data.reverse()
+                        messages: data
                     });
                 } else if (typeof data.content === 'string') {
                     this.emit(WSTransportEvents.Message, data);
                     const oldMessages = store.getState().currentChat?.messages || [];
                     store.set('currentChat', {
-                        messages: [...oldMessages, data]
+                        messages: [ data, ...oldMessages ]
                     });
                 }
             } catch (e) {

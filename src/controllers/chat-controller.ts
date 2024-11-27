@@ -1,11 +1,14 @@
 import chatApi from "../api/chat-api";
 import store from "../store";
+import { isEqual } from "../utils/utils";
 
 class ChatController {
     async getChats() {
         await chatApi.getChats()
             .then(({response}) => {
-                if (response.length > 0) {
+                const {chatList} = store.getState();
+
+                if (response.length > 0 && !isEqual(response, chatList)) {
                     store.set('chatList', response)
                 }
             })

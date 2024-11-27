@@ -1,4 +1,4 @@
 import Connect from "../../utils/connect";
 import AddChatModal from "./add-chat-modal";
 
-export default Connect(AddChatModal, () => {});
+export default Connect(AddChatModal, () =>  {});

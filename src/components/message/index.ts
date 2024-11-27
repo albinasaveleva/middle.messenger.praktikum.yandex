@@ -1,4 +1,4 @@
 import Connect from "../../utils/connect";
 import Message from "./message";
 
-export default Connect(Message, () => {});
+export default Connect(Message, () =>  {});

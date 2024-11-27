@@ -1,4 +1,4 @@
 import Connect from "../../utils/connect";
 import ErrorPage from "./error-page";
 
-export default Connect(ErrorPage, () => {});
+export default Connect(ErrorPage, () =>  {});
