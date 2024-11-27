@@ -23,7 +23,7 @@ class ChangeProfileInfo extends Component {
                 class: 'avatar'
                 }
             }, 'div'),
-            name: props.user ? `<span class="name">${props.user.display_name}</span>` : "",
+            name: props.user?.display_name || "",
             form: new Form({
                 attr: {
                 class: 'form',

@@ -19,7 +19,7 @@ import store from '../../store';
 import Router from '../../utils/router';
 
 const router = new Router("#app");
-const renderChatFeed = (checkedOld) => {
+const renderChatFeed = (checkedOld: boolean) => {
     if (!checkedOld) {
         messageController.getOld(0);
         store.set('currentChat', {
@@ -28,11 +28,138 @@ const renderChatFeed = (checkedOld) => {
     }
     return new ChatFeed();
 }
-const renderChatTimeStamp = (time) => {
-    //"2024-11-27T10:56:37+00:00"
+const renderChatTimeStamp = (time: string) => {
     const today = new Date();
-    console.log(new Date(time), today)
-    return `<span class="timestamp">12:00</span>`
+    const timestamp =  new Date(time);
+    let timestampProp = '';
+
+    if (today.getUTCFullYear() === timestamp.getUTCFullYear() && today.getUTCMonth() === timestamp.getUTCMonth() && today.getUTCDate() === timestamp.getUTCDate()) {
+        let hours;
+        switch (timestamp.getUTCHours()) {
+            case 0:
+                hours = '00'
+                break;
+            case 1:
+                hours = '01'
+                break;
+            case 2:
+                hours = '02'
+                break;
+            case 3:
+                hours = '03'
+                break;
+            case 4:
+                hours = '04'
+                break;
+            case 5:
+                hours = '05'
+                break;
+            case 6:
+                hours = '06'
+                break;
+            case 7:
+                hours = '07'
+                break;
+            case 8:
+                hours = '08'
+                break;
+            case 9:
+                hours = '09'
+                break;
+            default:
+                hours = timestamp.getUTCHours();
+                break;
+        }
+
+        let minutes;
+        switch (timestamp.getUTCMinutes()) {
+            case 0:
+                minutes = '00'
+                break;
+            case 1:
+                minutes = '01'
+                break;
+            case 2:
+                minutes = '02'
+                break;
+            case 3:
+                minutes = '03'
+                break;
+            case 4:
+                minutes = '04'
+                break;
+            case 5:
+                minutes = '05'
+                break;
+            case 6:
+                minutes = '06'
+                break;
+            case 7:
+                minutes = '07'
+                break;
+            case 8:
+                minutes = '08'
+                break;
+            case 9:
+                minutes = '09'
+                break;
+            default:
+                minutes = timestamp.getUTCMinutes();
+                break;
+        }
+
+        timestampProp = `${hours}:${minutes}`
+    } else {
+        const date = timestamp.getUTCDate();
+
+        let month;
+        switch (timestamp.getUTCMonth()) {
+            case 0:
+                month = ' Янв'
+                break;
+            case 1:
+                month = ' Фев'
+                break;
+            case 2:
+                month = ' Мар'
+                break;
+            case 3:
+                month = ' Апр'
+                break;
+            case 4:
+                month = ' Мая'
+                break;
+            case 5:
+                month = ' Июня'
+                break;
+            case 6:
+                month = ' Июля'
+                break;
+            case 7:
+                month = ' Авг'
+                break;
+            case 8:
+                month = ' Сен'
+                break;
+            case 9:
+                month = ' Окт'
+                break;
+            case 10:
+                month = ' Нояб'
+                break;
+            case 11:
+                month = ' Дек'
+                break;
+            default:
+                break;
+        }
+
+        const year = today.getUTCFullYear() === timestamp.getUTCFullYear() ? '' : ` ${timestamp.getUTCFullYear()}`;
+
+        timestampProp = `${date}${month}${year}`
+    }
+
+    return `<span class="timestamp">${timestampProp}</span>`
 }
 
 export default Connect(ChatPage, (state) => {
@@ -140,7 +267,7 @@ export default Connect(ChatPage, (state) => {
                     }, 'div')
                 }),
         }, 'div'),
-        chatFeed: state.currentChat && state.socketReadyState === 1
+        chatFeed: state.currentChat && state.chatList.some((chat) => Number(chat.id) === Number(state.currentChat.id)) && state.socketReadyState === 1
             ? renderChatFeed(state.currentChat.checkedOld)
             : new EmptyChatFeed(),
         modal: [
