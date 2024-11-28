@@ -34,3 +34,5 @@ userController.getUser()
         }
 
     })
+
+setInterval(() => {chatController.getChats()}, 15000);
