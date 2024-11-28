@@ -18,7 +18,7 @@ class ChatController {
                 .catch(({reason}) => console.log(reason))
         }
     }
-    async addChat(data: any) {
+    async addChat(data: {[key: string]: string}) {
         await chatApi.addChat(data)
     }
     deleteChat() {
@@ -27,7 +27,7 @@ class ChatController {
     addUser(data: any) {
         chatApi.addUser(data)
     }
-    deleteUser(data: {[key: string]: string}) {
+    deleteUser(data: any) {
         chatApi.deleteUser(data)
     }
     async getToken(id: number) {
