@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import Modal from "./modal";
 
-export default class Modal extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(Modal, () =>  {});

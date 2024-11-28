@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from '../../utils/connect';
+import AvatarHover from './avatar-hover';
 
-export default class AvatarHover extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(AvatarHover, () =>  {});

@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import Input from "./input";
 
-export default class Input extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(Input, () =>  {});

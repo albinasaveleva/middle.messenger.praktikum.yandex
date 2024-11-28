@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import Frame from "./frame";
 
-export default class Frame extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(Frame, () =>  {});

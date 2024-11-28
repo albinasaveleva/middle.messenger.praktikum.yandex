@@ -1,3 +1,6 @@
+import { BASE_API_URL } from "../api/base-api";
+// import { queryString } from "./utils";
+
 enum METHOD {
   GET = 'GET',
   POST =  'POST',
@@ -13,37 +16,29 @@ type Options = {
 
 type OptionsWithoutMethod = Omit<Options, 'method'>;
 
-function queryStringify(data: Record<string, any>): string {
-  if (typeof data !== "object" || data === null) {
-    return '';
-  }
-
-  return Object.keys(data)
-    .map(key => `${key}=${data[key].toString()}`)
-    .join('&')
-}
-
 export class HTTPTransport {
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    const {data} = options;
-    const newUrl = data ? `${url}?${queryStringify(data)}` : url;
+  get(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    // const {data} = options;
+    // const url = data ? `${BASE_API_URL}${endpoint}?${queryString(data)}` : `${BASE_API_URL}${endpoint}`;
 
-    return this.request(newUrl, {...options, method: METHOD.GET});
+    return this.request(endpoint, {...options, method: METHOD.GET});
   };
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, {...options, method: METHOD.POST});
+  post(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    return this.request(endpoint, {...options, method: METHOD.POST});
   };
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, {...options, method: METHOD.PUT});
+  put(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    return this.request(endpoint, {...options, method: METHOD.PUT});
   };
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, {...options, method: METHOD.DELETE});
+  delete(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    return this.request(endpoint, {...options, method: METHOD.DELETE});
   };
 
-  request(url: string, options: Options = { method: METHOD.GET }): Promise<XMLHttpRequest> {
+  request(endpoint: string, options: Options): Promise<XMLHttpRequest> {
+    const url = `${BASE_API_URL}/${endpoint}`;
+
     const {method, data, headers = {}} = options;
 
     return new Promise((resolve, reject) => {
@@ -54,21 +49,30 @@ export class HTTPTransport {
         xhr.setRequestHeader(key, headers[key]);
       });
 
-      xhr.onload = function() {
-        resolve(xhr);
+      xhr.onload = () => {
+        const status = xhr.status || 0;
+
+        if (status >= 200 && status < 300) {
+            resolve(xhr);
+        } else {
+            reject({reason: xhr.response.reason});
+        }
       };
+      xhr.onabort = () => reject({reason: 'abort'});
+      xhr.onerror = () => reject({reason: 'error'});
+      xhr.ontimeout = () => reject({reason: 'timeout'});
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
-      if (method === METHOD.GET || !data) {
+      if (method === METHOD.GET) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       }
     })
-
-
   }
 }

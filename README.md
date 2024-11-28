@@ -6,12 +6,11 @@ https://dazzling-unicorn-13d70a.netlify.app/
 
 ## Страницы приложения
 
- * Авторизация /src/pages/login-page
- * Регистрация /src/pages/signup-page
- * Список чатов и лента переписки /src/pages/chat-page
- * Профиль пользователя /src/pages/profile-page
- * Страница 404 /src/pages/non-found-page
- * Страница 5** /src/pages/error-page
+ * Авторизация /
+ * Регистрация /sign-up
+ * Список чатов и лента переписки /messenger
+ * Профиль пользователя /settings
+
 
 
 ## Технологии

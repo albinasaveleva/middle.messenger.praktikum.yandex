@@ -4,8 +4,9 @@ export default `
     <form class="form" name="search-form" id="search-form">
       {{{searchInput}}}
     </form>
+    {{{buttonAdd}}}
   </div>
   <div class="chats-box">
-    {{{chat}}}
+    {{{content}}}
   </div>
 `;

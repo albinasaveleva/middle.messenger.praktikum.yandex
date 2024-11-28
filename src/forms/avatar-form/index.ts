@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import AvatarForm from "./avatar-form";
 
-export default class AvatarForm extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(AvatarForm, () =>  {});

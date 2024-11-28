@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from '../../utils/connect';
+import ButtonLink from './button-link';
 
-export default class ButtonLink extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(ButtonLink, () =>  {});

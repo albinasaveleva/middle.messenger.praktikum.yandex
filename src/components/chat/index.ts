@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import Chat from "./chat";
 
-export default class Chat extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(Chat, () =>  {});

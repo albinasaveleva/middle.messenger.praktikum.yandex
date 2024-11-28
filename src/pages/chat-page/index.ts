@@ -1,152 +1,322 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import ChatPage from './chat-page';
+import Chat from '../../components/chat/index';
+import Avatar from '../../components/avatar/index';
+import ChatFeed from '../../components/chat-feed/index';
+import ButtonAction from '../../components/button-action/index';
+import Modal from '../../components/modal/index';
+import AddUserModal from '../../modals/add-user-modal/index';
+import DeleteUserModal from '../../modals/delete-user-modal/index';
+import Input from '../../components/input/index';
+import Chats from '../../components/chats/index';
+import ButtonLink from '../../components/button-link/index';
+import AddChatModal from '../../modals/add-chat-modal/index';
+import EmptyChatFeed from '../../components/empty-chat-feed/index';
 
-import Avatar from '../../components/avatar';
-import Chat from '../../components/chat';
-import Chats from '../../components/chats';
-import ButtonLink from '../../components/button-link';
-import Input from '../../components/input';
-import EmptyChatFeed from '../../components/empty-chat-feed';
-import ProfilePage from '../profile-page';
-import ChatFeed from '../../components/chat-feed';
-import ButtonAction from '../../components/button-action';
-import Form from '../../components/form';
-import MessageForm from '../../forms/message-form';
-import { inputValidation } from '../../utils/formValidation';
-import Message from '../../components/message';
-import Attach from '../../components/attach';
-import Actions from '../../components/actions';
+import Connect from "../../utils/connect";
+import chatController from '../../controllers/chat-controller';
+import messageController from '../../controllers/message-controller';
+import store from '../../store';
+import Router from '../../utils/router';
+import { TChat, TState } from '../../types/data';
 
-export default class ChatPage extends Component {
-  constructor(changePageContent: any) {
-    super('div', {
-      attr: {
-      class: 'chat-page',
-      id: 'chat-page'
-      },
-      chats: new Chats('div', {
-        attr: {
-          class: 'chats'
-        },
-        buttonLink: new ButtonLink('a', {
-          attr: {
-            class: 'profile-link',
-            href: '/profile'
-          },
-          action: 'Профиль',
-          events: {
-            click: (event: Event) => {
-              event.preventDefault();
-              // const href = event.target.attributes.href.value;
-              // history.pushState(null, null, href);
-              changePageContent({
-                content: new ProfilePage(changePageContent)
-              });
-            }
-          }
-        }),
-        searchInput: new Input('input', {
-          attr: {
-            class: "search-input",
-            name: "search",
-            type: "text",
-            placeholder: "Поиск"
-          }
-        }),
-        chat: new Chat('div', {
-          attr: {
-            class: 'chat'
-          },
-          avatar: new Avatar('div', {
-            attr: {
-              class: 'avatar'
-            }
-          }),
-          events: {
-            click: (event: Event) => {
-              event.preventDefault();
-              // const href = event.target.attributes.href.value;
-              // history.pushState(null, null, href);
-              this.setProps({
-                chatFeed: new ChatFeed('div', {
-                  attr: {
-                    class: 'chat-feed'
-                  },
-                  actions: new Actions('div', {
-                    attr: {
-                      class: 'actions'
-                    },
-                  }),
-                  messages: new Message('div', {
-                    attr: {
-                      class: 'outcoming-message'
-                    },
-                    message: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.'
-                  }),
-                  form: new Form('form', {
-                    attr: {
-                      class: 'form',
-                      name: "message-form",
-                      id: "message-form"
-                    },
-                    content: new MessageForm('div', {
-                      attr: {
-                        class: 'form-wrapper'
-                      },
-                      attach: new Attach('div', {
-                        attr: {
-                          class: 'attach'
-                        },
-                      }),
-                      messageInput: new Input('input', {
-                        attr: {
-                          class: "input-field",
-                          type: "text",
-                          name: "message",
-                          placeholder: "Сообщение"
-                        },
-                      }),
-                      buttonSend: new ButtonAction('button', {
-                        attr: {
-                          class: 'button-send',
-                          type: 'submit',
-                          form: 'message-form'
-                        },
-                      })
-                    }),
-                    events: {
-                      submit: (event: Event) => {
-                        event.preventDefault();
-
-                        const inputs = (event.target as HTMLElement).querySelectorAll('input');
-
-                        if (Array.from(inputs).every(inputValidation)) {
-                          const formData = new FormData(event.target as HTMLFormElement);
-
-                          for (let pair of formData.entries()) {
-                            console.log(`${pair[0]}: ${pair[1]}`);
-                          }
-
-                          (event.target as HTMLFormElement).reset();
-                        }
-                      }
-                    }
-                  })
-
-                })
-              })
-            }
-          }
-        })
-      }),
-      chatFeed: new EmptyChatFeed('div', {
-        attr: {
-          class: 'chat-feed'
-        }
-      })
-    })
-  }
-  render() {
-    return this.compile(tpl);
-  }
+const router = new Router("#app");
+const renderChatFeed = (checkedOld: boolean) => {
+    if (!checkedOld) {
+        messageController.getOld(0);
+        store.set('currentChat', {
+            checkedOld: true,
+        });
+    }
+    return new ChatFeed();
 }
+const renderChatTimeStamp = (time: string) => {
+    const today = new Date();
+    const timestamp =  new Date(time);
+    let timestampProp = '';
+
+    if (today.getUTCFullYear() === timestamp.getUTCFullYear() && today.getUTCMonth() === timestamp.getUTCMonth() && today.getUTCDate() === timestamp.getUTCDate()) {
+        let hours;
+        switch (timestamp.getUTCHours()) {
+            case 0:
+                hours = '00'
+                break;
+            case 1:
+                hours = '01'
+                break;
+            case 2:
+                hours = '02'
+                break;
+            case 3:
+                hours = '03'
+                break;
+            case 4:
+                hours = '04'
+                break;
+            case 5:
+                hours = '05'
+                break;
+            case 6:
+                hours = '06'
+                break;
+            case 7:
+                hours = '07'
+                break;
+            case 8:
+                hours = '08'
+                break;
+            case 9:
+                hours = '09'
+                break;
+            default:
+                hours = timestamp.getUTCHours();
+                break;
+        }
+
+        let minutes;
+        switch (timestamp.getUTCMinutes()) {
+            case 0:
+                minutes = '00'
+                break;
+            case 1:
+                minutes = '01'
+                break;
+            case 2:
+                minutes = '02'
+                break;
+            case 3:
+                minutes = '03'
+                break;
+            case 4:
+                minutes = '04'
+                break;
+            case 5:
+                minutes = '05'
+                break;
+            case 6:
+                minutes = '06'
+                break;
+            case 7:
+                minutes = '07'
+                break;
+            case 8:
+                minutes = '08'
+                break;
+            case 9:
+                minutes = '09'
+                break;
+            default:
+                minutes = timestamp.getUTCMinutes();
+                break;
+        }
+
+        timestampProp = `${hours}:${minutes}`
+    } else {
+        const date = timestamp.getUTCDate();
+
+        let month;
+        switch (timestamp.getUTCMonth()) {
+            case 0:
+                month = ' Янв'
+                break;
+            case 1:
+                month = ' Фев'
+                break;
+            case 2:
+                month = ' Мар'
+                break;
+            case 3:
+                month = ' Апр'
+                break;
+            case 4:
+                month = ' Мая'
+                break;
+            case 5:
+                month = ' Июня'
+                break;
+            case 6:
+                month = ' Июля'
+                break;
+            case 7:
+                month = ' Авг'
+                break;
+            case 8:
+                month = ' Сен'
+                break;
+            case 9:
+                month = ' Окт'
+                break;
+            case 10:
+                month = ' Нояб'
+                break;
+            case 11:
+                month = ' Дек'
+                break;
+            default:
+                break;
+        }
+
+        const year = today.getUTCFullYear() === timestamp.getUTCFullYear() ? '' : ` ${timestamp.getUTCFullYear()}`;
+
+        timestampProp = `${date}${month}${year}`
+    }
+
+    return `<span class="timestamp">${timestampProp}</span>`
+}
+
+export default Connect(ChatPage, (state: TState) => {
+    return {
+        user: state.user,
+        chatList: state.chatList,
+        currentChat: state.currentChat,
+        socketReadyState: state.socketReadyState,
+        chats: new Chats({
+            attr: {
+                class: 'chats'
+            },
+            buttonLink: new ButtonLink({
+                attr: {
+                    class: 'profile-link',
+                },
+                action: 'Профиль',
+                events: {
+                    click: (event: Event) => {
+                        event.preventDefault();
+                        router.go('/settings');
+                    }
+                }
+            }, 'a'),
+            searchInput: new Input({
+                attr: {
+                    class: "search-input",
+                    name: "search",
+                    type: "text",
+                    placeholder: "Поиск"
+                }
+            }, 'input'),
+            buttonAdd: new ButtonAction({
+                attr: {
+                    class: 'button-add'
+                },
+                action: 'Добавить новый чат',
+                events: {
+                    click: () => {
+                        const avatarModal = document.querySelector('#add-chat-modal') as HTMLElement;
+                        avatarModal.style.display = 'flex';
+                    }
+                }
+            }, 'button'),
+            content: state.chatList.length === 0
+                ? ""
+                : state.chatList.map((chat: TChat) => {
+                    return new Chat({
+                        attr: {
+                            class: 'chat',
+                            "data-chat-id": chat.id,
+                        },
+                        avatar: new Avatar({
+                            attr: {
+                                class: 'avatar'
+                            }
+                        }, 'div'),
+                        title: `<span class="title">${chat.title}</span>`,
+                        timestamp: chat.last_message === null
+                            ? ''
+                            : renderChatTimeStamp(chat.last_message.time),
+                        content: chat.last_message === null
+                            ? ''
+                            : `<span class="content">${chat.last_message.content}</span>`,
+                        count: chat.unread_count === 0
+                            ? ''
+                            : `<span class="count">${chat.unread_count}</span>` ,
+                        events: {
+                            click: async (event: Event) => {
+                                event.preventDefault();
+
+                                const chatElement = (event.target as HTMLElement).closest('.chat')
+                                const chatId = Number((chatElement as HTMLElement).dataset.chatId);
+                                const connect = async () => {
+                                    const userId = state.user?.id as number;
+                                    const currentChatId = chatId;
+                                    const { token: currentChatToken } = await chatController.getToken(chatId);
+
+                                    await messageController.connect(userId, currentChatId, currentChatToken);
+                                }
+                                const closeConnect = async () => {
+                                    await messageController.close();
+                                }
+
+                                if (!state.currentChat) {
+                                    store.set('currentChat', {
+                                        id: chatId,
+                                        title: chat.title,
+                                        messages: [],
+                                        checkedOld: false,
+                                    });
+                                    await connect();
+                                } else if (state.currentChat && state.currentChat.id !== chatId) {
+                                    await closeConnect();
+                                    store.set('socketReadyState', null);
+                                    store.set('currentChat', {
+                                        id: chatId,
+                                        title: chat.title,
+                                        messages: [],
+                                        checkedOld: false,
+                                    });
+
+                                    await connect();
+                                }
+                            }
+                        }
+                    }, 'div')
+                }),
+        }, 'div'),
+        chatFeed: state.currentChat && state.chatList.some((chat: TChat) => Number(chat.id) === Number(state.currentChat?.id)) && state.socketReadyState === 1
+            ? renderChatFeed(state.currentChat.checkedOld)
+            : new EmptyChatFeed(),
+        modal: [
+            new Modal({
+                attr: {
+                    class: 'modal',
+                    id: 'add-chat-modal'
+                },
+                content: new AddChatModal(),
+                events: {
+                    click: (event: Event) => {
+                        if ((event.target as HTMLElement).classList.contains("modal")) {
+                            (event.target as HTMLElement).style.display = 'none';
+                        }
+                    }
+                }
+            }, 'div'),
+            new Modal({
+                attr: {
+                    class: 'modal',
+                    id: 'add-user-modal'
+                },
+                content: new AddUserModal(),
+                events: {
+                    click: (event: Event) => {
+                        if ((event.target as HTMLElement).classList.contains("modal")) {
+                        (event.target as HTMLElement).style.display = 'none';
+                        }
+                    }
+                }
+            }, 'div'),
+            new Modal({
+                attr: {
+                    class: 'modal',
+                    id: 'delete-user-modal'
+                },
+                content: new DeleteUserModal(),
+                events: {
+                    click: (event: Event) => {
+                        if ((event.target as HTMLElement).classList.contains("modal")) {
+                        (event.target as HTMLElement).style.display = 'none';
+                        }
+                    }
+                }
+            }, 'div')
+        ]
+    }
+});
+
