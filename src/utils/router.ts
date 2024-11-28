@@ -4,21 +4,19 @@ class Router {
 
     routes;
     history;
-    _currentRoute;
     _rootQuery;
-    __instance;
+    static __instance: Router | null;
 
-    constructor(rootQuery) {
-        if (this.__instance) {
-          return this.__instance;
+    constructor(rootQuery: string) {
+        if (Router.__instance) {
+            return Router.__instance;
         }
 
         this.routes = [];
         this.history = window.history;
-        this._currentRoute = null;
         this._rootQuery = rootQuery;
 
-        this.__instance = this;
+        Router.__instance = this;
     }
 
     use(path: string, block: any) {
@@ -28,8 +26,8 @@ class Router {
     }
 
     start() {
-        window.onpopstate = (event) => {
-            this._onRoute(event.currentTarget?.location.pathname);
+        window.onpopstate = (event: PopStateEvent) => {
+            this._onRoute((event.currentTarget as Window).location.pathname);
         };
 
         this._onRoute(window.location.pathname);
@@ -54,15 +52,11 @@ class Router {
             return;
         }
 
-        if (this._currentRoute) {
-            this._currentRoute.leave();
-        }
-
         route.render(route, path);
     }
 
     getRoute(path: string) {
-        return this.routes?.find(route => route.match(path));
+        return this.routes?.find((route: Route) => route.match(path));
     }
 }
 

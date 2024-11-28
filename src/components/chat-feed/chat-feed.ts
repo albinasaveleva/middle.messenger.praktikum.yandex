@@ -10,6 +10,7 @@ import Input from '../input/index';
 import { inputValidation } from '../../utils/formValidation';
 import messageController from '../../controllers/message-controller';
 import Message from '../message/message';
+import { TMessage } from '../../types/data';
 
 class ChatFeed extends Component {
     constructor(props?: any) {
@@ -42,7 +43,7 @@ class ChatFeed extends Component {
                         },
                         action: 'Добавить пользователя',
                         events: {
-                            click: (event) => {
+                            click: () => {
                                 const avatarModal = document.querySelector('#add-user-modal') as HTMLElement;
                                 avatarModal.style.display = 'flex';
                             }
@@ -63,12 +64,13 @@ class ChatFeed extends Component {
                 ],
             }, 'div'),
             messages: props.currentChat.messages.length > 0
-                ? props.currentChat.messages.map((message) => {
+                ? props.currentChat.messages.map((message: TMessage) => {
                     return new Message({
                         attr: {
-                            class: message.user_id === props.user.id ? 'outcoming-message' : 'incoming-message'
+                            class: message.user_id === props.user.id ? 'message outcoming-message' : 'message incoming-message'
                         },
-                        message: message.content
+                        message: `<div class="content">${message.content}</div>`,
+                        timestamp: '<span class="timestamp">12:00</span>'
                     }, 'div')
                 })
                 : "",

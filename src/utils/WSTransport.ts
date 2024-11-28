@@ -12,7 +12,7 @@ export enum WSTransportEvents {
 
 export class WSTransport extends EventBus {
     socket: WebSocket | null = null;
-    pingInterval: ReturnType<typeof setInterval> | null;
+    pingInterval: ReturnType<typeof setInterval> | null = null;
     pingIntervalTime = 30000;
     endpoint?: string;
 
@@ -61,7 +61,7 @@ export class WSTransport extends EventBus {
         }, this.pingIntervalTime);
 
         this.on(WSTransportEvents.Close, () => {
-            clearInterval(this.pingInterval);
+            clearInterval(this.pingInterval as any);
             this.pingInterval = null;
         })
     }
@@ -75,7 +75,6 @@ export class WSTransport extends EventBus {
         socket.addEventListener('close', () => {
             this.emit(WSTransportEvents.Close);
             this.socket = null;
-            clearInterval(this.pingInterval);
         });
 
         socket.addEventListener('error', (event) => {

@@ -39,3 +39,14 @@ export type TChat = {
     title: string,
     unread_count: number
 }
+
+export type TMessage = {
+    chat_id: number,
+    content: string,
+    file: any | null,
+    id: number,
+    is_read: boolean,
+    time: string,
+    type: string,
+    user_id: number
+}
