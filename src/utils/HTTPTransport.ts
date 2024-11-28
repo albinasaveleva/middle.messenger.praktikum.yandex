@@ -1,5 +1,5 @@
 import { BASE_API_URL } from "../api/base-api";
-import { queryString } from "./utils";
+// import { queryString } from "./utils";
 
 enum METHOD {
   GET = 'GET',
@@ -18,7 +18,7 @@ type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 export class HTTPTransport {
   get(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    const {data} = options;
+    // const {data} = options;
     // const url = data ? `${BASE_API_URL}${endpoint}?${queryString(data)}` : `${BASE_API_URL}${endpoint}`;
 
     return this.request(endpoint, {...options, method: METHOD.GET});

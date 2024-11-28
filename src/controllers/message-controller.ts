@@ -1,5 +1,4 @@
 import messageApi from "../api/message-api";
-import store from "../store";
 
 class MessageController {
     async connect(userId: number, chatId: number, token: number) {
