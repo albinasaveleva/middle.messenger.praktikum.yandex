@@ -1,6 +1,6 @@
 import chatController from './src/controllers/chat-controller';
 import userController from './src/controllers/user-controller';
-import { ChatPage, LoginPage, NonFoundPage, ProfilePage, SignupPage } from './src/pages/index';
+import { ChatPage, LoginPage, ProfilePage, SignupPage } from './src/pages/index';
 import store from './src/store';
 import Router from './src/utils/router';
 
@@ -11,29 +11,26 @@ router
     .use('/messenger', ChatPage)
     .use('/settings', ProfilePage)
 
-try {
-    await userController.getUser();
-    await chatController.getChats();
-} catch ({reason}) {
-    console.log(reason)
-} finally {
-    setInterval(() => {chatController.getChats()}, 15000);
+let user = null;
 
-    const {user} = store.getState();
+userController.getUser()
+    .then(response => {
+        const user = response;
+        chatController.getChats();
+        router.start();
 
-    router.start();
-
-    if(user === null) {
-        if (window.location.pathname === '/sign-up') {
-            router.go('/sign-up');
+        if(user === null) {
+            if (window.location.pathname === '/sign-up') {
+                router.go('/sign-up');
+            } else {
+                router.go('/');
+            }
         } else {
-            router.go('/');
+            if (window.location.pathname === '/settings') {
+                router.go('/settings');
+            } else {
+                router.go('/messenger');
+            }
         }
-    } else {
-        if (window.location.pathname === '/settings') {
-            router.go('/settings');
-        } else {
-            router.go('/messenger');
-        }
-    }
-}
+
+    })
