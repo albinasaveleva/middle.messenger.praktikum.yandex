@@ -3,9 +3,15 @@ import store from "../store";
 
 class UserController {
     async getUser() {
-        await UserApi.getUser()
-            .then(({response}) => store.set('user', response))
-            .catch(({reason}) => console.log(reason))
+        return await UserApi.getUser()
+            .then(({response}) =>{
+                store.set('user', response);
+                return response;
+            })
+            .catch(({reason}) => {
+                console.log(reason);
+                return null;
+            })
     }
     deleteUser() {
         store.set('user', null);
