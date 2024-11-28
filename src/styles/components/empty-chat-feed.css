@@ -1,13 +1,13 @@
 .empty-chat-feed {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .empty-text {
-  font-size: 12px;
-  line-height: 12px;
-  text-align: center;
-  color: var(--dark-gray-color);
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    color: var(--dark-gray-color);
 }

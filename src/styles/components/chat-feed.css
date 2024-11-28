@@ -1,54 +1,54 @@
 .chat-feed {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    height: 100%;
 }
 
 .chat-feed .top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--light-gray-color);
-  position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--light-gray-color);
+    position: relative;
 }
 
 .chat-feed .top-bar .info {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .chat-feed .top-bar .avatar {
-  width: 34px;
-  height: 34px;
-  margin-right: 11px;
+    width: 34px;
+    height: 34px;
+    margin-right: 11px;
 }
 
 .chat-feed .top-bar .name {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 13px;
-  text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 13px;
+    text-align: left;
 }
 
 .chat-feed .top-bar .actions {
-  position: relative;
-  width: 3px;
-  height: 15px;
-  background-image: url("../icons/actions-icon.svg");
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    position: relative;
+    width: 3px;
+    height: 15px;
+    background-image: url("../icons/actions-icon.svg");
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .chat-feed .top-bar .frame {
-  position: absolute;
-  right: -10px;
-  top: 40px;
-  width: 200px;
-  height: 100px;
-  flex-direction: column;
+    position: absolute;
+    right: -10px;
+    top: 40px;
+    width: 200px;
+    height: 100px;
+    flex-direction: column;
 }
 
 .chat-feed .messages {
@@ -63,16 +63,23 @@
 
 .chat-feed .messages::-webkit-scrollbar {
     width: 4px;
-  }
+}
 
 .chat-feed .messages::-webkit-scrollbar-track {
     background: var(--light-gray-bg-color);
-  }
+}
 
 .chat-feed .messages::-webkit-scrollbar-thumb {
     background-color: var(--gray-bg-color);
     border-radius: 0;
-  }
+}
+
+/* .chat-feed .timestamp {
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    color: var(--blue-color);
+} */
 
 .chat-feed .message {
     font-size: 12px;
@@ -83,7 +90,7 @@
     grid-template-areas:
             "content content"
             ". timestamp";
-  }
+}
 
 .chat-feed .message .timestamp {
     font-size: 9px;
@@ -99,12 +106,12 @@
 }
 
 .chat-feed .outcoming-message {
-  background-color: var(--light-blue-color);
-  border-top-right-radius: 12px;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  margin-left: auto;
-  text-align: left;
+    background-color: var(--light-blue-color);
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    margin-left: auto;
+    text-align: left;
 }
 
 .chat-feed .outcoming-message .timestamp {
@@ -112,47 +119,40 @@
 }
 
 .chat-feed .incoming-message {
-  background-color: var(--light-gray-bg-color);
-  border-top-right-radius: 12px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  margin-right: auto;
-  text-align: left;
+    background-color: var(--light-gray-bg-color);
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    margin-right: auto;
+    text-align: left;
 }
 
 .chat-feed .incoming-message .timestamp {
     color: var(--dark-gray-color);
 }
 
-.chat-feed .timestamp {
-  font-size: 12px;
-  line-height: 12px;
-  text-align: center;
-  color: var(--blue-color);
-}
-
 .chat-feed .send-message .form-wrapper {
-  display: flex;
-  width: 100%;
-  border-top: 1px solid var(--light-gray-color);
-  padding: 10px 0;
-  margin-top: auto;
+    display: flex;
+    width: 100%;
+    border-top: 1px solid var(--light-gray-color);
+    padding: 10px 0;
+    margin-top: auto;
 }
 
 .chat-feed .send-message .attach {
-  position: relative;
-  height: 32px;
-  width: 32px;
-  background-image: url("../icons/attach-icon.svg");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    background-image: url("../icons/attach-icon.svg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .chat-feed .send-message .attach .frame {
-  position: absolute;
-  left: -10px;
-  width: 200px;
-  height: 100px;
-  bottom: 55px;
+    position: absolute;
+    left: -10px;
+    width: 200px;
+    height: 100px;
+    bottom: 55px;
 }
