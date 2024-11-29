@@ -1,28 +1,28 @@
 .profile-input {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .profile-input .input-label {
-  font-size: 13px;
-  line-height: 13px;
-  text-align: left;
-  color: var(--black-color);
-  flex-shrink: 0;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: left;
+    color: var(--black-color);
+    flex-shrink: 0;
 }
 
 .profile-input .input-field {
-  height: 32px;
-  font-size: 13px;
-  line-height: 13px;
-  text-align: right;
-  color: var(--dark-gray-color);
+    height: 32px;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: right;
+    color: var(--dark-gray-color);
 }
 
 .profile-input .input-field::placeholder {
-  font-size: 13px;
-  line-height: 13px;
-  text-align: right;
-  color: var(--dark-gray-color);
+    font-size: 13px;
+    line-height: 13px;
+    text-align: right;
+    color: var(--dark-gray-color);
 }

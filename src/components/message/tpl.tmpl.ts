@@ -1,1 +1,4 @@
-export default `{{{message}}}`;
+export default `
+    {{{message}}}
+    {{{timestamp}}}
+`;

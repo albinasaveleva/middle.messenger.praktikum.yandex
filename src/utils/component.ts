@@ -18,16 +18,14 @@ export default class Component {
   _element: HTMLElement | null = null;
   _meta: { [key: string]: any };
   _eventBus: EventBus;
-  _setUpdate: boolean = false;
 
-  constructor(tag: string = "div", componentProps: { [key: string]: any } = {}) {
+  constructor(componentProps: { [key: string]: any } = {}, tag: string = "div") {
     const { props, children, lists } = this.getProps(componentProps);
-
     this._children = this.makePropsProxy(children);
     this._lists = this.makePropsProxy(lists);
     this._id = makeUUID();
     this._props = this.makePropsProxy({ ...props, _id: this._id })
-    this._meta = { tag, props };
+    this._meta = { props, tag };
     this._eventBus = new EventBus();
 
     this.registerEvents();
@@ -90,24 +88,6 @@ export default class Component {
     })
   }
 
-  getProps(componentProps: {[key: string]: any}) {
-    const props: { [key: string]: any } = {};
-    const children: { [key: string]: any } = {};
-    const lists: { [key: string]: any } = {};
-
-    Object.entries(componentProps).forEach(([key, value]) => {
-      if (value instanceof Component) {
-        children[key] = value;
-      } else if (Array.isArray(value)) {
-        lists[key] = value;
-      } else {
-        props[key] = value;
-      }
-    })
-
-    return { props, children, lists };
-  }
-
   compile(template: string, props?: { [key: string]: any }) {
     if (typeof(props) == 'undefined') {
       props = this._props;
@@ -122,6 +102,7 @@ export default class Component {
     Object.entries(this._lists).forEach(([key, ]) => {
       propsAndStuds[key] = `<div data-id="__l_${key}"></div>`;
     })
+
 
     const fragment = this.createElement('template') as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(template)(propsAndStuds);
@@ -162,7 +143,9 @@ export default class Component {
     })
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+
+  }
 
   dispatchComponentDidMount() {
     this._eventBus.emit(Component.EVENTS.FLOW_CDM);
@@ -174,7 +157,7 @@ export default class Component {
   _componentDidUpdate() {
     const isRerender = this.componentDidUpdate();
     if (isRerender) {
-      this._eventBus.emit(Component.EVENTS.FLOW_RENDER)
+      this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
   }
 
@@ -182,18 +165,39 @@ export default class Component {
     return true;
   }
 
-  setProps = (newProps: { [key: string]: any }) => {
+  getProps(componentProps: {[key: string]: any}) {
+    const props: { [key: string]: any } = {};
+    const children: { [key: string]: any } = {};
+    const lists: { [key: string]: any } = {};
+
+    Object.entries(componentProps).forEach(([key, value]) => {
+      if (value instanceof Component) {
+        children[key] = value;
+      } else if (Array.isArray(value) && value[0] !instanceof Component) {
+        lists[key] = value;
+      } else {
+        props[key] = value;
+      }
+    })
+
+    return { props, children, lists };
+  }
+
+  setProps(newProps: { [key: string]: any }) {
     if (!newProps) {
       return;
     }
 
-    const { children, props } = this.getProps(newProps);
+    const { props, children, lists } = this.getProps(newProps);
 
     if (Object.values(children).length) {
       Object.assign(this._children, children);
     }
     if (Object.values(props).length) {
       Object.assign(this._props, props);
+    }
+    if (Object.values(lists).length) {
+        Object.assign(this._lists, lists);
     }
   };
 

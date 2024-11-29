@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import ChangeProfilePasswordForm from "./change-profile-password";
 
-export default class ChangeProfilePasswordForm extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(ChangeProfilePasswordForm, () =>  {});

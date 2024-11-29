@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import EmptyChatFeed from "./empty-chat-feed";
 
-export default class EmptyChatFeed extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(EmptyChatFeed, () =>  {});

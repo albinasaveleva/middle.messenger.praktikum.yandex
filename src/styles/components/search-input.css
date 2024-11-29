@@ -1,13 +1,13 @@
 .search-input {
-  height: 32px;
-  width: 100%;
-  padding: 10px;
-  background-color: var(--gray-bg-color);
-  font-size: 12px;
-  line-height: 12px;
-  border-radius:5px;
-  border: none;
-  outline: none;
+    height: 32px;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--gray-bg-color);
+    font-size: 12px;
+    line-height: 12px;
+    border-radius:5px;
+    border: none;
+    outline: none;
 }
 
 /* .search-input:placeholder {

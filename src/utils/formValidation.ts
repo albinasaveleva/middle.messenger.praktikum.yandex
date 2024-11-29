@@ -5,7 +5,7 @@ export const inputValidation = (input: HTMLInputElement): boolean => {
     case 'password':
       return /(?=.*[0-9])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,40}/.test(input.value);
     case 'email':
-      return /[a-zA-Z_-]{1,}@{1}[a-zA-Z]{1,}[.]{1}[a-zA-Z]{1,}/.test(input.value);
+      return /[a-zA-Z0-9_-]{1,}@{1}[a-zA-Z]{1,}[.]{1}[a-zA-Z]{1,}/.test(input.value);
     case 'first_name':
       return /[A-ZА-Я]{1}[a-zа-я-]/.test(input.value);
     case 'second_name':

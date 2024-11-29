@@ -1,8 +1,4 @@
-import tpl from './tpl.tmpl';
-import Component from '../../utils/component';
+import Connect from "../../utils/connect";
+import SignupForm from "./signup-form";
 
-export default class SignupForm extends Component {
-  render() {
-    return this.compile(tpl);
-  }
-}
+export default Connect(SignupForm, () =>  {});
