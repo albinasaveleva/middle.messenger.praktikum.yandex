@@ -40,7 +40,7 @@ https://dazzling-unicorn-13d70a.netlify.app/
 
 `npm run build`
 
-### Создание билда
-Запуск eslint:
+### Запуск eslint
+Выполните команду:
 
 `npm run prebuild`
