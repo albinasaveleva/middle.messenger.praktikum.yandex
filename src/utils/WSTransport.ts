@@ -101,7 +101,7 @@ export class WSTransport extends EventBus {
                     });
                 }
             } catch (e) {
-
+                console.log(e);
             }
         });
     }
