@@ -38,13 +38,13 @@ class Router {
         this._onRoute(path);
     }
 
-    back() {
-        window.history.back();
-    }
+    // back() {
+    //     window.history.back();
+    // }
 
-    forward() {
-        window.history.forward();
-    }
+    // forward() {
+    //     window.history.forward();
+    // }
 
     _onRoute(path: string) {
         const route = this.getRoute(path);
