@@ -19,7 +19,6 @@
     "strictNullChecks": true
   },
   "include": ["src"],
-  "prepare": "husky",
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node",

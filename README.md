@@ -22,7 +22,6 @@ https://dazzling-unicorn-13d70a.netlify.app/
  * выйти из аккаунта
 
 
-
 ## Технологии
  * JavaScript
  * TypesScript
@@ -30,7 +29,6 @@ https://dazzling-unicorn-13d70a.netlify.app/
  * CSS
  * PostCSS
  * Hаndlebars
-
 
 
 ## Разработка
