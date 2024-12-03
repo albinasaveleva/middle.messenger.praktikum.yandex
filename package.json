@@ -11,7 +11,7 @@
     "start": "vite build && vite preview",
     "lint": "stylelint \"**/*.css\"",
     "eslint": "eslint \"src/**/*.ts\"",
-    "test": "mocha 'src/**/*.test.ts'",
+    "test": "mocha \"src/**/*.test.ts\"",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -46,10 +46,5 @@
   "dependencies": {
     "handlebars": "^4.7.8",
     "uuid": "^10.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test && npm run eslint && npm run lint"
-    }
   }
 }
