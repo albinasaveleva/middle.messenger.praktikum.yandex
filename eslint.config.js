@@ -2,11 +2,8 @@ import parsel from "@typescript-eslint/parser";
 import eslintPlugin from "@typescript-eslint/eslint-plugin";
 
 export default [
-  js.configs.recommended,
   {
-    rules: {
-      "no-unused-vars": "warn",
-    },
+    files: ['**/*.ts'],
     ignores: [
       "/node_modules",
       "/github",

@@ -69,6 +69,7 @@ const merge = (lhs: Indexed, rhs: Indexed): Indexed => {
           lhs[p] = rhs[p];
         }
       } catch (e) {
+        console.log(e);
         lhs[p] = rhs[p];
       }
     }
