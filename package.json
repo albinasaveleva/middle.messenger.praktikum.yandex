@@ -12,6 +12,7 @@
     "lint": "stylelint \"**/*.css\"",
     "eslint": "eslint \"src/**/*.ts\"",
     "test": "mocha \"src/**/*.test.ts\"",
+    "pre-commit": "npm run test && npm run eslint && npm run lint",
     "prepare": "husky install"
   },
   "devDependencies": {
